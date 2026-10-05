@@ -5,8 +5,8 @@ license: Apache-2.0
 compatibility: Requires the cademi CLI 0.2 or newer (curl -fsSL https://cli.cademi.dev/install.sh | bash) and a Cademí credential (CADEMI_API_KEY or `cademi auth login`).
 metadata:
   author: minhacademi
-  version: "0.1.0"
-  cademi-cli: "0.2.0"
+  version: "0.1.1"
+  cademi-cli: "0.2.1"
   cademi-api: "3.10.0"
   docs: https://cademi.dev/cli/
 ---
@@ -373,7 +373,7 @@ One row per reference file. Each file carries the signature, route, permission, 
 
 | Reference | Prefix | Commands | Covers |
 |---|---|---|---|
-| `references/core.md` | `cademi` | 22 | api, auth, bug, commands, config, doctor, download, env, listen, profiles, skills, update, upload, version |
+| `references/core.md` | `cademi` | 24 | api, auth, bug, commands, config, doctor, download, env, listen, mcp, profiles, skills, update, upload, version |
 | `references/guides.md` | `cademi guide` | 6 | errors, input, output, reordering, retries |
 | `references/account.md` | `cademi account` | 18 | administrators, audit-entries, capabilities, domains, get, replicas, usage |
 | `references/automations.md` | `cademi automations` | 18 | diamonds |

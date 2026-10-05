@@ -1,6 +1,6 @@
 {
   "name": "cademi-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Skills for working with the Cademí platform: the cademi CLI (API v3) with generated command references",
   "author": { "name": "Cademí", "url": "https://cademi.dev" },
   "homepage": "https://cademi.dev/cli/",

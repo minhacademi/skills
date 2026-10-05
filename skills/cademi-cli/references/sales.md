@@ -2,13 +2,13 @@
 name: cademi-cli-sales
 description: "Connect gateways, deliveries and incoming sales — `cademi sales` (21 commands)"
 metadata:
-  cademi-cli: "0.2.0"
+  cademi-cli: "0.2.1"
   cademi-api: "3.10.0"
 ---
 
 # Sales Commands
 
-> cademi 0.2.0, API 3.10.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.1, API 3.10.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Gateways send sales events. Deliveries connect gateway products to content
 access. Inspect events and processing attempts to investigate sales handling.

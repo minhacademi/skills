@@ -2,13 +2,13 @@
 name: cademi-cli-core
 description: "Built-in commands: authentication and profiles, raw API requests, events, declarative configuration, files, diagnostics and updates"
 metadata:
-  cademi-cli: "0.2.0"
+  cademi-cli: "0.2.1"
   cademi-api: "3.10.0"
 ---
 
 # Core Commands
 
-> cademi 0.2.0, API 3.10.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.1, API 3.10.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Commands that are not generated from the API contract. Resource commands (`cademi <domain> ...`) live in the other reference files; `cademi guide` topics are in `guides.md`.
 
@@ -436,6 +436,49 @@ Check a manifest without changing anything
 - `manifest`
 
 **Flag sets:** output-basic
+
+### `cademi mcp docs`
+
+List the Cademí MCP documentation
+
+Print links to the Cademí MCP documentation, with a one-line summary of each page.
+
+### `cademi mcp install <claude|cursor|vscode|copilot|codex|gemini|opencode>`
+
+Add the Cademí MCP server to an AI assistant
+
+Add the Cademí MCP server to an AI assistant's configuration, as the remote
+server "cademi" (Streamable HTTP, OAuth). Other servers and settings in that
+configuration are kept. Sign-in happens in the assistant afterwards; the next
+step is printed when the server is added.
+
+Clients:
+  claude    Claude Code (its CLI)
+  cursor    Cursor (its MCP config file)
+  vscode    VS Code (its MCP config file)
+  copilot   GitHub Copilot CLI (its MCP config file)
+  codex     Codex (its CLI)
+  gemini    Gemini CLI (its MCP config file)
+  opencode  OpenCode (its MCP config file)
+
+Without --project the server is added for your user, in every project. An
+existing "cademi" entry pointing elsewhere is replaced only with --force.
+
+**Arguments:**
+- `claude|cursor|vscode|copilot|codex|gemini|opencode`
+
+**Flags:**
+- `--force` — Replace an existing cademi entry that points to another URL
+- `--project` — Add the server to this project only (config file in the current directory)
+- `--url <string>` — MCP server URL
+
+**Examples:**
+
+```bash
+cademi mcp install claude
+cademi mcp install codex
+cademi mcp install vscode --project    # .vscode/mcp.json in this directory
+```
 
 ### `cademi profiles list`
 
