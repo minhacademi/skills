@@ -5,10 +5,10 @@ license: Apache-2.0
 compatibility: Requires the cademi CLI 0.2 or newer (curl -fsSL https://cli.cademi.dev/install.sh | bash) and a Cademí credential (CADEMI_API_KEY or `cademi auth login`).
 metadata:
   author: minhacademi
-  version: "0.1.1"
+  version: "0.1.2"
   cademi-cli: "0.2.1"
   cademi-api: "3.10.0"
-  docs: https://cademi.dev/cli/
+  docs: https://cademi.dev/cli
 ---
 
 # Cademí CLI Usage Guide
@@ -360,6 +360,8 @@ cademi update --check                        # later updates are signed (ed25519
 - The installer needs `curl` and network access to `cli.cademi.dev`; it never asks for sudo. `CADEMI_INSTALL_DIR` changes the destination.
 - `CI` or `CADEMI_DISABLE_AUTOUPDATE` turn automatic updates off; `cademi update --version 0.2.0` pins or rolls back.
 - Installing the CLI does not sign anyone in: the next step is a credential (below).
+- `cademi skills install` installs this skill, at the version bundled with the installed CLI, into `~/.claude/skills` and `~/.agents/skills`. Without `--agent` or `--dir` it only installs for agents whose directory already exists, so an agent that never ran on the machine does not get it; `--dir .claude/skills` installs into one project, and `cademi skills status` checks the copy. After the CLI is updated, the first command you run refreshes the copies in `~/.claude/skills` and `~/.agents/skills`; a copy installed with `--dir` is not refreshed: run `cademi skills install --dir <path>` again.
+- `cademi mcp install <client>` adds the Cademí MCP server to an assistant (`claude`, `cursor`, `vscode`, `copilot`, `codex`, `gemini`, `opencode`); `cademi mcp docs` has the details. Prefer the MCP when the assistant should call the API as tools inside a conversation; prefer the CLI for scripts, CI, bulk work, events, and files.
 
 ### Credentials
 
