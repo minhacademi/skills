@@ -1,0 +1,12 @@
+# Cademí skills
+
+> Agent skills published by Cademí. Install with `npx skills add minhacademi/skills`.
+
+## Skills
+
+- [cademi-cli](cademi-cli/SKILL.md): Guide for using the cademi CLI to operate a Cademí platform (API v3) from the terminal - students, enrollments, products, modules, lessons, showcases, deliveries and sales, webhooks and events, settings, support, reports, files, sandbox scenarios and config-as-code. Use when the user mentions Cademí, `cademi` commands, Cademí IDs (usr_, prd_, dlv_, enr_, op_...), CADEMI_API_KEY, or wants to inspect or automate a Cademí account from a terminal, a script or CI, and when debugging cademi exit codes or JSON errors.
+
+## Related
+
+- https://cademi.dev/llms.txt — API, CLI and MCP documentation index
+- https://github.com/minhacademi/developers — issues and discussions for the API and the CLI

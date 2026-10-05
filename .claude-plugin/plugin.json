@@ -1,0 +1,10 @@
+{
+  "name": "cademi-cli",
+  "version": "0.1.0",
+  "description": "Skills for working with the Cademí platform: the cademi CLI (API v3) with generated command references",
+  "author": { "name": "Cademí", "url": "https://cademi.dev" },
+  "homepage": "https://cademi.dev/cli/",
+  "repository": "https://github.com/minhacademi/skills",
+  "license": "Apache-2.0",
+  "keywords": ["cademi", "cli", "lms", "api", "agent-skills"]
+}
