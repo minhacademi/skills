@@ -16,7 +16,7 @@ Controls transactional email sender identity, signature and appearance.
 
 Omitted fields remain unchanged. Only fields explicitly documented as nullable accept null.
 
-**See also in this domain:** `references/settings.md`, `references/settings-legal-terms.md`, `references/settings-menus.md`, `references/settings-support.md`
+**See also in this domain:** `references/settings-access.md`, `references/settings-definitions.md`, `references/settings-platform.md`, `references/settings-legal-terms.md`, `references/settings-menus.md`, `references/settings-support.md`
 
 Live catalog for this file: `cademi commands settings emails --json` (offline, no credential needed).
 

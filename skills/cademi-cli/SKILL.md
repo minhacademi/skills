@@ -394,7 +394,9 @@ One row per reference file. Each file carries the signature, route, permission, 
 | `references/reports.md` | `cademi reports` | 13 | activity, certificates, email-bounces, enrollments, exams, exports, lessons, list, products, rankings, support, users |
 | `references/sales.md` | `cademi sales` | 21 | deliveries, events, gateways, transactions |
 | `references/sandbox.md` | `cademi sandbox` | 7 | get, reset, resets, run, test-scenarios |
-| `references/settings.md` | `cademi settings` | 40 | admin-area, app, authentication, branding, configuration, custom-code, custom-fields, embedded-pages, gamification, platform, registration, security, sharing,… |
+| `references/settings-access.md` | `cademi settings` | 8 | authentication, registration, security, user-profile |
+| `references/settings-definitions.md` | `cademi settings` | 18 | configuration, custom-code, custom-fields, tags |
+| `references/settings-platform.md` | `cademi settings` | 14 | admin-area, app, branding, embedded-pages, gamification, platform, sharing |
 | `references/settings-emails.md` | `cademi settings emails` | 7 | get, templates, update |
 | `references/settings-legal-terms.md` | `cademi settings legal-terms` | 6 | acceptances, create, get, list, update |
 | `references/settings-menus.md` | `cademi settings menus` | 8 | get, items, list |
@@ -404,7 +406,9 @@ One row per reference file. Each file carries the signature, route, permission, 
 | `references/support-faqs.md` | `cademi support faqs` | 6 | create, delete, get, list, order, update |
 | `references/support-questions.md` | `cademi support questions` | 9 | delete, get, list, replies, update |
 | `references/support-tickets.md` | `cademi support tickets` | 9 | create, get, list, replies, update |
-| `references/users.md` | `cademi users` | 39 | access, access-emails, activity, attribution, avatar, certificates, create, custom-fields, delete, enrollments, get, list, notes, password-reset-emails,… |
+| `references/users-learning.md` | `cademi users` | 13 | certificates, enrollments, progress, score-adjustments, scores |
+| `references/users-profile.md` | `cademi users` | 17 | attribution, avatar, custom-fields, notes, tags, term-acceptances |
+| `references/users.md` | `cademi users` | 9 | access, access-emails, activity, create, delete, get, list, password-reset-emails, update |
 | `references/users-imports.md` | `cademi users imports` | 10 | analyses, create, delete, get, list, processing-attempts, rows, update |
 | `references/users-products.md` | `cademi users products` | 9 | access, list, progress |
 

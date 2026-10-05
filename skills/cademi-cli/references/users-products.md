@@ -17,7 +17,7 @@ product itself, use content products. Access and progress are separate views.
 
 **Related:** `cademi content products`, `cademi users enrollments`
 
-**See also in this domain:** `references/users.md`, `references/users-imports.md`
+**See also in this domain:** `references/users-learning.md`, `references/users-profile.md`, `references/users.md`, `references/users-imports.md`
 
 Live catalog for this file: `cademi commands users products --json` (offline, no credential needed).
 

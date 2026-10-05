@@ -17,7 +17,7 @@ required input and processing results before retrying a failed import.
 
 **Related:** `cademi files`, `cademi operations`
 
-**See also in this domain:** `references/users.md`, `references/users-products.md`
+**See also in this domain:** `references/users-learning.md`, `references/users-profile.md`, `references/users.md`, `references/users-products.md`
 
 Live catalog for this file: `cademi commands users imports --json` (offline, no credential needed).
 

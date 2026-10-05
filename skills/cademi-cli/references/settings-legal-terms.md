@@ -17,7 +17,7 @@ through users term-acceptances.
 
 **Related:** `cademi users term-acceptances`
 
-**See also in this domain:** `references/settings.md`, `references/settings-emails.md`, `references/settings-menus.md`, `references/settings-support.md`
+**See also in this domain:** `references/settings-access.md`, `references/settings-definitions.md`, `references/settings-platform.md`, `references/settings-emails.md`, `references/settings-menus.md`, `references/settings-support.md`
 
 Live catalog for this file: `cademi commands settings legal-terms --json` (offline, no credential needed).
 

@@ -17,7 +17,7 @@ Navigation settings do not grant access to linked products.
 
 **Related:** `cademi content products`
 
-**See also in this domain:** `references/settings.md`, `references/settings-emails.md`, `references/settings-legal-terms.md`, `references/settings-support.md`
+**See also in this domain:** `references/settings-access.md`, `references/settings-definitions.md`, `references/settings-platform.md`, `references/settings-emails.md`, `references/settings-legal-terms.md`, `references/settings-support.md`
 
 Live catalog for this file: `cademi commands settings menus --json` (offline, no credential needed).
 

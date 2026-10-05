@@ -18,7 +18,7 @@ Omitted fields remain unchanged. Only fields explicitly documented as nullable a
 
 **Related:** `cademi support tickets`, `cademi support departments`
 
-**See also in this domain:** `references/settings.md`, `references/settings-emails.md`, `references/settings-legal-terms.md`, `references/settings-menus.md`
+**See also in this domain:** `references/settings-access.md`, `references/settings-definitions.md`, `references/settings-platform.md`, `references/settings-emails.md`, `references/settings-legal-terms.md`, `references/settings-menus.md`
 
 Live catalog for this file: `cademi commands settings support --json` (offline, no credential needed).
 
