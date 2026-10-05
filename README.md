@@ -1,6 +1,6 @@
 # Cademí skills
 
-Agent skills published by [Cademí](https://cademi.dev): portable `SKILL.md` instruction sets that teach coding agents (Claude Code, Cursor, Codex, OpenCode, Gemini CLI, GitHub Copilot and others) how to work with Cademí products. They follow the [Agent Skills](https://agentskills.io/specification) format, so one copy installs everywhere.
+The collection of [Agent Skills](https://agentskills.io/specification) published by [Cademí](https://cademi.dev): portable `SKILL.md` instruction sets that teach coding agents (Claude Code, Cursor, Codex, OpenCode, Gemini CLI, GitHub Copilot and any other Agent Skills client) how to work with Cademí products. One copy installs everywhere.
 
 ## Skills
 
@@ -9,8 +9,6 @@ Agent skills published by [Cademí](https://cademi.dev): portable `SKILL.md` ins
 | [`skills/cademi-cli`](skills/cademi-cli/SKILL.md) | `cademi-cli` | The `cademi` CLI for API v3: discovery, authentication, input and output contracts, exit codes, safe writes, async operations, events, sandbox, config as code, plus one reference per command domain (`references/`). |
 
 ## Install
-
-Already have the CLI? Run `cademi skills install`. It installs the skill version that matches your CLI into `~/.claude/skills` and `~/.agents/skills` (`--dir .claude/skills` for a project-level copy, `cademi skills status` to check it, `cademi skills uninstall` to remove it). Updates of the CLI refresh the copies already installed.
 
 With the [`skills`](https://github.com/vercel-labs/skills) CLI, which installs into every agent it detects (`-g` for the user-wide directory):
 
@@ -26,9 +24,11 @@ In Claude Code, as a plugin from this marketplace:
 /plugin install cademi-cli@minhacademi
 ```
 
-By hand: copy or symlink `skills/cademi-cli` into your agent's skills directory (for example `~/.claude/skills/`, `~/.agents/skills/` or `.agents/skills/` in a project), or paste `SKILL.md` into a chat.
+By hand: copy or symlink a skill directory such as `skills/cademi-cli` into your agent's skills directory (for example `~/.claude/skills/`, `~/.agents/skills/` or `.agents/skills/` in a project), or paste its `SKILL.md` into a chat.
 
-### Requirements
+### The `cademi-cli` skill
+
+Already have the CLI? Run `cademi skills install`. It installs the skill version that matches your CLI into `~/.claude/skills` and `~/.agents/skills` (`--dir .claude/skills` for a project-level copy, `cademi skills status` to check it, `cademi skills uninstall` to remove it). Updates of the CLI refresh the copies already installed.
 
 The skill assumes the `cademi` CLI is installed and that a credential is available:
 
@@ -40,9 +40,9 @@ cademi auth login                                        # or export CADEMI_API_
 
 Docs: https://cademi.dev/cli/ (index for LLMs at https://cademi.dev/llms.txt).
 
-## Keeping up with the CLI
+## Versions
 
-The `metadata` block of each `SKILL.md` records the `cademi` release and API release the skill describes (`cademi version` prints yours). When a new CLI release adds or changes commands, this repository gets a new version of the skill; `cademi commands <prefix> --json` always describes the CLI you have installed.
+The `metadata` block of each `SKILL.md` records the product release the skill describes; for `cademi-cli` that is the `cademi` release and the API release (`cademi version` prints yours). When a release adds or changes what a skill covers, this repository gets a new version of that skill.
 
 ## Versioning
 
@@ -51,7 +51,7 @@ The `metadata` block of each `SKILL.md` records the `cademi` release and API rel
 
 ## Reporting problems
 
-Problems with the CLI or the API go to [minhacademi/developers](https://github.com/minhacademi/developers) (`cademi bug --print` prefills an issue). Problems with a skill, such as wrong guidance or a stale reference, are issues in this repository.
+Problems with Cademí products (the CLI, the API, webhooks, MCP) go to [minhacademi/developers](https://github.com/minhacademi/developers); `cademi bug --print` prefills a CLI issue. Problems with a skill, such as wrong guidance or a stale reference, are issues in this repository.
 
 ## License
 
