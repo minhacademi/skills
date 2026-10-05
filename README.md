@@ -1,6 +1,6 @@
 # Cademí skills
 
-The collection of [Agent Skills](https://agentskills.io/specification) published by [Cademí](https://cademi.dev): portable `SKILL.md` instruction sets that teach coding agents (Claude Code, Cursor, Codex, OpenCode, Gemini CLI, GitHub Copilot and any other Agent Skills client) how to work with Cademí products. One copy installs everywhere.
+The collection of [Agent Skills](https://agentskills.io/specification) published by [Cademí](https://cademi.dev): portable `SKILL.md` instruction sets that teach coding agents (Claude Code, Cursor, Codex, OpenCode, Gemini CLI, GitHub Copilot, and any other Agent Skills client) how to work with Cademí products. One copy installs everywhere.
 
 ## Skills
 
@@ -30,24 +30,27 @@ By hand: copy or symlink a skill directory such as `skills/cademi-cli` into your
 
 Already have the CLI? Run `cademi skills install`. It installs the skill version that matches your CLI into `~/.claude/skills` and `~/.agents/skills` (`--dir .claude/skills` for a project-level copy, `cademi skills status` to check it, `cademi skills uninstall` to remove it). Updates of the CLI refresh the copies already installed.
 
-The skill assumes the `cademi` CLI is installed and that a credential is available:
+The skill assumes the `cademi` CLI is installed and that a credential is available.
+
+macOS and Linux:
 
 ```sh
-curl -fsSL https://cli.cademi.dev/install.sh | bash     # macOS and Linux
-irm https://cli.cademi.dev/install.ps1 | iex             # Windows PowerShell
-cademi auth login                                        # or export CADEMI_API_KEY=ck_...
+curl -fsSL https://cli.cademi.dev/install.sh | bash
 ```
 
-Docs: https://cademi.dev/cli/ (index for LLMs at https://cademi.dev/llms.txt).
+Windows PowerShell:
+
+```powershell
+irm https://cli.cademi.dev/install.ps1 | iex
+```
+
+Then `cademi auth login`, or export `CADEMI_API_KEY`. Docs at [cademi.dev/cli](https://cademi.dev/cli), with an index for LLMs at [cademi.dev/llms.txt](https://cademi.dev/llms.txt).
 
 ## Versions
 
-The `metadata` block of each `SKILL.md` records the product release the skill describes; for `cademi-cli` that is the `cademi` release and the API release (`cademi version` prints yours). When a release adds or changes what a skill covers, this repository gets a new version of that skill.
-
-## Versioning
-
-- Each skill has its own `metadata.version` in its `SKILL.md`; the plugin version in `.claude-plugin/` is bumped whenever any skill changes.
-- `CHANGELOG.md` lists what changed and which `cademi` release the references match.
+- The `metadata` block of each `SKILL.md` records the product release the skill describes; for `cademi-cli` that is the `cademi` release and the API release (`cademi version` prints yours).
+- Each skill has its own `metadata.version`; the plugin version in `.claude-plugin/` is bumped whenever any skill changes.
+- `CHANGELOG.md` lists what changed in each version and which product release it matches.
 
 ## Reporting problems
 
