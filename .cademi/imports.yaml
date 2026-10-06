@@ -1,0 +1,12 @@
+# .cademi/imports.yaml: o que este repositorio recebe de outro, numa referencia fixa.
+# Lido por `bun run cli imports inspect|check|apply` (core/src/imports, no workspace da Iris).
+# O skill cademi-cli nasce no lms-cli (internal/skill/: SKILL.md escrito a mao, references, indice e
+# llms.txt gerados pelo `make skill`) e chega aqui da tag publicada, depois do release da CLI.
+# Os destinos daqui nao se editam a mao: a edicao editorial e no lms-cli e entra no proximo release.
+cademi-cli:
+  from: { repo: lms-cli, ref: "v{v}" }
+  guard: { file: internal/skill/cademi-cli/SKILL.md, text: "cademi-cli: \"{v}\"" }
+  current: { file: skills/cademi-cli/SKILL.md, text: "cademi-cli: \"{v}\"" }
+  files:
+    - { src: "internal/skill/cademi-cli/**", dest: skills/cademi-cli/, mode: replace }
+    - { src: internal/skill/llms.txt, dest: skills/llms.txt }

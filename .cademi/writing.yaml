@@ -1,0 +1,8 @@
+# o texto publico deste repositorio: o que a escrita publica confere (travessao e vazamento de coisa interna).
+# Lido por `bun run cli editorial check|inspect <repo>` (core/src/editorial). Globs relativos ao repo.
+# Os destinos do .cademi/imports.yaml deste repo saem sozinhos: chegam por import e nao se editam aqui.
+public:
+  - "**/*.md"
+  - ".claude-plugin/*.json"         # descricao do plugin e do marketplace
+# skills/cademi-cli/ e skills/llms.txt chegam pelo import cademi-cli (imports.yaml, da tag do lms-cli): saem
+# sozinhos; o SKILL.md se edita no lms-cli.
