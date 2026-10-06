@@ -5,9 +5,9 @@ license: Apache-2.0
 compatibility: Requires the cademi CLI 0.2 or newer (curl -fsSL https://cli.cademi.dev/install.sh | bash) and a Cademí credential (CADEMI_API_KEY or `cademi auth login`).
 metadata:
   author: minhacademi
-  version: "0.1.2"
-  cademi-cli: "0.2.1"
-  cademi-api: "3.10.0"
+  version: "0.1.3"
+  cademi-cli: "0.2.2"
+  cademi-api: "3.10.1"
   docs: https://cademi.dev/cli
 ---
 
@@ -21,17 +21,17 @@ Help users operate a Cademí platform from the command line with the `cademi` CL
 
 ### Key Principles
 
-- **Command shape** — `cademi <domain> <group…> <verb> <ids…>`: path parameters are positional (`cademi content products modules get prd_42 mod_7`), query parameters are kebab-case flags (`--status published`, `--tag-id tag_1,tag_2`), bodies come from `-d/--data`, `-f/--field` and `-F/--typed-field`.
-- **Prefer generated resource commands over `cademi api`** — they validate input against the contract, type the flags and document the body. Use `cademi api <METHOD> <path>` only for operations newer than the CLI or when mirroring a raw HTTP call.
-- **Use `--json` (or `--jq`) whenever you parse output** — lists print as tables on a terminal and as JSON when piped; `--json` removes the ambiguity. Standard output carries only data; status, progress and errors go to standard error.
-- **Read the exit code, not the text** — codes are stable (table below); messages follow `CADEMI_LANG` and change between releases.
-- **Check the body before writing** — `cademi commands <cmd> --schema --json` returns the complete request schema (types, enums, nested fields) offline. Reference files list the fields; `--schema` has the details.
-- **Writes are safe to retry** — every POST/PATCH/PUT/DELETE carries an automatic `Idempotency-Key`, and the CLI retries network errors, 429 and 5xx on its own. A failed write prints the key it used so you can replay it.
-- **Canonical paths only** — `cademi content products list`, not the hidden legacy `cademi products list`. Legacy paths still run but do not appear in `--help` or `cademi commands`, and may be removed.
-- **IDs are prefixed** — `usr_` user, `prd_` product, `mod_` module, `les_` lesson, `shw_` showcase, `dlv_` delivery, `enr_` enrollment, `exm_` exam, `cfd_` custom field, `tag_` tag, `tkt_` ticket, `whk_` webhook, `whd_` webhook delivery, `str_` event stream, `evt_` event, `op_` operation, `file_` file, `scn_` sandbox scenario, `key_` credential. The catalog shows the prefix of every path argument (`arguments[].schema.example`). A 404 on a well-formed call usually means a wrong prefix or an ID outside the credential's scope.
-- **Access is delivery + enrollment** — a delivery (`cademi sales deliveries`) defines what a purchase or a manual grant gives; a user gets content through an enrollment in a delivery (`cademi users enrollments create <user_id> -f delivery_id=dlv_…`). Publishing content is a separate step (`publish-all`).
-- **Sandbox for experiments** — credentials starting with `ck_test_` hit the sandbox; `cademi sandbox run <scenario_id>` creates simulated data and real events. Production profiles are highlighted and destructive prompts start with `[production]`.
-- **Docs when the catalog cannot answer** — https://cademi.dev/cli/*.md (index at https://cademi.dev/llms.txt) explain concepts; the catalog and `cademi guide <topic> --help` explain the commands.
+- **Command shape**: `cademi <domain> <group…> <verb> <ids…>`: path parameters are positional (`cademi content products modules get prd_42 mod_7`), query parameters are kebab-case flags (`--status published`, `--tag-id tag_1,tag_2`), bodies come from `-d/--data`, `-f/--field` and `-F/--typed-field`.
+- **Prefer generated resource commands over `cademi api`**: they validate input against the contract, type the flags and document the body. Use `cademi api <METHOD> <path>` only for operations newer than the CLI or when mirroring a raw HTTP call.
+- **Use `--json` (or `--jq`) whenever you parse output**: lists print as tables on a terminal and as JSON when piped; `--json` removes the ambiguity. Standard output carries only data; status, progress and errors go to standard error.
+- **Read the exit code, not the text**: codes are stable (table below); messages follow `CADEMI_LANG` and change between releases.
+- **Check the body before writing**: `cademi commands <cmd> --schema --json` returns the complete request schema (types, enums, nested fields) offline. Reference files list the fields; `--schema` has the details.
+- **Writes are safe to retry**: every POST/PATCH/PUT/DELETE carries an automatic `Idempotency-Key`, and the CLI retries network errors, 429 and 5xx on its own. A failed write prints the key it used so you can replay it.
+- **Canonical paths only**: `cademi content products list`, not the hidden legacy `cademi products list`. Legacy paths still run but do not appear in `--help` or `cademi commands`, and may be removed.
+- **IDs are prefixed**: `usr_` user, `prd_` product, `mod_` module, `les_` lesson, `shw_` showcase, `dlv_` delivery, `enr_` enrollment, `exm_` exam, `cfd_` custom field, `tag_` tag, `tkt_` ticket, `whk_` webhook, `whd_` webhook delivery, `str_` event stream, `evt_` event, `op_` operation, `file_` file, `scn_` sandbox scenario, `key_` credential. The catalog shows the prefix of every path argument (`arguments[].schema.example`). A 404 on a well-formed call usually means a wrong prefix or an ID outside the credential's scope.
+- **Access is delivery + enrollment**: a delivery (`cademi sales deliveries`) defines what a purchase or a manual grant gives; a user gets content through an enrollment in a delivery (`cademi users enrollments create <user_id> -f delivery_id=dlv_…`). Publishing content is a separate step (`publish-all`).
+- **Sandbox for experiments**: credentials starting with `ck_test_` hit the sandbox; `cademi sandbox run <scenario_id>` creates simulated data and real events. Production profiles are highlighted and destructive prompts start with `[production]`.
+- **Docs when the catalog cannot answer**: https://cademi.dev/cli/*.md (index at https://cademi.dev/llms.txt) explain concepts; the catalog and `cademi guide <topic> --help` explain the commands.
 
 ### Discovery Flow
 
@@ -270,7 +270,7 @@ cademi download "$file_id" -O handbook.pdf
 #### Run in CI
 
 ```bash
-curl -fsSL https://cli.cademi.dev/install.sh | CADEMI_VERSION=0.2.0 CADEMI_NO_MODIFY_PATH=1 bash
+curl -fsSL https://cli.cademi.dev/install.sh | CADEMI_VERSION=0.2.2 CADEMI_NO_MODIFY_PATH=1 bash
 export PATH="$HOME/.cademi/bin:$PATH"
 export CADEMI_API_KEY="$CADEMI_CI_KEY"                 # ck_test_… for test pipelines
 export CADEMI_CLIENT_REQUEST_ID="gh-${GITHUB_RUN_ID}"  # shows up in cademi integrations requests list
@@ -340,7 +340,7 @@ cademi env                                             # effective settings and 
 Check first; install only when it is missing, and tell the user what you are about to run:
 
 ```bash
-command -v cademi && cademi version          # installed? → cademi v0.2.0 (api 3.10.0, commit …)
+command -v cademi && cademi version          # installed? → cademi 0.2.2 (api 3.10.1, commit …)
 
 # macOS and Linux: no sudo, installs to ~/.cademi/bin and adds it to the shell startup file
 curl -fsSL https://cli.cademi.dev/install.sh | bash
@@ -350,7 +350,7 @@ export PATH="$HOME/.cademi/bin:$PATH"        # current shell only; new terminals
 irm https://cli.cademi.dev/install.ps1 | iex
 
 # CI or a container: pin the version and leave startup files alone
-curl -fsSL https://cli.cademi.dev/install.sh | CADEMI_VERSION=0.2.0 CADEMI_NO_MODIFY_PATH=1 bash
+curl -fsSL https://cli.cademi.dev/install.sh | CADEMI_VERSION=0.2.2 CADEMI_NO_MODIFY_PATH=1 bash
 
 cademi version                               # verify; the script already checked the SHA-256
 cademi update --check                        # later updates are signed (ed25519) and verified
@@ -358,7 +358,7 @@ cademi update --check                        # later updates are signed (ed25519
 
 - If `cademi` is not found right after installing, the current shell has not reloaded its PATH: export it as above or open a new terminal.
 - The installer needs `curl` and network access to `cli.cademi.dev`; it never asks for sudo. `CADEMI_INSTALL_DIR` changes the destination.
-- `CI` or `CADEMI_DISABLE_AUTOUPDATE` turn automatic updates off; `cademi update --version 0.2.0` pins or rolls back.
+- `CI` or `CADEMI_DISABLE_AUTOUPDATE` turn automatic updates off; `cademi update --version 0.2.2` pins or rolls back.
 - Installing the CLI does not sign anyone in: the next step is a credential (below).
 - `cademi skills install` installs this skill, at the version bundled with the installed CLI, into `~/.claude/skills` and `~/.agents/skills`. Without `--agent` or `--dir` it only installs for agents whose directory already exists, so an agent that never ran on the machine does not get it; `--dir .claude/skills` installs into one project, and `cademi skills status` checks the copy. After the CLI is updated, the first command you run refreshes the copies in `~/.claude/skills` and `~/.agents/skills`; a copy installed with `--dir` is not refreshed: run `cademi skills install --dir <path>` again.
 - `cademi mcp install <client>` adds the Cademí MCP server to an assistant (`claude`, `cursor`, `vscode`, `copilot`, `codex`, `gemini`, `opencode`); `cademi mcp docs` has the details. Prefer the MCP when the assistant should call the API as tools inside a conversation; prefer the CLI for scripts, CI, bulk work, events, and files.
@@ -369,7 +369,7 @@ Credentials are created in the Cademí dashboard (`ck_live_…` for production, 
 
 ## Command Reference
 
-One row per reference file. Each file carries the signature, route, permission, arguments, flags, body fields and examples of its commands for cademi 0.2.0. The live catalog is always `cademi commands <prefix> --json`.
+One row per reference file. Each file carries the signature, route, permission, arguments, flags, body fields and examples of its commands for cademi 0.2.2. The live catalog is always `cademi commands <prefix> --json`.
 
 <!-- commands:start -->
 

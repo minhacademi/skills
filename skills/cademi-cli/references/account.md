@@ -2,13 +2,13 @@
 name: cademi-cli-account
 description: "Inspect the account, administrators and available capabilities — `cademi account` (18 commands)"
 metadata:
-  cademi-cli: "0.2.1"
-  cademi-api: "3.10.0"
+  cademi-cli: "0.2.2"
+  cademi-api: "3.10.1"
 ---
 
 # Account Commands
 
-> cademi 0.2.1, API 3.10.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.2, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Account operations describe the platform, domains and replicas.
 Administrators manage the platform; users are its students. Capabilities
@@ -74,7 +74,7 @@ Returns aggregated API usage for the account over the time window selected by `p
 
 `storage` reports the file storage in use and the storage quota of the account, in bytes, regardless of `period`. The quota also covers the accounts billed with it, such as its replicas, and uploads that would exceed it are rejected with `quota_exceeded`.
 
-Figures are computed from live data when the request is made, so `ingestion_delay_seconds` is always `0`, and the response is never cached.
+Request and operation figures are computed from live data when the request is made, so `ingestion_delay_seconds` is always `0`, and the response is never cached. `storage.used_bytes` comes from a stored total that is updated on each upload and deletion through the API and recalculated daily, so files added or removed in the dashboard may take up to a day to be reflected.
 
 Requires the `usage.read` permission.
 

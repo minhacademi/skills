@@ -2,13 +2,13 @@
 name: cademi-cli-content-products-modules
 description: "Manage a product's modules and module groups — `cademi content products modules` (9 commands)"
 metadata:
-  cademi-cli: "0.2.1"
-  cademi-api: "3.10.0"
+  cademi-cli: "0.2.2"
+  cademi-api: "3.10.1"
 ---
 
 # Content Products Modules Commands
 
-> cademi 0.2.1, API 3.10.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.2, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
 
 > Domain `cademi content` — Organize showcases, products and learning content.
 

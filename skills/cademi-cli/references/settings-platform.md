@@ -2,13 +2,13 @@
 name: cademi-cli-settings-platform
 description: "Platform-wide settings: platform, app, branding, admin area, embedded pages, sharing and gamification — `cademi settings` (14 commands)"
 metadata:
-  cademi-cli: "0.2.1"
-  cademi-api: "3.10.0"
+  cademi-cli: "0.2.2"
+  cademi-api: "3.10.1"
 ---
 
 # Settings Platform Commands
 
-> cademi 0.2.1, API 3.10.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.2, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Platform-wide settings: platform, app, branding, admin area, embedded pages, sharing and gamification. The rest of `cademi settings` is in the sibling files below.
 

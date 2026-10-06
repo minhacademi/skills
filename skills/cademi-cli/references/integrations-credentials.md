@@ -2,13 +2,13 @@
 name: cademi-cli-integrations-credentials
 description: "Manage API credentials and their access policies — `cademi integrations credentials` (15 commands)"
 metadata:
-  cademi-cli: "0.2.1"
-  cademi-api: "3.10.0"
+  cademi-cli: "0.2.2"
+  cademi-api: "3.10.1"
 ---
 
 # Integrations Credentials Commands
 
-> cademi 0.2.1, API 3.10.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.2, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
 
 > Domain `cademi integrations` — Manage API credentials, events and webhook delivery.
 
