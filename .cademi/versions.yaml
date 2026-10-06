@@ -18,6 +18,6 @@ references:
     - { file: skills/cademi-cli/SKILL.md, text: "cademi {v} (api {api}", role: mention, form: no-v }
     - { file: skills/cademi-cli/SKILL.md, text: "for cademi {v}", role: mention }
   api:
-    - { file: skills/cademi-cli/SKILL.md, yaml_front: metadata.cademi-api, role: pin }
+    - { file: skills/cademi-cli/SKILL.md, yaml_front: metadata.cademi-api, role: pin, may_lag: true }   # o skill acompanha a CLI publicada, nao a API: sobe no release da CLI
     - { file: "skills/cademi-cli/references/*.md", yaml_front: metadata.cademi-api, role: derived, all_equal: true, generator: "bun run cli imports apply skills cademi-cli --to {v}" }
     - { file: skills/cademi-cli/SKILL.md, text: "(api {v}, commit", role: mention }
