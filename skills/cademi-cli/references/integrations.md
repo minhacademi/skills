@@ -2,13 +2,13 @@
 name: cademi-cli-integrations
 description: "Manage API credentials, events and webhook delivery — `cademi integrations` (10 commands)"
 metadata:
-  cademi-cli: "0.2.2"
+  cademi-cli: "0.2.3"
   cademi-api: "3.10.1"
 ---
 
 # Integrations Commands
 
-> cademi 0.2.2, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.3, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Credentials control API access. Events describe account activity, webhooks
 deliver notifications, and event-streams configure streaming access.

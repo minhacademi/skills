@@ -2,13 +2,13 @@
 name: cademi-cli-automations
 description: "Manage learning and sales automation journeys — `cademi automations` (18 commands)"
 metadata:
-  cademi-cli: "0.2.2"
+  cademi-cli: "0.2.3"
   cademi-api: "3.10.1"
 ---
 
 # Automations Commands
 
-> cademi 0.2.2, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.3, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Diamond funnels coordinate a lead's journey through lessons and an offer.
 They connect learning content, access deliveries and webhook triggers.
@@ -40,6 +40,10 @@ Each command lists the sets it accepts. The flags of a set are:
 
 **idempotency**
 - `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+
+**async**
+- `--wait` — When the API answers 202, wait for the operation to finish
+- `--wait-timeout <duration>` — Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
 
 **confirm**
 - `-y, --yes` — Do not ask for confirmation
@@ -376,7 +380,7 @@ A membership with no recorded failure is rejected with `409 state_conflict` and 
 - `diamond_id` — Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
 - `membership_id` — Public ID of the membership, prefixed with `mbr_`. Example: `mbr_7`
 
-**Flag sets:** output, idempotency
+**Flag sets:** output, idempotency, async
 
 Legacy path: `cademi diamonds memberships processing-attempts create`
 
@@ -384,7 +388,7 @@ Legacy path: `cademi diamonds memberships processing-attempts create`
 
 ```bash
 # run
-cademi automations diamonds memberships processing-attempts create dmd_42 mbr_7 --json
+cademi automations diamonds memberships processing-attempts create dmd_42 mbr_7 --wait --json
 ```
 
 #### `cademi automations diamonds memberships processing-attempts get <diamond_id> <membership_id> <attempt_id>`

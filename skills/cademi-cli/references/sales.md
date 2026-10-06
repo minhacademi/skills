@@ -2,13 +2,13 @@
 name: cademi-cli-sales
 description: "Connect gateways, deliveries and incoming sales — `cademi sales` (21 commands)"
 metadata:
-  cademi-cli: "0.2.2"
+  cademi-cli: "0.2.3"
   cademi-api: "3.10.1"
 ---
 
 # Sales Commands
 
-> cademi 0.2.2, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.3, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Gateways send sales events. Deliveries connect gateway products to content
 access. Inspect events and processing attempts to investigate sales handling.
@@ -533,7 +533,7 @@ Requires an `Idempotency-Key` header.
 **Arguments:**
 - `event_id` — Public ID of the event, prefixed with `sev_`. Example: `sev_42`
 
-**Flag sets:** output, idempotency
+**Flag sets:** output, idempotency, async
 
 Legacy path: `cademi sales-events processing-attempts create`
 
@@ -541,7 +541,7 @@ Legacy path: `cademi sales-events processing-attempts create`
 
 ```bash
 # run
-cademi sales events processing-attempts create sev_42 --json
+cademi sales events processing-attempts create sev_42 --wait --json
 ```
 
 #### `cademi sales events processing-attempts get <event_id> <attempt_id>`

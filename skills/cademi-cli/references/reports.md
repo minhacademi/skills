@@ -2,13 +2,13 @@
 name: cademi-cli-reports
 description: "Inspect activity, learning results and account-wide records — `cademi reports` (13 commands)"
 metadata:
-  cademi-cli: "0.2.2"
+  cademi-cli: "0.2.3"
   cademi-api: "3.10.1"
 ---
 
 # Reports Commands
 
-> cademi 0.2.2, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.3, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Reports provide aggregate views across the account. enrollments lists
 grants across users; users enrollments manages an individual user's grants.
@@ -85,9 +85,9 @@ The `email`, `document`, and `phone` fields are included only when the credentia
 **Flag sets:** output
 
 **Flags:**
-- `--from <string>` — First day of the date range (ISO 8601).
+- `--from <string>` — First day of the date range (ISO 8601). (required)
 - `--limit <int64>` — Maximum number of items to return, from 1 to 100; minimum: 1; maximum: 100
-- `--to <string>` — Last day of the date range (ISO 8601).
+- `--to <string>` — Last day of the date range (ISO 8601). (required)
 
 **Examples:**
 
@@ -317,7 +317,7 @@ Returns performance metrics for each lesson of the product identified by `produc
 - `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
 - `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
 - `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--product-id <string>` — Public ID of the product whose lessons are reported.
+- `--product-id <string>` — Public ID of the product whose lessons are reported. (required)
 - `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
 - `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
 
@@ -406,8 +406,8 @@ Returns message volume and response metrics for each support channel within the 
 **Flag sets:** output
 
 **Flags:**
-- `--from <string>` — First day of the date range (ISO 8601).
-- `--to <string>` — Last day of the date range (ISO 8601).
+- `--from <string>` — First day of the date range (ISO 8601). (required)
+- `--to <string>` — Last day of the date range (ISO 8601). (required)
 
 **Examples:**
 

@@ -2,13 +2,13 @@
 name: cademi-cli-account
 description: "Inspect the account, administrators and available capabilities — `cademi account` (18 commands)"
 metadata:
-  cademi-cli: "0.2.2"
+  cademi-cli: "0.2.3"
   cademi-api: "3.10.1"
 ---
 
 # Account Commands
 
-> cademi 0.2.2, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.3, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Account operations describe the platform, domains and replicas.
 Administrators manage the platform; users are its students. Capabilities
@@ -81,7 +81,7 @@ Requires the `usage.read` permission.
 **Flag sets:** output
 
 **Flags:**
-- `--period <string>` — Time window of the aggregated figures, ending now. (1h, 24h, 7d, 30d)
+- `--period <string>` — Time window of the aggregated figures, ending now. (1h, 24h, 7d, 30d) (required)
 
 **Examples:**
 

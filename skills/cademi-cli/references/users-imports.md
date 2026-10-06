@@ -2,13 +2,13 @@
 name: cademi-cli-users-imports
 description: "Import student records and inspect import processing — `cademi users imports` (10 commands)"
 metadata:
-  cademi-cli: "0.2.2"
+  cademi-cli: "0.2.3"
   cademi-api: "3.10.1"
 ---
 
 # Users Imports Commands
 
-> cademi 0.2.2, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.3, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
 
 > Domain `cademi users` — Manage students, enrollments and learning progress.
 
@@ -256,7 +256,7 @@ The import must have a completed analysis with no errors. Use `mode=initial` (de
 **Arguments:**
 - `import_id` — Public ID of the import, prefixed with `imp_`. Example: `imp_42`
 
-**Flag sets:** output, body, idempotency
+**Flag sets:** output, body, idempotency, async
 
 **Body:**
 
@@ -272,10 +272,10 @@ Legacy path: `cademi imports processing-attempts create`
 
 ```bash
 # partial update
-cademi users imports processing-attempts create imp_42 -f mode=initial --json
+cademi users imports processing-attempts create imp_42 -f mode=initial --wait --json
 
 # full body from a file
-cademi users imports processing-attempts create imp_42 --data @body.json --json
+cademi users imports processing-attempts create imp_42 --data @body.json --wait --json
 ```
 
 #### `cademi users imports processing-attempts get <import_id> <attempt_id>`

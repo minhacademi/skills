@@ -2,13 +2,13 @@
 name: cademi-cli-guides
 description: "Automation guides built into the CLI (errors, input, output, reordering, retries), read offline with --help"
 metadata:
-  cademi-cli: "0.2.2"
+  cademi-cli: "0.2.3"
   cademi-api: "3.10.1"
 ---
 
 # Guide Commands
 
-> cademi 0.2.2, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.3, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
 
 `cademi guide <topic> --help` prints these guides locally, without contacting the API. They are reproduced here so an agent can read them without running the CLI.
 
@@ -54,7 +54,7 @@ solely from stdout; check the exit status.
 ```text
 --wait and operations wait print the terminal operation even if it failed
 or was canceled, then exit 1. partially_succeeded exits 0: inspect status and
-cademi operations items list <operation_id> for individual item failures.
+cademi operations items <operation_id> for individual item failures.
 --wait-timeout and operations wait --timeout accept durations such as 30s or
 2m (0 means no limit). A timeout exits 1 and Ctrl-C exits 130; neither cancels
 the operation on the server. Resume with operations wait <operation_id>.
@@ -65,7 +65,7 @@ Polling failures use the API/transport codes above.
 
 ```bash
 cademi operations wait op_42 --timeout 2m --json
-cademi operations items list op_42 --all --json
+cademi operations items op_42 --all --json
 ```
 
 ## `cademi guide input --help`

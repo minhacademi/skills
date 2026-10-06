@@ -2,13 +2,13 @@
 name: cademi-cli-users-profile
 description: "Tags, custom field values, notes, attribution, avatar and term acceptances of a user — `cademi users` (17 commands)"
 metadata:
-  cademi-cli: "0.2.2"
+  cademi-cli: "0.2.3"
   cademi-api: "3.10.1"
 ---
 
 # Users Profile Commands
 
-> cademi 0.2.2, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.3, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Tags, custom field values, notes, attribution, avatar and term acceptances of a user. The rest of `cademi users` is in the sibling files below.
 

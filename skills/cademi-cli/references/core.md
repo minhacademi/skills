@@ -2,13 +2,13 @@
 name: cademi-cli-core
 description: "Built-in commands: authentication and profiles, raw API requests, events, declarative configuration, files, diagnostics and updates"
 metadata:
-  cademi-cli: "0.2.2"
+  cademi-cli: "0.2.3"
   cademi-api: "3.10.1"
 ---
 
 # Core Commands
 
-> cademi 0.2.2, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.3, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Commands that are not generated from the API contract. Resource commands (`cademi <domain> ...`) live in the other reference files; `cademi guide` topics are in `guides.md`.
 
@@ -363,7 +363,7 @@ Revoke the OAuth session and remove the profile's secrets
 Revoke the OAuth tokens of the profile (RFC 7009) and remove its secrets from the keychain.
 
 The API credential itself is not revoked: it may be shared with other people or systems.
-Revoke it in the dashboard if needed, or with `cademi credentials update <credential_id> -F status=revoked`
+Revoke it in the dashboard if needed, or with `cademi integrations credentials update <credential_id> -F status=revoked`
 using another credential that has the credentials.manage permission.
 
 ### `cademi auth status`
@@ -401,7 +401,7 @@ still needed when the plan has secrets (***), to fill in their real values.
 
 **Flags:**
 - `--no-wait` — Do not wait for the operation to finish
-- `--plan <string>` — Apply a plan saved with `cademi config plan --out`
+- `--plan <string>` — Apply a plan `file` saved with cademi config plan --out
 
 **Examples:**
 

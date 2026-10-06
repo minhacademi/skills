@@ -2,13 +2,13 @@
 name: cademi-cli-files
 description: "Manage stored files and upload sessions — `cademi files` (14 commands)"
 metadata:
-  cademi-cli: "0.2.2"
+  cademi-cli: "0.2.3"
   cademi-api: "3.10.1"
 ---
 
 # Files Commands
 
-> cademi 0.2.2, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.3, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Files are stored assets referenced by other resources. uploads provides
 low-level upload sessions. Use upload and download for complete file transfers.
@@ -40,6 +40,10 @@ Each command lists the sets it accepts. The flags of a set are:
 
 **idempotency**
 - `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+
+**async**
+- `--wait` — When the API answers 202, wait for the operation to finish
+- `--wait-timeout <duration>` — Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
 
 **confirm**
 - `-y, --yes` — Do not ask for confirmation
@@ -180,7 +184,7 @@ Requesting personal data columns (`email`, `document`, or `phone`) also requires
 
 The generated file is a UTF-8 CSV. It does not expire: it is kept until the export is deleted.
 
-**Flag sets:** output, body, idempotency
+**Flag sets:** output, body, idempotency, async
 
 **Body (required):**
 
@@ -199,10 +203,10 @@ Legacy path: `cademi exports create`
 
 ```bash
 # create: required fields with -f (strings) and -F (typed)
-cademi files exports create -f 'columns[]=<value>' -f resource=users --json
+cademi files exports create -f 'columns[]=<value>' -f resource=users --wait --json
 
 # full body from a file
-cademi files exports create --data @body.json --json
+cademi files exports create --data @body.json --wait --json
 ```
 
 #### `cademi files exports delete <export_id>`

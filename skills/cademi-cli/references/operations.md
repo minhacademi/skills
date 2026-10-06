@@ -2,13 +2,13 @@
 name: cademi-cli-operations
 description: "Inspect and wait for asynchronous API operations — `cademi operations` (9 commands)"
 metadata:
-  cademi-cli: "0.2.2"
+  cademi-cli: "0.2.3"
   cademi-api: "3.10.1"
 ---
 
 # Operations Commands
 
-> cademi 0.2.2, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.3, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Some writes return an operation instead of a completed result. Use wait
 with its operation ID, or --wait on commands that start asynchronous work.
@@ -174,7 +174,7 @@ Wait for an asynchronous operation to finish
 Poll the operation (every 2s for the first 30s, then every 10s) until it is
 succeeded, partially_succeeded, failed or canceled, and print it.
 Exits with 0 for succeeded AND partially_succeeded: inspect status and item errors
-before treating every item as successful (cademi operations items list).
+before treating every item as successful (cademi operations items <operation_id>).
 Exits with 1 for failed, canceled or a local wait timeout; Ctrl-C exits with 130.
 A timeout or Ctrl-C stops local polling without canceling the server operation.
 Polling API errors use the exit codes in cademi guide errors --help.
