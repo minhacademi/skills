@@ -1,8 +1,3 @@
-# o portao deste repositorio: o que precisa passar antes de push na main e antes de tag.
-# Lido por `bun run cli controls gate <repo>` (core/src/controls). argv, nunca string de shell.
-# O skill cademi-cli nasce no lms-cli e chega aqui da tag publicada (.cademi/imports.yaml): o portao confere
-# que o que esta aqui e byte a byte o da tag.
-# toolchain que o portao usa, alem de git, bun e gh (implicitos); conferida por `bun run cli workspace doctor`
 requires: [bun]
 code: true
 checks:

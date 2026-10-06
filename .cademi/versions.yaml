@@ -1,7 +1,5 @@
-# repositories/skills/.cademi/versions.yaml
 package: skill
 version:
-  # no SKILL.md as chaves vivem dentro de metadata:, por isso o caminho pontuado
   - { file: skills/cademi-cli/SKILL.md, yaml_front: metadata.version }
   - { file: .claude-plugin/plugin.json, json: version, role: derived }
   - { file: .claude-plugin/marketplace.json, json: metadata.version, role: derived }
@@ -12,12 +10,11 @@ references:
     - { file: skills/cademi-cli/SKILL.md, yaml_front: metadata.cademi-cli, role: pin, generator: "bun run cli imports apply skills cademi-cli --to {v}" }
     - { file: "skills/cademi-cli/references/*.md", yaml_front: metadata.cademi-cli, role: derived, all_equal: true, generator: "bun run cli imports apply skills cademi-cli --to {v}" }
     - { file: "skills/cademi-cli/references/*.md", text: "> cademi {v}, API {api}.", role: derived, all_equal: true, generator: "bun run cli imports apply skills cademi-cli --to {v}" }
-    # as 4 linhas abaixo são prosa escrita à mão no SKILL.md do lms-cli (internal/skill); chegam pelo imports
     - { file: skills/cademi-cli/SKILL.md, text: "CADEMI_VERSION={v}", role: mention }
     - { file: skills/cademi-cli/SKILL.md, text: "cademi update --version {v}", role: mention }
     - { file: skills/cademi-cli/SKILL.md, text: "cademi {v} (api {api}", role: mention, form: no-v }
     - { file: skills/cademi-cli/SKILL.md, text: "for cademi {v}", role: mention }
   api:
-    - { file: skills/cademi-cli/SKILL.md, yaml_front: metadata.cademi-api, role: pin, may_lag: true }   # o skill acompanha a CLI publicada, nao a API: sobe no release da CLI
+    - { file: skills/cademi-cli/SKILL.md, yaml_front: metadata.cademi-api, role: pin, may_lag: true }
     - { file: "skills/cademi-cli/references/*.md", yaml_front: metadata.cademi-api, role: derived, all_equal: true, generator: "bun run cli imports apply skills cademi-cli --to {v}" }
     - { file: skills/cademi-cli/SKILL.md, text: "(api {v}, commit", role: mention }
