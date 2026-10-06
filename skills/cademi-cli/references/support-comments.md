@@ -2,13 +2,13 @@
 name: cademi-cli-support-comments
 description: "Moderate comments and manage their replies — `cademi support comments` (8 commands)"
 metadata:
-  cademi-cli: "0.2.3"
-  cademi-api: "3.10.1"
+  cademi-cli: "0.2.5"
+  cademi-api: "3.12.0"
 ---
 
 # Support Comments Commands
 
-> cademi 0.2.3, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.5, API 3.12.0. The live catalog is always `cademi commands <prefix> --json`.
 
 > Domain `cademi support` — Handle student comments, questions and support tickets.
 
@@ -103,7 +103,7 @@ cademi support comments get prd_42 cmt_9 --json
 
 List comments for moderation · `GET /api/v3/support/comments` · permission `comments.read`
 
-Lists top-level comments across all products accessible with the current credentials, for use as a moderation queue.
+Lists comments and pending replies across all products accessible with the current credentials, for use as a moderation queue.
 
 When `status` is omitted, only comments with the `pending` status are returned. Results are paginated with a cursor and sorted by ID, newest first by default; use `sort=id` for oldest first.
 
@@ -221,7 +221,7 @@ Delete a comment reply · `DELETE /api/v3/products/{product_id}/comments/{commen
 
 Deletes a single reply from a comment. The top-level comment and its other replies are not affected.
 
-Only replies written by an administrator or an API credential (`author.kind` is `admin` or `credential`) can be deleted. Attempts to delete any other reply return `403` with the `permission_denied` error code and `details[].field` set to `author.kind`. To remove the entire conversation, delete the top-level comment instead.
+Staff replies are deleted without removing the top-level comment. A student reply can also be deleted individually when the credentials have `comments.delete`; the rest of the thread is kept.
 
 **Arguments:**
 - `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`

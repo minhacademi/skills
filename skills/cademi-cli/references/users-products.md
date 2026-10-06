@@ -2,13 +2,13 @@
 name: cademi-cli-users-products
 description: "Inspect a user's effective product access and progress — `cademi users products` (9 commands)"
 metadata:
-  cademi-cli: "0.2.3"
-  cademi-api: "3.10.1"
+  cademi-cli: "0.2.5"
+  cademi-api: "3.12.0"
 ---
 
 # Users Products Commands
 
-> cademi 0.2.3, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.5, API 3.12.0. The live catalog is always `cademi commands <prefix> --json`.
 
 > Domain `cademi users` — Manage students, enrollments and learning progress.
 
@@ -121,7 +121,7 @@ Update product access · `PATCH /api/v3/users/{user_id}/products/{product_id}/ac
 
 Overrides the user's access to a product. Only the fields supplied in the request are changed:
 
-- `duration` sets the access duration for this product.
+- `duration` sets the access duration for this product. Send `null` to inherit the delivery duration again.
 - `schedule_id` assigns the user to a schedule; send `null` to remove the assignment.
 - `rules_waived` controls whether the product's content release rules are waived for this user.
 

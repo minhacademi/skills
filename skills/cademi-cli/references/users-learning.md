@@ -1,14 +1,14 @@
 ---
 name: cademi-cli-users-learning
-description: "Enrollments, progress, certificates and scores of a user — `cademi users` (13 commands)"
+description: "Enrollments, progress, certificates and scores of a user — `cademi users` (14 commands)"
 metadata:
-  cademi-cli: "0.2.3"
-  cademi-api: "3.10.1"
+  cademi-cli: "0.2.5"
+  cademi-api: "3.12.0"
 ---
 
 # Users Learning Commands
 
-> cademi 0.2.3, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.5, API 3.12.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Enrollments, progress, certificates and scores of a user. The rest of `cademi users` is in the sibling files below.
 
@@ -463,6 +463,35 @@ cademi users score-adjustments create usr_42 --data @body.json --json
 ```
 
 ### `cademi users scores` — Manage users scores
+
+#### `cademi users scores delete <user_id> <score_id>`
+
+Delete a point entry · `DELETE /api/v3/users/{user_id}/scores/{score_id}` · permission `scores.delete`
+
+Permanently deletes a manual point entry from the user's points ledger, such as one created by `POST /users/{user_id}/score-adjustments` or added in the dashboard. A `reason` is required in the request body, and the deletion is recorded as a progress adjustment with its reason and author.
+
+The user's balance changes by the negative of the entry's points, and a `score.deleted` event is published. Points earned automatically (lessons, courses, certificates, questions, comments and exams) cannot be deleted and return `422` with the `score_not_removable` error code.
+
+**Arguments:**
+- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `score_id` — Public ID of the score, prefixed with `sco_`. Example: `sco_42`
+
+**Flag sets:** output, body, idempotency, confirm
+
+**Body (required):**
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `reason` | string | yes |  |
+
+Full schema: `cademi commands users scores delete --schema --json`
+
+**Examples:**
+
+```bash
+# delete: confirms unless --yes (required without a terminal)
+cademi users scores delete usr_42 sco_42 --yes
+```
 
 #### `cademi users scores get <user_id> <score_id>`
 

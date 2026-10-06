@@ -2,6 +2,16 @@
 
 All notable changes to the skills in this repository. Each skill carries its own version in the `metadata` block of its `SKILL.md`.
 
+## cademi-cli 0.1.6 (2026-10-06)
+
+- References follow the `cademi` CLI 0.2.5 (API 3.12.0): new `cademi users scores delete <user_id> <score_id>`, which deletes a manual point entry with a required `reason` and the `scores.delete` permission (automatic points return `422 score_not_removable`).
+- The `score.removed` event is now `score.deleted`: pass `score.deleted` to `cademi listen --events`.
+- The comments list also returns replies, and the `sandbox resets create` description cites the right scenario runs path.
+- Version examples in the guide point to 0.2.5.
+- This version also carries the changes of the `cademi` CLI 0.2.4 (API 3.11.0), since the skill was not published in between: `cademi support tickets list --queue` (`open`, `answered`, `closed`); `cademi support departments delete --unlink-tickets` (without it, a department with tickets is refused with `state_conflict`); `admin_id` in `support departments create` and `update`; `text` is optional in `support tickets replies create` (`file_ids` alone is enough); `products` is optional in `sales deliveries create`; `sales deliveries update` accepts `deleted` as an alias of `status`.
+- Deliveries are live: `sales deliveries products update` and `sales deliveries rules update` apply to existing enrollments. A student reply in `support comments` can be deleted on its own, and `duration: null` in `users products update` inherits the delivery duration again.
+- `admin_two_factor_available` in `settings authentication update` is deprecated, and the exit codes table notes that for a group in `permissions_any_of`, any one permission is enough.
+
 ## cademi-cli 0.1.4 (2026-10-06)
 
 - References follow the `cademi` CLI 0.2.3 (API 3.10.1): `files exports create` and the three `processing-attempts create` commands (sales events, users imports, automations diamonds memberships) accept `--wait` and `--wait-timeout`, and required query flags (`account usage --period`, `reports activity list --from/--to`, `reports lessons list --product-id`, `reports support get --from/--to`) are marked `(required)`.

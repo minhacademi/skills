@@ -2,13 +2,13 @@
 name: cademi-cli-sales
 description: "Connect gateways, deliveries and incoming sales — `cademi sales` (21 commands)"
 metadata:
-  cademi-cli: "0.2.3"
-  cademi-api: "3.10.1"
+  cademi-cli: "0.2.5"
+  cademi-api: "3.12.0"
 ---
 
 # Sales Commands
 
-> cademi 0.2.3, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.5, API 3.12.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Gateways send sales events. Deliveries connect gateway products to content
 access. Inspect events and processing attempts to investigate sales handling.
@@ -85,10 +85,10 @@ The secret is write-only: responses indicate only whether a secret is configured
 | `gateway` | string | yes |  |
 | `kind` | string |  | One of: `one_time`, `subscription` |
 | `name` | string | yes |  |
-| `products` | object |  | The set of products that a delivery grants access to. |
-| `products.entries` | array of object | yes |  |
-| `products.ignored_external_product_ids` | array of string | yes | Gateway product codes that sale processing ignores across the entire account. Read-only in this resource. |
-| `products.object` | string | yes | One of: `delivery_products` |
+| `products` | object |  | Products and showcases the delivery grants access to, in the same shape as the body of `PUT /sales/deliveries/{delivery_id}/products`. If omitted, the delivery starts without products. |
+| `products.entries` | array of object |  |  |
+| `products.ignored_external_product_ids` | array of string |  | Read-only: accepted for compatibility with the response shape and ignored. The ignored gateway product codes apply to the whole account and cannot be set through the API. |
+| `products.object` | string |  | Accepted for compatibility with the response shape and ignored. One of: `delivery_products` |
 | `schedules` | array of object |  |  |
 | `secret` | string, nullable |  |  |
 | `tags` | array of string |  |  |
@@ -101,7 +101,7 @@ Legacy path: `cademi deliveries create`
 
 ```bash
 # create: required fields with -f (strings) and -F (typed)
-cademi sales deliveries create -f gateway=<gateway> -f name=<name> --data '{"products.entries":[...]}' -f 'products.ignored_external_product_ids[]=<value>' -f products.object=delivery_products --json
+cademi sales deliveries create -f gateway=<gateway> -f name=<name> --json
 
 # full body from a file
 cademi sales deliveries create --data @body.json --json
@@ -171,7 +171,7 @@ Update a delivery · `PATCH /api/v3/sales/deliveries/{delivery_id}` · permissio
 
 Updates an existing delivery.
 
-Changing `status` requires the `deliveries.archive` permission in addition to `deliveries.update`. Archiving a delivery stops it from processing new sales but does not revoke access from users who have already purchased.
+Changing `status` or `deleted` requires the `deliveries.archive` permission in addition to `deliveries.update`. `deleted` is an alias of `status`: `true` archives the delivery and `false` makes it active again, because an archived delivery is the deleted one. When both are sent, `status` prevails. Archiving a delivery stops it from processing new sales but does not revoke access from users who have already purchased.
 
 To avoid overwriting a newer version, send the delivery's current `ETag` in the `If-Match` header.
 
@@ -189,7 +189,7 @@ Replicated deliveries are read-only; updating or archiving them returns `403` wi
 
 | Field | Type | Required | Description |
 |---|---|---|---|
-| `deleted` | boolean |  |  |
+| `deleted` | boolean |  | Alias of `status`: `true` archives the delivery and `false` makes it active again. Requires `deliveries.archive`. |
 | `external_ids` | array of string |  |  |
 | `hidden` | boolean |  |  |
 | `name` | string |  |  |
@@ -268,7 +268,7 @@ Replace delivery products · `PUT /api/v3/sales/deliveries/{delivery_id}/product
 
 Replaces the delivery's entire product set with the supplied entries.
 
-Existing enrollments are not changed; the new set applies to subsequent sales. Every referenced product must be accessible with the current credentials. Replicated deliveries are read-only; replacing their products returns `403` with the `replica_readonly` error code.
+The delivery is live: the new set applies to existing enrollments unless the user has an individual override (`schedule_id` lock or duration). Every referenced product must be accessible with the current credentials. Replicated deliveries are read-only; replacing their products returns `403` with the `replica_readonly` error code.
 
 To avoid overwriting a newer version, send the delivery's current `ETag` in the `If-Match` header.
 
@@ -332,7 +332,7 @@ Replace delivery release schedules · `PUT /api/v3/sales/deliveries/{delivery_id
 
 Replaces the release schedules applied by the delivery.
 
-Changes apply only to new enrollments. Existing enrollments keep the release schedule assigned when they were granted.
+The delivery is live: existing enrollments follow the new schedules unless the user has an individual `schedule_id` lock. That lock is changed per user in the product access update operation.
 
 **Arguments:**
 - `delivery_id` — Public ID of the delivery, prefixed with `dlv_`. Example: `dlv_42`

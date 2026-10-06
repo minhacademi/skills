@@ -2,13 +2,13 @@
 name: cademi-cli-sandbox
 description: "Inspect sandbox data and run test scenarios — `cademi sandbox` (7 commands)"
 metadata:
-  cademi-cli: "0.2.3"
-  cademi-api: "3.10.1"
+  cademi-cli: "0.2.5"
+  cademi-api: "3.12.0"
 ---
 
 # Sandbox Commands
 
-> cademi 0.2.3, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.5, API 3.12.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Sandbox workflows reset test data and run predefined scenarios. reset and
 run require sandbox credentials. Inspect auth status to check your environment.
@@ -118,7 +118,7 @@ Reset the sandbox · `POST /api/v3/sandbox/resets` · permission `sandbox.manage
 
 Deletes the sandbox data, including uploaded files, and seeds the default test data again. Credentials, administrators, and audit entries are preserved, and production data is never affected.
 
-Only sandbox credentials can request a reset. Production credentials receive `403 Forbidden` with the `sandbox_only` error code. Only one reset can be queued or running at a time.
+Only sandbox credentials can request a reset. Production credentials receive `403 Forbidden` with the `sandbox_only` error code. `POST /sandbox/test-scenarios/{scenario_id}/runs` refuses the same credential with `409 sandbox_required`: both codes mean the request must be made with a sandbox credential, and a client can handle them the same way. Only one reset can be queued or running at a time.
 
 The reset is processed asynchronously. The `Location` header points to the operation that tracks its progress. The `Idempotency-Key` header is required; retrying with the same key returns the same operation.
 
@@ -187,7 +187,7 @@ Run a test scenario · `POST /api/v3/sandbox/test-scenarios/{scenario_id}/runs` 
 
 Runs a test scenario in the sandbox. Records created by the scenario have `meta.simulated` set to `true`, and the corresponding events are delivered to webhooks and event streams as they would be in production. Scenario parameters can be supplied in `params`.
 
-Available only with sandbox credentials. Production credentials receive `409 Conflict` with the `sandbox_required` error code.
+Available only with sandbox credentials. Production credentials receive `409 Conflict` with the `sandbox_required` error code. `POST /sandbox/resets` refuses the same credential with `403 sandbox_only`: both codes mean the request must be made with a sandbox credential, and a client can handle them the same way.
 
 The run is processed asynchronously. The `Location` header points to the operation that tracks its progress. The `Idempotency-Key` header is required; retrying with the same key returns the same operation without running the scenario again.
 

@@ -2,13 +2,13 @@
 name: cademi-cli-support-tickets
 description: "Manage support conversations and their messages — `cademi support tickets` (9 commands)"
 metadata:
-  cademi-cli: "0.2.3"
-  cademi-api: "3.10.1"
+  cademi-cli: "0.2.5"
+  cademi-api: "3.12.0"
 ---
 
 # Support Tickets Commands
 
-> cademi 0.2.3, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.5, API 3.12.0. The live catalog is always `cademi commands <prefix> --json`.
 
 > Domain `cademi support` — Handle student comments, questions and support tickets.
 
@@ -141,9 +141,10 @@ If the credentials are restricted to specific users or products, only tickets wi
 - `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
 - `--product-id <string>` — Only tickets about the product with this public ID.
 - `--q <string>` — Text search term.
+- `--queue <string>` — Inbox queue: open (awaiting staff), answered (awaiting user), or closed. (open, answered, closed)
 - `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
 - `--sort <string>` — Sort order. A leading '-' sorts in descending order. (updated_at, -updated_at)
-- `--status <string>` — Only tickets with this status. (open, closed)
+- `--status <string>` — Lifecycle status: open or closed. (open, closed)
 - `--updated-after <string>` — Only items updated after this date and time (ISO 8601).
 - `--user-id <string>` — Only tickets opened by the user with this public ID.
 
@@ -225,7 +226,7 @@ Adds a reply to the ticket conversation on behalf of the support team. The reply
 | Field | Type | Required | Description |
 |---|---|---|---|
 | `file_ids` | array of string |  |  |
-| `text` | string | yes |  |
+| `text` | string, nullable |  | Reply text. May be omitted when `file_ids` is present. |
 
 Full schema: `cademi commands support tickets replies create --schema --json`
 
@@ -234,7 +235,7 @@ Legacy path: `cademi tickets replies create`
 **Examples:**
 
 ```bash
-# create: required fields with -f (strings) and -F (typed)
+# partial update
 cademi support tickets replies create tkt_42 -f text=<text> --json
 
 # full body from a file

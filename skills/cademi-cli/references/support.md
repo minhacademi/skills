@@ -2,13 +2,13 @@
 name: cademi-cli-support
 description: "Handle student comments, questions and support tickets — `cademi support` (5 commands)"
 metadata:
-  cademi-cli: "0.2.3"
-  cademi-api: "3.10.1"
+  cademi-cli: "0.2.5"
+  cademi-api: "3.12.0"
 ---
 
 # Support Commands
 
-> cademi 0.2.3, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.5, API 3.12.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Comments, questions and tickets are student communication channels.
 Departments organize support and FAQs provide reusable answers.
@@ -69,7 +69,7 @@ Related settings:
 
 Create a department · `POST /api/v3/support/departments` · permission `departments.create`
 
-Creates a support department with the given name.
+Creates a support department with the given name. `admin_id` assigns the responsible administrator.
 
 The response includes a `Location` header pointing to the new department.
 
@@ -79,6 +79,7 @@ The response includes a `Location` header pointing to the new department.
 
 | Field | Type | Required | Description |
 |---|---|---|---|
+| `admin_id` | string, nullable |  |  |
 | `name` | string | yes |  |
 
 Full schema: `cademi commands support departments create --schema --json`
@@ -101,12 +102,15 @@ Delete a department · `DELETE /api/v3/support/departments/{department_id}` · p
 
 Deletes a support department.
 
-A department that still has tickets assigned to it, including deleted tickets, cannot be deleted. The request is rejected with the `state_conflict` error code and the department and its tickets remain unchanged. The `tickets_count` field of the department reflects these tickets.
+A department that still has tickets assigned to it, including deleted tickets, cannot be deleted unless `unlink_tickets=true` is sent. Without that flag the request is rejected with the `state_conflict` error code. With the flag, tickets are kept and unlinked, matching the dashboard, including deleted tickets, which the API does not list. To keep tickets in a department, move them first with `PATCH /support/tickets/{ticket_id}` (`department_id`).
 
 **Arguments:**
 - `department_id` — Public ID of the department, prefixed with `dep_`. Example: `dep_3`
 
 **Flag sets:** output, idempotency, confirm
+
+**Flags:**
+- `--unlink-tickets` — When true, unassign tickets (including those in the trash) and delete the department.
 
 Legacy path: `cademi departments delete`
 
@@ -160,7 +164,7 @@ cademi support departments list --json
 
 Update a department · `PATCH /api/v3/support/departments/{department_id}` · permission `departments.update`
 
-Renames a support department.
+Updates a support department. Omitted fields are left unchanged. Send `admin_id` as `null` to clear the assigned administrator.
 
 The `If-Match` header is optional. When supplied, it must contain the `ETag` returned by the retrieve operation; if the department has changed since then, the update is rejected.
 
@@ -176,6 +180,7 @@ The `If-Match` header is optional. When supplied, it must contain the `ETag` ret
 
 | Field | Type | Required | Description |
 |---|---|---|---|
+| `admin_id` | string, nullable |  |  |
 | `name` | string |  |  |
 
 Full schema: `cademi commands support departments update --schema --json`
@@ -186,7 +191,7 @@ Legacy path: `cademi departments update`
 
 ```bash
 # partial update guarded by the ETag from get -i
-cademi support departments update dep_3 -f name=<name> --if-match '"<etag>"' --json
+cademi support departments update dep_3 -f admin_id=<admin_id> --if-match '"<etag>"' --json
 
 # full body from a file
 cademi support departments update dep_3 --data @body.json --json

@@ -2,13 +2,13 @@
 name: cademi-cli-settings-access
 description: "Sign-in, security, registration and student profile settings — `cademi settings` (8 commands)"
 metadata:
-  cademi-cli: "0.2.3"
-  cademi-api: "3.10.1"
+  cademi-cli: "0.2.5"
+  cademi-api: "3.12.0"
 ---
 
 # Settings Access Commands
 
-> cademi 0.2.3, API 3.10.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.5, API 3.12.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Sign-in, security, registration and student profile settings. The rest of `cademi settings` is in the sibling files below.
 
@@ -95,7 +95,7 @@ To avoid overwriting a newer version, send the `ETag` returned by the retrieve o
 | `access_screens.model` | string, nullable |  | Which model does this platform use? |
 | `access_screens.phrase` | string, nullable |  | Shown next to the form. Leave empty to use the model's own sentence. |
 | `access_screens.theme` | string, nullable |  | Applies to all four models. Following the area, it matches the mode chosen for the student area. |
-| `admin_two_factor_available` | boolean |  | When enabled, each administrator can set up verification in their own Profile. This option does not require the second factor. |
+| `admin_two_factor_available` | boolean |  | Deprecated and ignored: two-step verification is available to every administrator on every account. Kept for compatibility until v4. |
 | `google_login` | object, nullable |  | Google sign-in credentials for students. Active sessions are not terminated by these changes. |
 | `google_login.client_id` | string, nullable |  | Client ID |
 | `google_login.client_secret` | string, nullable |  | Write-only credential. null clears the stored value. |
