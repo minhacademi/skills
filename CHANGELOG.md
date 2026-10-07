@@ -2,6 +2,13 @@
 
 All notable changes to the skills in this repository. Each skill carries its own version in the `metadata` block of its `SKILL.md`.
 
+## cademi-cli 0.1.8 (2026-10-07)
+
+- References follow the `cademi` CLI 0.2.7 and API 3.12.1.
+- The page the browser shows after `cademi auth login` now uses the cademi.dev look, with the Cademí symbol and one color per outcome (green authorized, red denied, amber when the authorization comes back twice).
+- The `auth login` text, the root help, the login messages and the browser pages say "account" instead of "platform" and "instance", matching the portal. The `--platform` flag, the `platform` key in `--json` and the `platform_mismatch` code are unchanged.
+- Examples include required flags (`cademi account usage --period 30d`, `reports activity list`, `reports lessons list`, `reports support get`), and there is a new "Account overview" recipe.
+
 ## cademi-cli 0.1.7 (2026-10-06)
 
 - References follow the `cademi` CLI 0.2.6 (API 3.12.1, compatible with 3.12.0): the API spec now describes what it already returned.
