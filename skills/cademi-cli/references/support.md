@@ -2,13 +2,13 @@
 name: cademi-cli-support
 description: "Handle student comments, questions and support tickets — `cademi support` (5 commands)"
 metadata:
-  cademi-cli: "0.2.6"
+  cademi-cli: "0.2.7"
   cademi-api: "3.12.1"
 ---
 
 # Support Commands
 
-> cademi 0.2.6, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.7, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Comments, questions and tickets are student communication channels.
 Departments organize support and FAQs provide reusable answers.

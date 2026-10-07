@@ -2,13 +2,13 @@
 name: cademi-cli-users
 description: "Manage students, enrollments and learning progress — `cademi users` (9 commands)"
 metadata:
-  cademi-cli: "0.2.6"
+  cademi-cli: "0.2.7"
   cademi-api: "3.12.1"
 ---
 
 # Users Commands
 
-> cademi 0.2.6, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.7, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Users are students in the platform. Enrollments grant access through a
 delivery. Products access reports effective access, sources and overrides.

@@ -2,13 +2,13 @@
 name: cademi-cli-support-faqs
 description: "Maintain frequently asked questions — `cademi support faqs` (6 commands)"
 metadata:
-  cademi-cli: "0.2.6"
+  cademi-cli: "0.2.7"
   cademi-api: "3.12.1"
 ---
 
 # Support Faqs Commands
 
-> cademi 0.2.6, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.7, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
 
 > Domain `cademi support` — Handle student comments, questions and support tickets.
 

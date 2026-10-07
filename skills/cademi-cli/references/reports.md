@@ -2,13 +2,13 @@
 name: cademi-cli-reports
 description: "Inspect activity, learning results and account-wide records — `cademi reports` (13 commands)"
 metadata:
-  cademi-cli: "0.2.6"
+  cademi-cli: "0.2.7"
   cademi-api: "3.12.1"
 ---
 
 # Reports Commands
 
-> cademi 0.2.6, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.7, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Reports provide aggregate views across the account. enrollments lists
 grants across users; users enrollments manages an individual user's grants.
@@ -93,7 +93,7 @@ The `email`, `document`, and `phone` fields are included only when the credentia
 
 ```bash
 # list: one page, machine-readable
-cademi reports activity list --limit 20 --json
+cademi reports activity list --from <YYYY-MM-DD> --to <YYYY-MM-DD> --limit 20 --json
 ```
 
 ### `cademi reports certificates` — List certificate issuance by product
@@ -325,13 +325,13 @@ Returns performance metrics for each lesson of the product identified by `produc
 
 ```bash
 # list: one page, machine-readable
-cademi reports lessons list --limit 20 --json
+cademi reports lessons list --product-id <product-id> --limit 20 --json
 
 # next page: pass page.next_cursor from a --raw response
-cademi reports lessons list --limit 200 --raw --json
+cademi reports lessons list --product-id <product-id> --limit 200 --raw --json
 
 # every page, projected
-cademi reports lessons list --all --jq '[.[] | {id}]'
+cademi reports lessons list --product-id <product-id> --all --jq '[.[] | {id}]'
 ```
 
 ### `cademi reports products` — List product performance
@@ -413,7 +413,7 @@ Returns message volume and response metrics for each support channel within the 
 
 ```bash
 # get
-cademi reports support get --json
+cademi reports support get --from <YYYY-MM-DD> --to <YYYY-MM-DD> --json
 ```
 
 ### `cademi reports users` — Retrieve the users report

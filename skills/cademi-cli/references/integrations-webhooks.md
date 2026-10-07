@@ -2,13 +2,13 @@
 name: cademi-cli-integrations-webhooks
 description: "Configure webhook endpoints and inspect notification delivery — `cademi integrations webhooks` (13 commands)"
 metadata:
-  cademi-cli: "0.2.6"
+  cademi-cli: "0.2.7"
   cademi-api: "3.12.1"
 ---
 
 # Integrations Webhooks Commands
 
-> cademi 0.2.6, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.7, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
 
 > Domain `cademi integrations` — Manage API credentials, events and webhook delivery.
 

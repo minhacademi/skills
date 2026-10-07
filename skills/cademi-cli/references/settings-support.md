@@ -2,13 +2,13 @@
 name: cademi-cli-settings-support
 description: "Support ticket settings — `cademi settings support` (8 commands)"
 metadata:
-  cademi-cli: "0.2.6"
+  cademi-cli: "0.2.7"
   cademi-api: "3.12.1"
 ---
 
 # Settings Support Commands
 
-> cademi 0.2.6, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.7, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
 
 > Domain `cademi settings` — Configure platform behavior, appearance and shared definitions.
 

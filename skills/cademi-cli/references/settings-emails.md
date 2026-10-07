@@ -2,13 +2,13 @@
 name: cademi-cli-settings-emails
 description: "Email settings — `cademi settings emails` (7 commands)"
 metadata:
-  cademi-cli: "0.2.6"
+  cademi-cli: "0.2.7"
   cademi-api: "3.12.1"
 ---
 
 # Settings Emails Commands
 
-> cademi 0.2.6, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.7, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
 
 > Domain `cademi settings` — Configure platform behavior, appearance and shared definitions.
 
