@@ -2,13 +2,13 @@
 name: cademi-cli-settings-access
 description: "Sign-in, security, registration and student profile settings — `cademi settings` (8 commands)"
 metadata:
-  cademi-cli: "0.2.5"
-  cademi-api: "3.12.0"
+  cademi-cli: "0.2.6"
+  cademi-api: "3.12.1"
 ---
 
 # Settings Access Commands
 
-> cademi 0.2.5, API 3.12.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.6, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Sign-in, security, registration and student profile settings. The rest of `cademi settings` is in the sibling files below.
 

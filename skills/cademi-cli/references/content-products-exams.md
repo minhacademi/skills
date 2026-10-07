@@ -2,13 +2,13 @@
 name: cademi-cli-content-products-exams
 description: "Manage a product's exams, questions and answer keys — `cademi content products exams` (19 commands)"
 metadata:
-  cademi-cli: "0.2.5"
-  cademi-api: "3.12.0"
+  cademi-cli: "0.2.6"
+  cademi-api: "3.12.1"
 ---
 
 # Content Products Exams Commands
 
-> cademi 0.2.5, API 3.12.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.6, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
 
 > Domain `cademi content` — Organize showcases, products and learning content.
 

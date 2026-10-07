@@ -2,6 +2,14 @@
 
 All notable changes to the skills in this repository. Each skill carries its own version in the `metadata` block of its `SKILL.md`.
 
+## cademi-cli 0.1.7 (2026-10-06)
+
+- References follow the `cademi` CLI 0.2.6 (API 3.12.1, compatible with 3.12.0): the API spec now describes what it already returned.
+- `cademi users products progress adjustments list` and `get`: `type` lists the five values the API returns (`reset`, `exam_result_deleted`, `exam_attempt_reopened`, `score_adjusted`, `score_deleted`) and is extensible, and `result` documents the keys of each type. In score adjustments, `result.score_id` and `result.product_id` are now public IDs (`sco_`, `prd_`) instead of internal numbers.
+- Descriptions: a score balance is also corrected by deleting a manual entry (`cademi users scores delete`), the `score.deleted` event example has a null `exam_id` (manual deletion), and the comments list no longer mentions `include_replies`.
+- `scores.delete` reports `introduced_in` 3.12.0 in the permission catalog, which moves to `catalog_version` 3.12.0.
+- Version examples in the guide point to 0.2.6.
+
 ## cademi-cli 0.1.6 (2026-10-06)
 
 - References follow the `cademi` CLI 0.2.5 (API 3.12.0): new `cademi users scores delete <user_id> <score_id>`, which deletes a manual point entry with a required `reason` and the `scores.delete` permission (automatic points return `422 score_not_removable`).

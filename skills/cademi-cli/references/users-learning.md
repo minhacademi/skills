@@ -2,13 +2,13 @@
 name: cademi-cli-users-learning
 description: "Enrollments, progress, certificates and scores of a user — `cademi users` (14 commands)"
 metadata:
-  cademi-cli: "0.2.5"
-  cademi-api: "3.12.0"
+  cademi-cli: "0.2.6"
+  cademi-api: "3.12.1"
 ---
 
 # Users Learning Commands
 
-> cademi 0.2.5, API 3.12.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.2.6, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Enrollments, progress, certificates and scores of a user. The rest of `cademi users` is in the sibling files below.
 

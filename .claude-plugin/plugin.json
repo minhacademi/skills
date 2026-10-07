@@ -1,6 +1,6 @@
 {
   "name": "cademi-cli",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "The cademi CLI skill: agent guidance and command references for the Cademí API v3",
   "author": { "name": "Cademí", "url": "https://cademi.dev" },
   "homepage": "https://cademi.dev/cli/",
