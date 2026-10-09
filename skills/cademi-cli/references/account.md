@@ -2,13 +2,13 @@
 name: cademi-cli-account
 description: "Inspect the account, administrators and available capabilities — `cademi account` (18 commands)"
 metadata:
-  cademi-cli: "0.2.7"
-  cademi-api: "3.12.1"
+  cademi-cli: "0.3.1"
+  cademi-api: "3.13.1"
 ---
 
 # Account Commands
 
-> cademi 0.2.7, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.3.1, API 3.13.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Account operations describe the platform, domains and replicas.
 Administrators manage the platform; users are its students. Capabilities

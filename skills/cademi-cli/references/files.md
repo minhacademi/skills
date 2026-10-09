@@ -2,13 +2,13 @@
 name: cademi-cli-files
 description: "Manage stored files and upload sessions — `cademi files` (14 commands)"
 metadata:
-  cademi-cli: "0.2.7"
-  cademi-api: "3.12.1"
+  cademi-cli: "0.3.1"
+  cademi-api: "3.13.1"
 ---
 
 # Files Commands
 
-> cademi 0.2.7, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.3.1, API 3.13.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Files are stored assets referenced by other resources. uploads provides
 low-level upload sessions. Use upload and download for complete file transfers.
@@ -178,7 +178,7 @@ Create an export · `POST /api/v3/exports` · permission `exports.create`
 
 Requests a data export. The file is generated asynchronously by an `export.generate` operation, whose ID is returned in `operation_id`; use the retrieve operation to follow the export status.
 
-Each entry in `columns` must belong to the column catalog of the selected `resource`, and `filters` accepts the same keys as the users collection: `product_id`, `tag_id`, `showcase_id`, `delivery_id`, `access`, `type`, and `status`. Unknown columns or filters are rejected with a validation error.
+Each entry in `columns` must belong to the column catalog of the selected `resource`, and `filters` accepts the same keys as the users collection: `product_id`, `tag_id`, `showcase_id`, `delivery_id`, `access`, `type`, and `status`. `product_id` and `tag_id` accept a single ID or a list of IDs. Unknown columns or filters are rejected with a validation error.
 
 Requesting personal data columns (`email`, `document`, or `phone`) also requires the `users.read_personal` permission. Without it, the request is rejected with `permission_denied` instead of silently omitting those columns.
 

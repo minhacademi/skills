@@ -2,13 +2,13 @@
 name: cademi-cli-guides
 description: "Automation guides built into the CLI (errors, input, output, reordering, retries), read offline with --help"
 metadata:
-  cademi-cli: "0.2.7"
-  cademi-api: "3.12.1"
+  cademi-cli: "0.3.1"
+  cademi-api: "3.13.1"
 ---
 
 # Guide Commands
 
-> cademi 0.2.7, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.3.1, API 3.13.1. The live catalog is always `cademi commands <prefix> --json`.
 
 `cademi guide <topic> --help` prints these guides locally, without contacting the API. They are reproduced here so an agent can read them without running the CLI.
 

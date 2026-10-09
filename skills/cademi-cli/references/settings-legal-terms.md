@@ -2,13 +2,13 @@
 name: cademi-cli-settings-legal-terms
 description: "Manage legal terms presented to students — `cademi settings legal-terms` (6 commands)"
 metadata:
-  cademi-cli: "0.2.7"
-  cademi-api: "3.12.1"
+  cademi-cli: "0.3.1"
+  cademi-api: "3.13.1"
 ---
 
 # Settings Legal Terms Commands
 
-> cademi 0.2.7, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.3.1, API 3.13.1. The live catalog is always `cademi commands <prefix> --json`.
 
 > Domain `cademi settings` — Configure platform behavior, appearance and shared definitions.
 

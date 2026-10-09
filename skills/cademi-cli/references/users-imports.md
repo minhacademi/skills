@@ -2,13 +2,13 @@
 name: cademi-cli-users-imports
 description: "Import student records and inspect import processing — `cademi users imports` (10 commands)"
 metadata:
-  cademi-cli: "0.2.7"
-  cademi-api: "3.12.1"
+  cademi-cli: "0.3.1"
+  cademi-api: "3.13.1"
 ---
 
 # Users Imports Commands
 
-> cademi 0.2.7, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.3.1, API 3.13.1. The live catalog is always `cademi commands <prefix> --json`.
 
 > Domain `cademi users` — Manage students, enrollments and learning progress.
 
@@ -252,6 +252,8 @@ Queues the rows that are ready for processing. Requires the `imports.process` pe
 A successful response confirms that the rows were queued, not that enrollments were granted. Rows are processed asynchronously; use the list import rows operation to follow the result of each row.
 
 The import must have a completed analysis with no errors. Use `mode=initial` (default) for the first attempt, and `mode=retry` to requeue only the rows whose processing failed.
+
+The first import of an account is released by the Cademí team: until the account has a processed import, `mode=initial` is rejected with `409`, the `feature_disabled` error code, and `details[].reason` set to `first_import_requires_release`. Contact support to release it; later imports are processed normally.
 
 **Arguments:**
 - `import_id` — Public ID of the import, prefixed with `imp_`. Example: `imp_42`

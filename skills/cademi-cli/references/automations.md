@@ -2,13 +2,13 @@
 name: cademi-cli-automations
 description: "Manage learning and sales automation journeys — `cademi automations` (18 commands)"
 metadata:
-  cademi-cli: "0.2.7"
-  cademi-api: "3.12.1"
+  cademi-cli: "0.3.1"
+  cademi-api: "3.13.1"
 ---
 
 # Automations Commands
 
-> cademi 0.2.7, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.3.1, API 3.13.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Diamond funnels coordinate a lead's journey through lessons and an offer.
 They connect learning content, access deliveries and webhook triggers.
@@ -99,7 +99,7 @@ Delete a Diamond · `DELETE /api/v3/automations/diamond/{diamond_id}` · permiss
 
 Moves the Diamond to the trash.
 
-A Diamond that still has memberships cannot be deleted, and deletion cannot be forced. Such requests return the `state_conflict` error code.
+A Diamond that still has memberships cannot be deleted through the API, and deletion cannot be forced. Such requests return `409` with the `state_conflict` error code and `details[].reason` set to `has_memberships`. The API has no operation to remove memberships; delete the Diamond in the dashboard instead.
 
 **Arguments:**
 - `diamond_id` — Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`

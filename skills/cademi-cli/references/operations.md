@@ -2,13 +2,13 @@
 name: cademi-cli-operations
 description: "Inspect and wait for asynchronous API operations — `cademi operations` (9 commands)"
 metadata:
-  cademi-cli: "0.2.7"
-  cademi-api: "3.12.1"
+  cademi-cli: "0.3.1"
+  cademi-api: "3.13.1"
 ---
 
 # Operations Commands
 
-> cademi 0.2.7, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.3.1, API 3.13.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Some writes return an operation instead of a completed result. Use wait
 with its operation ID, or --wait on commands that start asynchronous work.

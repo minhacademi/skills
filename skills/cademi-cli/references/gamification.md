@@ -2,13 +2,13 @@
 name: cademi-cli-gamification
 description: "Inspect points and student rankings — `cademi gamification` (2 commands)"
 metadata:
-  cademi-cli: "0.2.7"
-  cademi-api: "3.12.1"
+  cademi-cli: "0.3.1"
+  cademi-api: "3.13.1"
 ---
 
 # Gamification Commands
 
-> cademi 0.2.7, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.3.1, API 3.13.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Scores record gamification points and rankings compare students. Configure
 scoring behavior in settings gamification; individual adjustments and

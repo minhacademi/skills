@@ -2,13 +2,13 @@
 name: cademi-cli-integrations
 description: "Manage API credentials, events and webhook delivery — `cademi integrations` (10 commands)"
 metadata:
-  cademi-cli: "0.2.7"
-  cademi-api: "3.12.1"
+  cademi-cli: "0.3.1"
+  cademi-api: "3.13.1"
 ---
 
 # Integrations Commands
 
-> cademi 0.2.7, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.3.1, API 3.13.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Credentials control API access. Events describe account activity, webhooks
 deliver notifications, and event-streams configure streaming access.
@@ -64,7 +64,7 @@ Creates an event stream that delivers the account's public events over Server-Se
 
 Requires an `Idempotency-Key` header. The credential must also have the `events.read` permission; otherwise the request fails with `permission_denied`.
 
-The number of active event streams is limited per credential and per account. Creating a stream beyond these limits returns `429` with the `too_many_streams` error code in the standard error envelope, without the rate-limit fields.
+The number of active event streams is limited to 5 per credential and 20 per account. Creating a stream beyond these limits returns `429` with the `too_many_streams` error code in the standard error envelope, without the rate-limit fields.
 
 **Flag sets:** output, body, idempotency
 

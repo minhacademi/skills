@@ -2,13 +2,13 @@
 name: cademi-cli-sandbox
 description: "Inspect sandbox data and run test scenarios — `cademi sandbox` (7 commands)"
 metadata:
-  cademi-cli: "0.2.7"
-  cademi-api: "3.12.1"
+  cademi-cli: "0.3.1"
+  cademi-api: "3.13.1"
 ---
 
 # Sandbox Commands
 
-> cademi 0.2.7, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.3.1, API 3.13.1. The live catalog is always `cademi commands <prefix> --json`.
 
 Sandbox workflows reset test data and run predefined scenarios. reset and
 run require sandbox credentials. Inspect auth status to check your environment.

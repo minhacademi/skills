@@ -2,13 +2,13 @@
 name: cademi-cli-support-comments
 description: "Moderate comments and manage their replies — `cademi support comments` (8 commands)"
 metadata:
-  cademi-cli: "0.2.7"
-  cademi-api: "3.12.1"
+  cademi-cli: "0.3.1"
+  cademi-api: "3.13.1"
 ---
 
 # Support Comments Commands
 
-> cademi 0.2.7, API 3.12.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.3.1, API 3.13.1. The live catalog is always `cademi commands <prefix> --json`.
 
 > Domain `cademi support` — Handle student comments, questions and support tickets.
 
