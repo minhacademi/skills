@@ -2,6 +2,21 @@
 
 All notable changes to the skills in this repository. Each skill carries its own version in the `metadata` block of its `SKILL.md`.
 
+## cademi-cli 0.1.10 (2026-10-09)
+
+- References follow the `cademi` CLI 0.3.1 and API 3.13.1, a documentation-only API release: requests, responses and commands do not change.
+- `cademi integrations event-streams create` states the limit of 5 active streams per credential and 20 per account. `cademi certificates create` lists the `details[].reason` values of the 409 (`no_access`, `template_disabled`, `exam_not_passed`, `not_completed`).
+- The declarative manifest guidance says `module` and `lesson` require `product_id` in `attributes` (it accepts `$ref`), that `lesson` takes `module_id` and `content`, and that the validation report lists the manifest's own codes and always returns an empty `warnings`.
+
+## cademi-cli 0.1.9 (2026-10-09)
+
+- References follow the `cademi` CLI 0.3.0 and API 3.13.0 (includes 3.12.2).
+- First import of an account: until the account has a processed import, `cademi users imports processing-attempts create` with `mode=initial` returns `409 feature_disabled` with `details[].reason` `first_import_requires_release` (exit code 6). Contact Cademí support to release it.
+- `POST /event-streams` returns the standard error envelope on `429 too_many_streams`, without the rate-limit fields; `cademi listen` already handled it.
+- Errors in the terminal show each `details` item with its reason next to the code, for example `(feature_disabled, reason: first_import_requires_release)`. The `--json` envelope and exit codes do not change.
+- Descriptions updated for `users imports processing-attempts create`, `automations diamonds delete`, `files exports create` and `Certificate.reissue`; `null` is part of the enum of `ReleaseRule.type` and `ProductAccess.denial_reason`; every operation declares 403 and 503.
+- API fixes that need no CLI change: `files exports create` and import analyses work again; `files exports list` and `get` and `reports exports get` skip records without any date; `integrations webhooks get` on a deleted endpoint is 404; `sales deliveries update` is idempotent when archiving or reactivating; an administrator granted by ids manages the ones in scope (out of scope is 404); `gamification scores list` without filters no longer times out; correcting the reply of a reopened question moves it back to answered; the user of a ticket without a user is null.
+
 ## cademi-cli 0.1.8 (2026-10-07)
 
 - References follow the `cademi` CLI 0.2.7 and API 3.12.1.
