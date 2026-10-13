@@ -2,6 +2,17 @@
 
 All notable changes to the skills in this repository. Each skill carries its own version in the `metadata` block of its `SKILL.md`.
 
+## cademi-cli 0.1.11 (2026-10-12)
+
+- References follow the `cademi` CLI 0.3.2 and API 3.14.0 (includes 3.13.2).
+- May require action: `account administrators permissions get` returns `role`, `full_access` and `policies` instead of the permissions map and `product_ids`. `root` and `master_admin` return `full_access: true` and no policies.
+- May require action: `account administrators permissions update` takes `role` and `policies` (required; `policies: []` with `root` or `master_admin`). `permissions` and `product_ids` return 422 `unknown_field`. `--if-match` takes the ETag of `permissions get`; the one from `administrators get` returns 412 `revision_mismatch`.
+- May require action: `account administrators create` takes `policies` instead of `permissions`. Without `policies`, the administrator gets the role's default permissions, limited to `product_ids` when sent. Sending `policies` together with `product_ids` returns 422 `validation_failed`.
+- May require action: nobody grants more than they have (403 `delegation_limit_exceeded`, exit 4). Changing your own permissions returns 409 `state_conflict` with reason `self_modification`.
+- May require action: `published_by` of a policy can be `{"kind": "system", "id": null}`.
+- Help for `administrators create` and `permissions get/update` describes the policy format. The permission catalog lists `billing.read`, `billing.manage_invoices`, `billing.manage_cards`, `activity.read` and `settings.update_appearance`.
+- API fix (3.13.2): `reports exports get` on an account without exports returns `summary.by_status` as `{}`.
+
 ## cademi-cli 0.1.10 (2026-10-09)
 
 - References follow the `cademi` CLI 0.3.1 and API 3.13.1, a documentation-only API release: requests, responses and commands do not change.
