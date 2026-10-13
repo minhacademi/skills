@@ -2,13 +2,13 @@
 name: cademi-cli-account
 description: "Inspect the account, administrators and available capabilities — `cademi account` (18 commands)"
 metadata:
-  cademi-cli: "0.3.1"
-  cademi-api: "3.13.1"
+  cademi-cli: "0.3.2"
+  cademi-api: "3.14.0"
 ---
 
 # Account Commands
 
-> cademi 0.3.1, API 3.13.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.3.2, API 3.14.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Account operations describe the platform, domains and replicas.
 Administrators manage the platform; users are its students. Capabilities
@@ -105,7 +105,7 @@ Creates an administrator in the current account.
 
 By default, the new administrator receives an access email. Set `send_credentials` to `false` to skip it.
 
-You can assign granular permissions and product access in the same request with `permissions` and `product_ids`, which also requires the `administrators.manage_permissions` permission. When `permissions` is supplied, the administrator receives only the permissions listed there instead of the role's default permissions; `product_ids` alone keeps the role's default permissions. If any part of the request is rejected, no administrator is created.
+By default, the administrator receives the default permissions of the selected role across the whole account. Send `product_ids` to limit those default permissions to the listed products, or send `policies` (in the same format as `PUT /administrators/{administrator_id}/permissions`) to grant exactly the permissions listed there instead. Sending `policies` and `product_ids` together returns `validation_failed`. Both require the `administrators.manage_permissions` permission. If any part of the request is rejected, no administrator is created.
 
 _Full description: `cademi commands account administrators create --json --jq '.commands[0].description'`_
 
@@ -117,7 +117,7 @@ _Full description: `cademi commands account administrators create --json --jq '.
 |---|---|---|---|
 | `email` | string | yes |  |
 | `name` | string | yes |  |
-| `permissions` | object |  |  |
+| `policies` | array of object |  |  |
 | `product_ids` | array of string |  |  |
 | `role` | string | yes |  |
 | `send_credentials` | boolean |  |  |
@@ -297,7 +297,9 @@ Related: `cademi integrations credentials`
 
 Retrieve administrator permissions · `GET /api/v3/administrators/{administrator_id}/permissions` · permission `administrators.read`
 
-Returns the administrator's role, the full set of granular permissions with the state of each one, and the IDs of the products the administrator can access.
+Returns the administrator's role and the policies of their active policy revision, in the same format as credential policies.
+
+Full-access roles (`root` and `master_admin`) return `full_access: true` and no policies. Use the returned `ETag` in `If-Match` when updating the permissions.
 
 **Arguments:**
 - `administrator_id` — Public ID of the administrator, prefixed with `adm_`. Example: `adm_42`
@@ -317,13 +319,13 @@ cademi account administrators permissions get adm_42 --json
 
 Update administrator permissions · `PUT /api/v3/administrators/{administrator_id}/permissions` · permission `administrators.manage_permissions`
 
-Replaces the administrator's role, granular permissions, and product access in a single operation. Permissions not granted in `permissions` are disabled, and product access is set to exactly the products listed in `product_ids`. If any part of the request is rejected, no changes are applied.
+Replaces the administrator's role and policies in a single operation. Each item of `policies` is a policy in the same format as `POST /credentials/{credential_id}/policies`: the `capabilities` it grants and the `resources` they apply to. The new policies replace all previous ones; if any part of the request is rejected, no changes are applied.
 
-Permission keys that do not exist in the permission catalog return `validation_failed`.
+Full-access roles (`root` and `master_admin`) have no policies: send an empty `policies` array with them, or the request returns `validation_failed`.
 
-The API cannot assign the `root` or `master_admin` role, and every permission granted must be part of the selected role's default permissions. Requests that exceed these limits return `delegation_limit_exceeded`.
+Nobody can grant more than they have. A credential grants only the delegable permissions of its own policies, never `administrators.*` or `credentials.*`, and never assigns a full-access role. Requests that exceed these limits return `delegation_limit_exceeded`. An administrator cannot change their own permissions.
 
-To avoid overwriting a newer version, send the `ETag` returned by the retrieve administrator operation in the `If-Match` header. The response includes the new `ETag`.
+_Full description: `cademi commands account administrators permissions update --json --jq '.commands[0].description'`_
 
 **Arguments:**
 - `administrator_id` — Public ID of the administrator, prefixed with `adm_`. Example: `adm_42`
@@ -337,8 +339,7 @@ To avoid overwriting a newer version, send the `ETag` returned by the retrieve a
 
 | Field | Type | Required | Description |
 |---|---|---|---|
-| `permissions` | object | yes |  |
-| `product_ids` | array of string |  |  |
+| `policies` | array of object | yes |  |
 | `role` | string | yes |  |
 
 Full schema: `cademi commands account administrators permissions update --schema --json`
@@ -349,7 +350,7 @@ Legacy path: `cademi administrators permissions update`
 
 ```bash
 # create: required fields with -f (strings) and -F (typed)
-cademi account administrators permissions update adm_42 -F 'permissions={...}' -f role=<role> --json
+cademi account administrators permissions update adm_42 --data '{"policies":[...]}' -f role=<role> --json
 
 # full body from a file
 cademi account administrators permissions update adm_42 --data @body.json --json

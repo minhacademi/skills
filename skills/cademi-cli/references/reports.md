@@ -2,13 +2,13 @@
 name: cademi-cli-reports
 description: "Inspect activity, learning results and account-wide records — `cademi reports` (13 commands)"
 metadata:
-  cademi-cli: "0.3.1"
-  cademi-api: "3.13.1"
+  cademi-cli: "0.3.2"
+  cademi-api: "3.14.0"
 ---
 
 # Reports Commands
 
-> cademi 0.3.1, API 3.13.1. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.3.2, API 3.14.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Reports provide aggregate views across the account. enrollments lists
 grants across users; users enrollments manages an individual user's grants.
