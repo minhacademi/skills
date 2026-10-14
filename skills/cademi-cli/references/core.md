@@ -2,13 +2,13 @@
 name: cademi-cli-core
 description: "Built-in commands: authentication and profiles, raw API requests, events, declarative configuration, files, diagnostics and updates"
 metadata:
-  cademi-cli: "0.3.2"
-  cademi-api: "3.14.0"
+  cademi-cli: "0.4.0"
+  cademi-api: "3.15.0"
 ---
 
 # Core Commands
 
-> cademi 0.3.2, API 3.14.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.4.0, API 3.15.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Commands that are not generated from the API contract. Resource commands (`cademi <domain> ...`) live in the other reference files; `cademi guide` topics are in `guides.md`.
 
@@ -52,7 +52,7 @@ in JSON). To repeat that request, pass the returned key with --idempotency-key
 and the same body; see cademi guide retries --help.
 
 Before sending, the request is checked against the API contract embedded in this
-version (api 3.14.0): unknown query parameters and body fields are
+version (api 3.15.0): unknown query parameters and body fields are
 rejected with exit 2. Use --skip-validation to call something newer than that release.
 
 **Arguments:**
@@ -72,7 +72,7 @@ rejected with exit 2. Use --skip-validation to call something newer than that re
 **Examples:**
 
 ```bash
-cademi api /credentials/current
+cademi api /capabilities
 cademi api /products -f status=published --all --jq '.[].id'
 cademi api POST /users -f name="Ana Souza" -f email=ana@example.com
 cademi api PATCH /products/prd_12 --if-match 'W/"product:prd_12:..."' -f status=draft
@@ -329,15 +329,17 @@ Connect the CLI to a Cademí account and save the connection as a profile.
 
 By default the login is in human mode: the browser opens, you enter your
 account's address, sign in there as an administrator with two-factor
-authentication and choose Authorize (OAuth with PKCE). Then you paste the secret
-of an API credential linked to that administrator. Every call carries both, and
-the audit trail records the administrator as the author.
+authentication and choose Authorize (OAuth with PKCE). The CLI then acts as that
+administrator, with the administrator's permissions, and the audit trail records
+the administrator as the author. No API credential is needed: the access token
+is renewed automatically while the session is valid.
 
 --platform takes your account's address (acme.cademi.com.br, a custom domain
 or just its subdomain) and skips the question in the browser. It is saved in the
 profile and reused on the next login.
 
-With --api-key-only the profile uses only the API credential (autonomous mode).
+With --api-key-only the profile uses only the secret of an API credential
+(autonomous mode), typed at a prompt or read from stdin with --with-key.
 
 Secrets are stored in the operating system keychain, never in files.
 
@@ -345,7 +347,7 @@ Secrets are stored in the operating system keychain, never in files.
 - `--api-key-only` — Use only the API credential (autonomous mode), without OAuth
 - `--no-browser` — Print the authorization URL instead of opening the browser
 - `--platform <string>` — Your account's address (acme.cademi.com.br, a custom domain or its subdomain); saved in the profile
-- `--with-key` — Read the API key secret from stdin
+- `--with-key` — Read the API key secret from stdin (with --api-key-only)
 
 **Examples:**
 
@@ -362,7 +364,7 @@ Revoke the OAuth session and remove the profile's secrets
 
 Revoke the OAuth tokens of the profile (RFC 7009) and remove its secrets from the keychain.
 
-The API credential itself is not revoked: it may be shared with other people or systems.
+For a profile in autonomous mode, the API credential itself is not revoked: it may be shared with other people or systems.
 Revoke it in the dashboard if needed, or with `cademi integrations credentials update <credential_id> -F status=revoked`
 using another credential that has the credentials.manage permission.
 

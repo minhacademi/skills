@@ -5,9 +5,9 @@ license: Apache-2.0
 compatibility: Requires the cademi CLI 0.2 or newer (curl -fsSL https://cli.cademi.dev/install.sh | bash) and a Cademí credential (CADEMI_API_KEY or `cademi auth login`).
 metadata:
   author: minhacademi
-  version: "0.1.11"
-  cademi-cli: "0.3.2"
-  cademi-api: "3.14.0"
+  version: "0.1.12"
+  cademi-cli: "0.4.0"
+  cademi-api: "3.15.0"
   docs: https://cademi.dev/cli
 ---
 
@@ -71,12 +71,12 @@ The `cademi` CLI follows conventions from `gh` and `stripe`, so that knowledge t
 | Mode | How | Use it for |
 |---|---|---|
 | Autonomous | `CADEMI_API_KEY=ck_…` in the environment (overrides every profile, no keychain) or `cademi auth login --api-key-only` | Scripts, CI, containers, agents |
-| Human | `cademi auth login [--platform acme.cademi.com.br]`: browser OAuth with 2FA as an administrator, then paste a credential secret | People at a terminal; the audit trail records the administrator |
+| Human | `cademi auth login [--platform acme.cademi.com.br]`: browser OAuth with 2FA as an administrator; the CLI acts as that administrator, with the administrator's permissions | People at a terminal; the audit trail records the administrator |
 | Delegated | `CADEMI_ACCESS_TOKEN` issued by the Cademí MCP | Calls made on behalf of an MCP session |
 
 - Precedence: `CADEMI_ACCESS_TOKEN`, then `CADEMI_API_KEY`, then the profile from `-p/--profile`, `CADEMI_PROFILE`, or the current one.
 - Non-interactive login with a profile: `echo "$KEY" | cademi auth login --api-key-only --with-key --profile ci`.
-- `cademi auth status --json` shows the profile, environment (`production` or `sandbox`), credential and permissions count; `cademi integrations credentials current-policies` lists the effective permissions. `cademi profiles list` and `cademi profiles use <name>` switch accounts.
+- `cademi auth status --json` shows the profile, environment (`production` or `sandbox`) and, with a credential, the credential and its permissions count; in human and delegated modes it shows the administrator (`administrator.id`, `administrator.account_id`) and the capabilities count instead. The effective permissions come from `cademi integrations credentials current-policies` in autonomous mode and from `cademi account capabilities get` in human and delegated modes (as an administrator, `current-policies` returns 404). `cademi profiles list` and `cademi profiles use <name>` switch accounts.
 - A machine without a keychain (container, headless Linux) must use `CADEMI_API_KEY`.
 - `cademi doctor` checks config, keychain, network, clock, credential and API release compatibility in one run.
 
@@ -162,10 +162,12 @@ With `--json`, `-o json` or `--jq`, errors are one JSON document on **stderr**, 
 #### Check who you are
 
 ```bash
-# Profile, environment (production/sandbox), credential and API release
+# Profile, environment (production/sandbox), credential or administrator, and API release
 cademi auth status --json
-# Effective permissions of the credential
+# Effective permissions: autonomous mode (API credential)
 cademi integrations credentials current-policies --json
+# Effective permissions: human and delegated modes (administrator)
+cademi account capabilities get --json
 # One-shot diagnosis when something fails
 cademi doctor
 ```
@@ -283,7 +285,7 @@ cademi download "$file_id" -O handbook.pdf
 #### Run in CI
 
 ```bash
-curl -fsSL https://cli.cademi.dev/install.sh | CADEMI_VERSION=0.3.2 CADEMI_NO_MODIFY_PATH=1 bash
+curl -fsSL https://cli.cademi.dev/install.sh | CADEMI_VERSION=0.4.0 CADEMI_NO_MODIFY_PATH=1 bash
 export PATH="$HOME/.cademi/bin:$PATH"
 export CADEMI_API_KEY="$CADEMI_CI_KEY"                 # ck_test_… for test pipelines
 export CADEMI_CLIENT_REQUEST_ID="gh-${GITHUB_RUN_ID}"  # shows up in cademi integrations requests list
@@ -353,7 +355,7 @@ cademi env                                             # effective settings and 
 Check first; install only when it is missing, and tell the user what you are about to run:
 
 ```bash
-command -v cademi && cademi version          # installed? → cademi 0.3.2 (api 3.14.0, commit …)
+command -v cademi && cademi version          # installed? → cademi 0.4.0 (api 3.15.0, commit …)
 
 # macOS and Linux: no sudo, installs to ~/.cademi/bin and adds it to the shell startup file
 curl -fsSL https://cli.cademi.dev/install.sh | bash
@@ -363,7 +365,7 @@ export PATH="$HOME/.cademi/bin:$PATH"        # current shell only; new terminals
 irm https://cli.cademi.dev/install.ps1 | iex
 
 # CI or a container: pin the version and leave startup files alone
-curl -fsSL https://cli.cademi.dev/install.sh | CADEMI_VERSION=0.3.2 CADEMI_NO_MODIFY_PATH=1 bash
+curl -fsSL https://cli.cademi.dev/install.sh | CADEMI_VERSION=0.4.0 CADEMI_NO_MODIFY_PATH=1 bash
 
 cademi version                               # verify; the script already checked the SHA-256
 cademi update --check                        # later updates are signed (ed25519) and verified
@@ -371,7 +373,7 @@ cademi update --check                        # later updates are signed (ed25519
 
 - If `cademi` is not found right after installing, the current shell has not reloaded its PATH: export it as above or open a new terminal.
 - The installer needs `curl` and network access to `cli.cademi.dev`; it never asks for sudo. `CADEMI_INSTALL_DIR` changes the destination.
-- `CI` or `CADEMI_DISABLE_AUTOUPDATE` turn automatic updates off; `cademi update --version 0.3.2` pins or rolls back.
+- `CI` or `CADEMI_DISABLE_AUTOUPDATE` turn automatic updates off; `cademi update --version 0.4.0` pins or rolls back.
 - Installing the CLI does not sign anyone in: the next step is a credential (below).
 - `cademi skills install` installs this skill, at the version bundled with the installed CLI, into `~/.claude/skills` and `~/.agents/skills`. Without `--agent` or `--dir` it only installs for agents whose directory already exists, so an agent that never ran on the machine does not get it; `--dir .claude/skills` installs into one project, and `cademi skills status` checks the copy. After the CLI is updated, the first command you run refreshes the copies in `~/.claude/skills` and `~/.agents/skills`; a copy installed with `--dir` is not refreshed: run `cademi skills install --dir <path>` again.
 - `cademi mcp install <client>` adds the Cademí MCP server to an assistant (`claude`, `cursor`, `vscode`, `copilot`, `codex`, `gemini`, `opencode`); `cademi mcp docs` has the details. Prefer the MCP when the assistant should call the API as tools inside a conversation; prefer the CLI for scripts, CI, bulk work, events, and files.
@@ -382,7 +384,7 @@ Credentials are created in the Cademí dashboard (`ck_live_…` for production, 
 
 ## Command Reference
 
-One row per reference file. Each file carries the signature, route, permission, arguments, flags, body fields and examples of its commands for cademi 0.3.2. The live catalog is always `cademi commands <prefix> --json`.
+One row per reference file. Each file carries the signature, route, permission, arguments, flags, body fields and examples of its commands for cademi 0.4.0. The live catalog is always `cademi commands <prefix> --json`.
 
 <!-- commands:start -->
 

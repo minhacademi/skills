@@ -2,13 +2,13 @@
 name: cademi-cli-content-banners
 description: "Manage banners shown in the student area — `cademi content banners` (7 commands)"
 metadata:
-  cademi-cli: "0.3.2"
-  cademi-api: "3.14.0"
+  cademi-cli: "0.4.0"
+  cademi-api: "3.15.0"
 ---
 
 # Content Banners Commands
 
-> cademi 0.3.2, API 3.14.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.4.0, API 3.15.0. The live catalog is always `cademi commands <prefix> --json`.
 
 > Domain `cademi content` — Organize showcases, products and learning content.
 

@@ -2,13 +2,13 @@
 name: cademi-cli-files
 description: "Manage stored files and upload sessions — `cademi files` (14 commands)"
 metadata:
-  cademi-cli: "0.3.2"
-  cademi-api: "3.14.0"
+  cademi-cli: "0.4.0"
+  cademi-api: "3.15.0"
 ---
 
 # Files Commands
 
-> cademi 0.3.2, API 3.14.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.4.0, API 3.15.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Files are stored assets referenced by other resources. uploads provides
 low-level upload sessions. Use upload and download for complete file transfers.

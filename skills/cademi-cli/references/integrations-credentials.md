@@ -2,13 +2,13 @@
 name: cademi-cli-integrations-credentials
 description: "Manage API credentials and their access policies — `cademi integrations credentials` (15 commands)"
 metadata:
-  cademi-cli: "0.3.2"
-  cademi-api: "3.14.0"
+  cademi-cli: "0.4.0"
+  cademi-api: "3.15.0"
 ---
 
 # Integrations Credentials Commands
 
-> cademi 0.3.2, API 3.14.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.4.0, API 3.15.0. The live catalog is always `cademi commands <prefix> --json`.
 
 > Domain `cademi integrations` — Manage API credentials, events and webhook delivery.
 
@@ -60,7 +60,7 @@ Each entry in `policies` specifies either a list of `capabilities` or a policy `
 
 The credential secret is returned only in this response and cannot be retrieved again. Store it securely. Retrying the request with the same `Idempotency-Key` does not return the secret again; it returns `409` with the `secret_not_replayable` error code.
 
-The new credential cannot receive permissions beyond those the calling credential is allowed to delegate. Such requests are rejected with `delegation_limit_exceeded` and no credential is issued.
+_Full description: `cademi commands integrations credentials create --json --jq '.commands[0].description'`_
 
 **Flag sets:** output, body, idempotency
 
@@ -68,7 +68,6 @@ The new credential cannot receive permissions beyond those the calling credentia
 
 | Field | Type | Required | Description |
 |---|---|---|---|
-| `auth_mode` | string |  | One of: `autonomous`, `human_required`, `both` |
 | `expires_at` | date-time, nullable |  |  |
 | `name` | string | yes |  |
 | `policies` | array of object |  |  |
@@ -92,7 +91,7 @@ cademi integrations credentials create --data @body.json --json
 
 Retrieve the current credential · `GET /api/v3/credentials/current`
 
-Returns the credential used to authenticate the request, reflecting its current state. Available to any authenticated credential without additional permissions.
+Returns the credential used to authenticate the request, reflecting its current state. Available to any authenticated credential without additional permissions. A request authenticated with the OAuth access token of an administrator has no credential and receives `404`.
 
 **Flag sets:** output
 

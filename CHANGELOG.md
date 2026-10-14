@@ -2,6 +2,18 @@
 
 All notable changes to the skills in this repository. Each skill carries its own version in the `metadata` block of its `SKILL.md`.
 
+## cademi-cli 0.1.12 (2026-10-14)
+
+- References follow the `cademi` CLI 0.4.0 and API 3.15.0.
+- Human login is OAuth only: `cademi auth login` acts as the administrator, with their own permissions, and no longer asks for a credential secret. Only `Authorization: Bearer` is sent, never `X-API-Key`. `--with-key` without `--api-key-only` is ignored, with a warning.
+- Human profiles saved by earlier versions (key and tokens) keep working without a new login; the key is ignored.
+- `auth status`, `doctor` and sandbox reset in human and delegated modes use `GET /capabilities`. Status shows the administrator and the account (`adm_`, `ins_`).
+- `integrations credentials create` no longer accepts `auth_mode` (422 `unknown_field`), and credentials no longer return `auth_mode` or `human`.
+- `integrations credentials current` and `current-policies` return 404 with an administrator token; use `account capabilities get`.
+- The help of `account capabilities get`, `account administrators create`, `account administrators permissions update` and `integrations credentials create` describes what an administrator can grant.
+- The error codes `human_context_required`, `human_mode_not_allowed`, `admin_not_eligible` and `tenant_mismatch` are gone; there is a new hint for 401 `ambiguous_credentials`.
+- `requested_by.kind` of a processing attempt can be `administrator`.
+
 ## cademi-cli 0.1.11 (2026-10-12)
 
 - References follow the `cademi` CLI 0.3.2 and API 3.14.0 (includes 3.13.2).

@@ -2,13 +2,13 @@
 name: cademi-cli-content-products-access-schedules
 description: "Define when a product's content becomes available — `cademi content products access-schedules` (10 commands)"
 metadata:
-  cademi-cli: "0.3.2"
-  cademi-api: "3.14.0"
+  cademi-cli: "0.4.0"
+  cademi-api: "3.15.0"
 ---
 
 # Content Products Access Schedules Commands
 
-> cademi 0.3.2, API 3.14.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.4.0, API 3.15.0. The live catalog is always `cademi commands <prefix> --json`.
 
 > Domain `cademi content` — Organize showcases, products and learning content.
 

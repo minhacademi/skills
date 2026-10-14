@@ -2,13 +2,13 @@
 name: cademi-cli-account
 description: "Inspect the account, administrators and available capabilities — `cademi account` (18 commands)"
 metadata:
-  cademi-cli: "0.3.2"
-  cademi-api: "3.14.0"
+  cademi-cli: "0.4.0"
+  cademi-api: "3.15.0"
 ---
 
 # Account Commands
 
-> cademi 0.3.2, API 3.14.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.4.0, API 3.15.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Account operations describe the platform, domains and replicas.
 Administrators manage the platform; users are its students. Capabilities
@@ -323,8 +323,6 @@ Replaces the administrator's role and policies in a single operation. Each item 
 
 Full-access roles (`root` and `master_admin`) have no policies: send an empty `policies` array with them, or the request returns `validation_failed`.
 
-Nobody can grant more than they have. A credential grants only the delegable permissions of its own policies, never `administrators.*` or `credentials.*`, and never assigns a full-access role. Requests that exceed these limits return `delegation_limit_exceeded`. An administrator cannot change their own permissions.
-
 _Full description: `cademi commands account administrators permissions update --json --jq '.commands[0].description'`_
 
 **Arguments:**
@@ -435,11 +433,11 @@ Related: `cademi doctor`
 
 #### `cademi account capabilities get`
 
-Retrieve credential capabilities · `GET /api/v3/capabilities`
+Retrieve caller capabilities · `GET /api/v3/capabilities`
 
-Returns the permissions currently in effect for the authenticated credential, together with the permission catalog version, the environment, and the rate limits that apply to the credential.
+Returns the permissions currently in effect for the caller (the authenticated credential, or the administrator of an OAuth access token), together with the permission catalog version, the environment, and the rate limits that apply to the caller.
 
-Any authenticated credential can call this operation; no specific permission is required. The call is read-only and does not grant or change any permissions.
+Any authenticated caller can use this operation; no specific permission is required. The call is read-only and does not grant or change any permissions.
 
 **Flag sets:** output
 
