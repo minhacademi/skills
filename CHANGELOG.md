@@ -2,6 +2,12 @@
 
 All notable changes to the skills in this repository. Each skill carries its own version in the `metadata` block of its `SKILL.md`.
 
+## cademi-cli 0.1.13 (2026-10-14)
+
+- References follow the `cademi` CLI 0.4.1 and API 3.15.2 (includes 3.15.1, text only): no operation, field, event, or error code changed.
+- End of the API transition: the `cademi auth login` access token sent together with `X-API-Key`, as CLI 0.3.x does, now returns `401 ambiguous_credentials`. 0.4.0 and later send the bearer token alone; if you still run 0.3.x, update (`cademi update`).
+- `account administrators delete` help: an administrator acting with their own OAuth access token cannot delete themselves.
+
 ## cademi-cli 0.1.12 (2026-10-14)
 
 - References follow the `cademi` CLI 0.4.0 and API 3.15.0.

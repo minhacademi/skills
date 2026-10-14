@@ -2,13 +2,13 @@
 name: cademi-cli-content-products-lessons
 description: "Manage lessons and their content within a product — `cademi content products lessons` (16 commands)"
 metadata:
-  cademi-cli: "0.4.0"
-  cademi-api: "3.15.0"
+  cademi-cli: "0.4.1"
+  cademi-api: "3.15.2"
 ---
 
 # Content Products Lessons Commands
 
-> cademi 0.4.0, API 3.15.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.4.1, API 3.15.2. The live catalog is always `cademi commands <prefix> --json`.
 
 > Domain `cademi content` — Organize showcases, products and learning content.
 

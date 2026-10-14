@@ -2,13 +2,13 @@
 name: cademi-cli-account
 description: "Inspect the account, administrators and available capabilities — `cademi account` (18 commands)"
 metadata:
-  cademi-cli: "0.4.0"
-  cademi-api: "3.15.0"
+  cademi-cli: "0.4.1"
+  cademi-api: "3.15.2"
 ---
 
 # Account Commands
 
-> cademi 0.4.0, API 3.15.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.4.1, API 3.15.2. The live catalog is always `cademi commands <prefix> --json`.
 
 Account operations describe the platform, domains and replicas.
 Administrators manage the platform; users are its students. Capabilities
@@ -142,7 +142,7 @@ Delete an administrator · `DELETE /api/v3/administrators/{administrator_id}` ·
 
 Moves the administrator to the trash. A trashed administrator can be restored with the update operation by setting `deleted` to `false`.
 
-The last `root` administrator in the account cannot be deleted, and in human mode administrators cannot delete themselves. Administrators with the `root` or `master_admin` role cannot be deleted through the API; attempts return `delegation_limit_exceeded`.
+The last `root` administrator in the account cannot be deleted, and an administrator acting with their OAuth access token cannot delete themselves. Administrators with the `root` or `master_admin` role cannot be deleted through the API; attempts return `delegation_limit_exceeded`.
 
 API credentials created by the deleted administrator are not revoked.
 

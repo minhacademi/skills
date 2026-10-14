@@ -2,13 +2,13 @@
 name: cademi-cli-users-imports
 description: "Import student records and inspect import processing — `cademi users imports` (10 commands)"
 metadata:
-  cademi-cli: "0.4.0"
-  cademi-api: "3.15.0"
+  cademi-cli: "0.4.1"
+  cademi-api: "3.15.2"
 ---
 
 # Users Imports Commands
 
-> cademi 0.4.0, API 3.15.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.4.1, API 3.15.2. The live catalog is always `cademi commands <prefix> --json`.
 
 > Domain `cademi users` — Manage students, enrollments and learning progress.
 

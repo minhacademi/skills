@@ -2,13 +2,13 @@
 name: cademi-cli-core
 description: "Built-in commands: authentication and profiles, raw API requests, events, declarative configuration, files, diagnostics and updates"
 metadata:
-  cademi-cli: "0.4.0"
-  cademi-api: "3.15.0"
+  cademi-cli: "0.4.1"
+  cademi-api: "3.15.2"
 ---
 
 # Core Commands
 
-> cademi 0.4.0, API 3.15.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.4.1, API 3.15.2. The live catalog is always `cademi commands <prefix> --json`.
 
 Commands that are not generated from the API contract. Resource commands (`cademi <domain> ...`) live in the other reference files; `cademi guide` topics are in `guides.md`.
 
@@ -52,7 +52,7 @@ in JSON). To repeat that request, pass the returned key with --idempotency-key
 and the same body; see cademi guide retries --help.
 
 Before sending, the request is checked against the API contract embedded in this
-version (api 3.15.0): unknown query parameters and body fields are
+version (api 3.15.2): unknown query parameters and body fields are
 rejected with exit 2. Use --skip-validation to call something newer than that release.
 
 **Arguments:**
