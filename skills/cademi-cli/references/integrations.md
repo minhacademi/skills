@@ -2,13 +2,13 @@
 name: cademi-cli-integrations
 description: "Manage API credentials, events and webhook delivery — `cademi integrations` (10 commands)"
 metadata:
-  cademi-cli: "0.4.1"
-  cademi-api: "3.15.2"
+  cademi-cli: "0.5.0"
+  cademi-api: "3.18.0"
 ---
 
 # Integrations Commands
 
-> cademi 0.4.1, API 3.15.2. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Credentials control API access. Events describe account activity, webhooks
 deliver notifications, and event-streams configure streaming access.
@@ -245,8 +245,8 @@ Newly recorded events become visible after a short delay of a few seconds, so th
 - `--occurred-after <string>` — Only items that occurred after this date and time (ISO 8601).
 - `--occurred-before <string>` — Only items that occurred before this date and time (ISO 8601).
 - `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--resource-id <string>` — Only events about the resource with this public ID.
-- `--resource-type <string>` — Only events about resources of this type.
+- `--resource-id <string>` — Only events about the resource with this public ID, the same value an event returns in 'resource.id' (for example, 'les_30'). Requires 'resource_type'. A value that is not a public ID of that resource type returns '422'.
+- `--resource-type <string>` — Only events about resources of this type. Required when 'resource_id' is sent.
 - `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
 - `--type <stringSlice>` — Only events of these types. Repeat the parameter to match any of several types.
 

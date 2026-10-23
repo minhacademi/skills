@@ -2,13 +2,13 @@
 name: cademi-cli-content-products-lessons
 description: "Manage lessons and their content within a product — `cademi content products lessons` (16 commands)"
 metadata:
-  cademi-cli: "0.4.1"
-  cademi-api: "3.15.2"
+  cademi-cli: "0.5.0"
+  cademi-api: "3.18.0"
 ---
 
 # Content Products Lessons Commands
 
-> cademi 0.4.1, API 3.15.2. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
 > Domain `cademi content` — Organize showcases, products and learning content.
 
@@ -462,13 +462,11 @@ cademi content products lessons content get prd_42 les_7 --json
 
 Replace lesson content · `PUT /api/v3/products/{product_id}/lessons/{lesson_id}/content` · permission `lessons.update`
 
-Replaces the lesson body and, when `video` is included, the lesson video. The `inherited` field returned by the retrieve operation is accepted and ignored, so retrieved content can be sent back as is.
+Replaces the lesson body and, when `video` is included, the lesson video. The `inherited` field returned by the retrieve operation is accepted and ignored, so retrieved content can be sent back as is, unless it contains a block that this operation does not accept (see below).
 
-`raw` blocks are not accepted, embed blocks must use a recognized provider, and quiz lessons do not accept a video. The request body must not exceed 1 MiB.
+The body is a list of Editor.js blocks. Each block has a `type`, a `data` object and, optionally, the `id` assigned by the editor. These are the block types the lesson page displays and the `data` fields of each one:
 
-The content of a connected lesson belongs to its source lesson and cannot be changed; such requests fail with `state_conflict`. Replicated lessons are read-only, and requests to change them return `replica_readonly`.
-
-Send the lesson's current `ETag` in the `If-Match` header to avoid overwriting a newer version.
+_Full description: `cademi commands content products lessons content update --json --jq '.commands[0].description'`_
 
 **Arguments:**
 - `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
@@ -484,7 +482,7 @@ Send the lesson's current `ETag` in the `If-Match` header to avoid overwriting a
 | Field | Type | Required | Description |
 |---|---|---|---|
 | `body` | object |  |  |
-| `body.blocks` | array of object |  |  |
+| `body.blocks` | array of object |  | Editor.js blocks. The supported types and their `data` fields are listed in the operation description. |
 | `video` | object, nullable |  |  |
 | `video.url` | string |  |  |
 

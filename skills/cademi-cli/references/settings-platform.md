@@ -2,13 +2,13 @@
 name: cademi-cli-settings-platform
 description: "Platform-wide settings: platform, app, branding, admin area, embedded pages, sharing and gamification — `cademi settings` (14 commands)"
 metadata:
-  cademi-cli: "0.4.1"
-  cademi-api: "3.15.2"
+  cademi-cli: "0.5.0"
+  cademi-api: "3.18.0"
 ---
 
 # Settings Platform Commands
 
-> cademi 0.4.1, API 3.15.2. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Platform-wide settings: platform, app, branding, admin area, embedded pages, sharing and gamification. The rest of `cademi settings` is in the sibling files below.
 
@@ -420,6 +420,7 @@ To avoid overwriting a newer version, send the `ETag` returned by the retrieve o
 | `language` | string, nullable |  | Default interface language shown to students. |
 | `showcase_layout` | string, nullable |  | Student-area navigation model: `default` selects the educational layout and `netflix` selects the streaming-style showcase. Send null to clear the configured model. One of: `default`, `netflix` |
 | `sidebar_hidden` | boolean, nullable |  | Whether the student-area sidebar is hidden. |
+| `timezone` | string, nullable |  | IANA time zone of the platform, such as America/Sao_Paulo. It sets how dates are shown and how business dates without an offset are read; stored instants do not change. Time zone used to show dates to students and staff and to read the… |
 | `title` | string, nullable |  | Text shown in the browser tab on every page. |
 
 Full schema: `cademi commands settings platform update --schema --json`

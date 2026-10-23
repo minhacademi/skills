@@ -2,13 +2,13 @@
 name: cademi-cli-automations
 description: "Manage learning and sales automation journeys — `cademi automations` (18 commands)"
 metadata:
-  cademi-cli: "0.4.1"
-  cademi-api: "3.15.2"
+  cademi-cli: "0.5.0"
+  cademi-api: "3.18.0"
 ---
 
 # Automations Commands
 
-> cademi 0.4.1, API 3.15.2. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Diamond funnels coordinate a lead's journey through lessons and an offer.
 They connect learning content, access deliveries and webhook triggers.

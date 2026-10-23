@@ -1,6 +1,16 @@
 # Changelog
 
 All notable changes to the skills in this repository. Each skill carries its own version in the `metadata` block of its `SKILL.md`.
+## cademi-cli 0.1.14 (2026-10-22)
+
+References follow the `cademi` CLI 0.5.0 and API 3.18.0 (includes 3.15.3, 3.15.4, 3.16.0 and 3.17.0).
+
+- `events list --resource-id` now requires `--resource-type` and the public ID of the resource, the same value an event returns in `resource.id` (for example, `les_30`); without `--resource-type`, or with a bare number such as `30`, the API returns `422 validation_failed` (API 3.15.3).
+- `timezone` field in `settings platform update` (`-f timezone=America/Sao_Paulo`) and in `settings platform get`: the IANA time zone of the account, such as `America/Sao_Paulo` (API 3.17.0).
+- `config validate`, `plan` and `apply` accept the `email_template` kind (update only: `sale`, `import`, `free` or `new_access` in `id`) and the `custom_field` kind; the `config` help lists both (API 3.18.0).
+- `integrations credentials policy-templates` lists the `settings_manager` template, with the settings permissions (API 3.18.0).
+- `content products lessons content update` help: the accepted block types and the `data` fields of each, including `linkTool`.
+
 
 ## cademi-cli 0.1.13 (2026-10-14)
 

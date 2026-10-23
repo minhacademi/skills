@@ -2,13 +2,13 @@
 name: cademi-cli-users-products
 description: "Inspect a user's effective product access and progress — `cademi users products` (9 commands)"
 metadata:
-  cademi-cli: "0.4.1"
-  cademi-api: "3.15.2"
+  cademi-cli: "0.5.0"
+  cademi-api: "3.18.0"
 ---
 
 # Users Products Commands
 
-> cademi 0.4.1, API 3.15.2. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
 > Domain `cademi users` — Manage students, enrollments and learning progress.
 
