@@ -5,3 +5,6 @@ checks:
     run: [bun, "{root}/core/src/cli/index.ts", imports, check, skills]
   - name: editorial check
     run: [bun, run, "{root}/core/src/cli/index.ts", editorial, check, skills]
+  # as referencias de versao do skill (metadata.version, menções) contra o publicado
+  - name: versions check
+    run: [bun, run, "{root}/core/src/cli/index.ts", versions, check, --repo, skills]
