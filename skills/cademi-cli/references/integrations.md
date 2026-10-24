@@ -1,14 +1,14 @@
 ---
 name: cademi-cli-integrations
-description: "Manage API credentials, events and webhook delivery — `cademi integrations` (10 commands)"
+description: "Manage API credentials, events and webhook delivery (`cademi integrations`, 10 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Integrations Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Credentials control API access. Events describe account activity, webhooks
 deliver notifications, and event-streams configure streaming access.
@@ -25,31 +25,31 @@ Live catalog for this file: `cademi commands integrations --json` (offline, no c
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
-### `cademi integrations event-streams` — Manage event stream connections
+### `cademi integrations event-streams`: Manage event stream connections
 
 Configure and inspect streaming access. Use listen to consume Server-Sent
 Events in the terminal or forward them to a local endpoint.
@@ -101,7 +101,7 @@ Revokes the event stream and closes any open connection to it shortly afterward.
 The stream is not removed: it remains available through the retrieve and list operations with the `revoked` status.
 
 **Arguments:**
-- `event_stream_id` — Public ID of the event stream, prefixed with `str_`. Example: `str_01J8Z3`
+- `event_stream_id`: Public ID of the event stream, prefixed with `str_`. Example: `str_01J8Z3`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -123,7 +123,7 @@ Returns the event stream's status, filters, delivery cursor, and connection stat
 Revoked and expired event streams remain retrievable.
 
 **Arguments:**
-- `event_stream_id` — Public ID of the event stream, prefixed with `str_`. Example: `str_01J8Z3`
+- `event_stream_id`: Public ID of the event stream, prefixed with `str_`. Example: `str_01J8Z3`
 
 **Flag sets:** output
 
@@ -147,11 +147,11 @@ Event streams created by other credentials are never included, even within the s
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
 
 Legacy path: `cademi event-streams list`
 
@@ -168,7 +168,7 @@ cademi integrations event-streams list --limit 200 --raw --json
 cademi integrations event-streams list --all --jq '[.[] | {id}]'
 ```
 
-### `cademi integrations event-streams events` — Connect to an event stream
+### `cademi integrations event-streams events`: Connect to an event stream
 
 Related: `cademi listen`, `cademi integrations events`
 
@@ -185,7 +185,7 @@ Only one connection per stream is allowed at a time. The server closes the conne
 Delivery has a latency of a few seconds and is not real-time.
 
 **Arguments:**
-- `event_stream_id` — Public ID of the event stream, prefixed with `str_`. Example: `str_01J8Z3`
+- `event_stream_id`: Public ID of the event stream, prefixed with `str_`. Example: `str_01J8Z3`
 
 Legacy path: `cademi event-streams events get`
 
@@ -196,7 +196,7 @@ Legacy path: `cademi event-streams events get`
 cademi integrations event-streams events get str_01J8Z3 --json
 ```
 
-### `cademi integrations events` — Inspect account events available to integrations
+### `cademi integrations events`: Inspect account events available to integrations
 
 Inspect event records here. Use webhooks to deliver notifications or listen
 to consume a live stream from the terminal.
@@ -212,7 +212,7 @@ Retrieves a public event by its public ID.
 Malformed IDs, internal event types, and events that are not accessible with the current credentials all return `404 Not Found`.
 
 **Arguments:**
-- `event_id` — Public ID of the event, prefixed with `evt_`. Example: `evt_01J8Z3TESTE`
+- `event_id`: Public ID of the event, prefixed with `evt_`. Example: `evt_01J8Z3TESTE`
 
 **Flag sets:** output
 
@@ -238,17 +238,17 @@ Newly recorded events become visible after a short delay of a few seconds, so th
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--occurred-after <string>` — Only items that occurred after this date and time (ISO 8601).
-- `--occurred-before <string>` — Only items that occurred before this date and time (ISO 8601).
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--resource-id <string>` — Only events about the resource with this public ID, the same value an event returns in 'resource.id' (for example, 'les_30'). Requires 'resource_type'. A value that is not a public ID of that resource type returns '422'.
-- `--resource-type <string>` — Only events about resources of this type. Required when 'resource_id' is sent.
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
-- `--type <stringSlice>` — Only events of these types. Repeat the parameter to match any of several types.
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--occurred-after <string>`: Only items that occurred after this date and time (ISO 8601).
+- `--occurred-before <string>`: Only items that occurred before this date and time (ISO 8601).
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--resource-id <string>`: Only events about the resource with this public ID, the same value an event returns in 'resource.id' (for example, 'les_30'). Requires 'resource_type'. A value that is not a public ID of that resource type returns '422'.
+- `--resource-type <string>`: Only events about resources of this type. Required when 'resource_id' is sent.
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (id, -id)
+- `--type <stringSlice>`: Only events of these types. Repeat the parameter to match any of several types.
 
 Legacy path: `cademi events list`
 
@@ -265,7 +265,7 @@ cademi integrations events list --limit 200 --raw --json
 cademi integrations events list --all --jq '[.[] | {id}]'
 ```
 
-### `cademi integrations requests` — Inspect API request history
+### `cademi integrations requests`: Inspect API request history
 
 Inspect requests when investigating API calls and integration failures.
 
@@ -282,7 +282,7 @@ Retrieves a logged API request together with the audit entries it produced.
 Requests that do not exist or are not accessible with the current credentials return `404 Not Found` with the `not_found` error code.
 
 **Arguments:**
-- `request_id` — Public ID of the request. Example: `01J8Z3TESTE`
+- `request_id`: Public ID of the request. Example: `01J8Z3TESTE`
 
 **Flag sets:** output
 
@@ -306,18 +306,18 @@ Results are paginated with a cursor. The collection can be filtered by outcome, 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--action-code <string>` — Only requests with this action code.
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--occurred-after <string>` — Only items that occurred after this date and time (ISO 8601).
-- `--occurred-before <string>` — Only items that occurred before this date and time (ISO 8601).
-- `--outcome <stringSlice>` — Only requests with these outcomes. Repeat the parameter to match any of several outcomes.
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--resource-id <string>` — Only requests that affected the resource with this public ID.
-- `--resource-type <string>` — Only requests that affected resources of this type.
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (occurred_at, -occurred_at)
+- `--action-code <string>`: Only requests with this action code.
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--occurred-after <string>`: Only items that occurred after this date and time (ISO 8601).
+- `--occurred-before <string>`: Only items that occurred before this date and time (ISO 8601).
+- `--outcome <stringSlice>`: Only requests with these outcomes. Repeat the parameter to match any of several outcomes.
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--resource-id <string>`: Only requests that affected the resource with this public ID.
+- `--resource-type <string>`: Only requests that affected resources of this type.
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (occurred_at, -occurred_at)
 
 Legacy path: `cademi requests list`
 
@@ -334,7 +334,7 @@ cademi integrations requests list --limit 200 --raw --json
 cademi integrations requests list --all --jq '[.[] | {id}]'
 ```
 
-### `cademi integrations schema` — Retrieve the API's OpenAPI contract
+### `cademi integrations schema`: Retrieve the API's OpenAPI contract
 
 Retrieves the API contract. Use commands --json for the CLI's own command
 catalog, including canonical paths, legacy paths and available flags.

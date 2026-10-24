@@ -1,24 +1,24 @@
 ---
 name: cademi-cli-users-learning
-description: "Enrollments, progress, certificates and scores of a user — `cademi users` (14 commands)"
+description: "Enrollments, progress, certificates and scores of a user (`cademi users`, 14 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Users Learning Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Enrollments, progress, certificates and scores of a user. The rest of `cademi users` is in the sibling files below.
 
 **Related:** `cademi sales deliveries`
 
 **Related settings:**
-- `cademi settings registration` — Controls free sign-up channels, the delivery granted to new students, allowed email domains and document requirements. (`cademi settings registration get|update`)
-- `cademi settings user-profile` — Controls which profile fields students can see or edit and how student names appear in support tools. (`cademi settings user-profile get|update`)
-- `cademi settings tags` — Create and edit tag definitions here. Assign tags to a student through users tags; deliveries may also apply tags when granting access. (`cademi settings tags create|delete|get|list|update`)
-- `cademi settings custom-fields` — Manage field definitions and types. Read or update a student's values through users custom-fields. (`cademi settings custom-fields create|delete|get|list|update`)
+- `cademi settings registration`: Controls free sign-up channels, the delivery granted to new students, allowed email domains and document requirements. (`cademi settings registration get|update`)
+- `cademi settings user-profile`: Controls which profile fields students can see or edit and how student names appear in support tools. (`cademi settings user-profile get|update`)
+- `cademi settings tags`: Create and edit tag definitions here. Assign tags to a student through users tags; deliveries may also apply tags when granting access. (`cademi settings tags create|delete|get|list|update`)
+- `cademi settings custom-fields`: Manage field definitions and types. Read or update a student's values through users custom-fields. (`cademi settings custom-fields create|delete|get|list|update`)
 
 **See also in this domain:** `references/users-profile.md`, `references/users.md`, `references/users-imports.md`, `references/users-products.md`
 
@@ -37,31 +37,31 @@ Live catalog for this file: `cademi commands users --json` (offline, no credenti
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
-### `cademi users certificates` — Manage certificates issued to students
+### `cademi users certificates`: Manage certificates issued to students
 
 Inspect and manage issued certificates. Templates and previews belong to
 content products certificate; aggregated results belong to reports certificates.
@@ -79,7 +79,7 @@ If the user already holds a valid certificate for the product, the existing cert
 To reissue a certificate, set `supersedes_certificate_id` to the certificate being replaced. Reissuing requires the `certificates.reissue` permission in addition to `certificates.create`, and the certificate identified in `supersedes_certificate_id` is revoked with the reason `reissued`. That certificate must belong to the same user and product; otherwise, the request is rejected with a validation error on `supersedes_certificate_id`. A certificate that is already revoked cannot be superseded.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output, body, idempotency
 
@@ -113,8 +113,8 @@ Moves the certificate to the trash. A `reason` is required and is recorded with 
 Deleted certificates no longer appear in the user's certificate list and can no longer be verified through public validation. If the user is still eligible, they can obtain a new certificate on demand. To invalidate a certificate while keeping it on record, revoke it through the update operation instead.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
-- `certificate_id` — Public ID of the certificate, prefixed with `cer_`. Example: `cer_9`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `certificate_id`: Public ID of the certificate, prefixed with `cer_`. Example: `cer_9`
 
 **Flag sets:** output, body, idempotency, confirm
 
@@ -144,8 +144,8 @@ Revoked certificates remain retrievable, with `status` set to `revoked`. Templat
 The response includes an `ETag` representing the current revision. Send this value in the `If-Match` header when revoking the certificate to avoid acting on an outdated version.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
-- `certificate_id` — Public ID of the certificate, prefixed with `cer_`. Example: `cer_9`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `certificate_id`: Public ID of the certificate, prefixed with `cer_`. Example: `cer_9`
 
 **Flag sets:** output
 
@@ -169,21 +169,21 @@ The collection can be filtered by product, status, and issue date, and is pagina
 The `fields` object, which contains the document, address, and custom field values recorded at issuance, is included only when the credential has the `users.read_personal` permission.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--issued-after <string>` — Only items issued after this date and time (ISO 8601).
-- `--issued-before <string>` — Only items issued before this date and time (ISO 8601).
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--product-id <string>` — Only certificates issued for the product with this public ID.
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
-- `--status <string>` — Only certificates with this status. (valid, revoked)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--issued-after <string>`: Only items issued after this date and time (ISO 8601).
+- `--issued-before <string>`: Only items issued before this date and time (ISO 8601).
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--product-id <string>`: Only certificates issued for the product with this public ID.
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (id, -id)
+- `--status <string>`: Only certificates with this status. (valid, revoked)
 
 Legacy path: `cademi certificates list`
 
@@ -211,13 +211,13 @@ A revoked certificate remains on record and retrievable, and public validation r
 Send the certificate's current `ETag` in the `If-Match` header to avoid acting on an outdated version.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
-- `certificate_id` — Public ID of the certificate, prefixed with `cer_`. Example: `cer_9`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `certificate_id`: Public ID of the certificate, prefixed with `cer_`. Example: `cer_9`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body (required):**
 
@@ -240,7 +240,7 @@ cademi users certificates update usr_42 cer_9 -f reason=<reason> -f status=revok
 cademi users certificates update usr_42 cer_9 --data @body.json --json
 ```
 
-### `cademi users enrollments` — Grant and manage a user's access through deliveries
+### `cademi users enrollments`: Grant and manage a user's access through deliveries
 
 Supply a user ID. Creating an enrollment requires a delivery_id in the body.
 The delivery determines covered products and access duration. Effective
@@ -265,7 +265,7 @@ If the user already has an enrollment for the same delivery, the existing enroll
 The credentials must have access to every product included in the delivery. A delivery that does not exist, is archived, has no products, or includes products outside the scope of the current credentials is rejected with a validation error on `delivery_id`.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output, body, idempotency
 
@@ -298,8 +298,8 @@ Retrieves an enrollment of the user by its public ID.
 The response includes an `ETag` representing the current revision. Send this value in the `If-Match` header when updating the enrollment to avoid overwriting a newer version.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
-- `enrollment_id` — Public ID of the enrollment, prefixed with `enr_`. Example: `enr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `enrollment_id`: Public ID of the enrollment, prefixed with `enr_`. Example: `enr_42`
 
 **Flag sets:** output
 
@@ -319,22 +319,22 @@ Lists the user's enrollments, one per delivery.
 When the credentials are restricted to specific products, only enrollments for deliveries that include at least one of those products are returned. Revoked enrollments are excluded unless `status=revoked` or `deleted=true` is supplied.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `--deleted` — When 'true', returns only items in the trash. Items in the trash are excluded by default.
-- `--delivery-id <string>` — Only enrollments granted by the delivery with this public ID.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--origin <string>` — Only enrollments with this origin. (manual, sale, subscription)
-- `--product-id <string>` — Only enrollments in the product with this public ID.
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--status <string>` — Only enrollments with this status. (active, suspended, revoked)
-- `--updated-after <string>` — Only items updated after this date and time (ISO 8601).
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `--deleted`: When 'true', returns only items in the trash. Items in the trash are excluded by default.
+- `--delivery-id <string>`: Only enrollments granted by the delivery with this public ID.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--origin <string>`: Only enrollments with this origin. (manual, sale, subscription)
+- `--product-id <string>`: Only enrollments in the product with this public ID.
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--status <string>`: Only enrollments with this status. (active, suspended, revoked)
+- `--updated-after <string>`: Only items updated after this date and time (ISO 8601).
 
 **Examples:**
 
@@ -364,13 +364,13 @@ A revoked enrollment only accepts `deleted: false`; changing its `status` or `en
 To avoid overwriting a newer version, send the `ETag` returned by the retrieve operation in the `If-Match` header.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
-- `enrollment_id` — Public ID of the enrollment, prefixed with `enr_`. Example: `enr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `enrollment_id`: Public ID of the enrollment, prefixed with `enr_`. Example: `enr_42`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -392,7 +392,7 @@ cademi users enrollments update usr_42 enr_42 -f deleted=false --if-match '"<eta
 cademi users enrollments update usr_42 enr_42 --data @body.json --json
 ```
 
-### `cademi users progress` — List user progress
+### `cademi users progress`: List user progress
 
 #### `cademi users progress list <user_id>`
 
@@ -403,16 +403,16 @@ Returns the user's progress in each product, using cursor-based pagination.
 If the current credentials are restricted to specific products, only those products are included.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
 
 **Examples:**
 
@@ -427,7 +427,7 @@ cademi users progress list usr_42 --limit 200 --raw --json
 cademi users progress list usr_42 --all --jq '[.[] | {id}]'
 ```
 
-### `cademi users score-adjustments` — Create a points adjustment
+### `cademi users score-adjustments`: Create a points adjustment
 
 #### `cademi users score-adjustments create <user_id>`
 
@@ -438,7 +438,7 @@ Creates a manual adjustment to the user's points. The adjustment is recorded as 
 `points` must be a non-zero integer; negative values deduct points. Use `product_id` to associate the adjustment with a product.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output, body, idempotency
 
@@ -462,7 +462,7 @@ cademi users score-adjustments create usr_42 -F points=1 -f reason=<reason> --js
 cademi users score-adjustments create usr_42 --data @body.json --json
 ```
 
-### `cademi users scores` — Manage users scores
+### `cademi users scores`: Manage users scores
 
 #### `cademi users scores delete <user_id> <score_id>`
 
@@ -473,8 +473,8 @@ Permanently deletes a manual point entry from the user's points ledger, such as 
 The user's balance changes by the negative of the entry's points, and a `score.deleted` event is published. Points earned automatically (lessons, courses, certificates, questions, comments and exams) cannot be deleted and return `422` with the `score_not_removable` error code.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
-- `score_id` — Public ID of the score, prefixed with `sco_`. Example: `sco_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `score_id`: Public ID of the score, prefixed with `sco_`. Example: `sco_42`
 
 **Flag sets:** output, body, idempotency, confirm
 
@@ -500,8 +500,8 @@ Retrieve a point entry · `GET /api/v3/users/{user_id}/scores/{score_id}` · per
 Retrieves a point entry from the user's points ledger. The entry must belong to the user identified in the path; otherwise, the API returns `404 Not Found`.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
-- `score_id` — Public ID of the score, prefixed with `sco_`. Example: `sco_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `score_id`: Public ID of the score, prefixed with `sco_`. Example: `sco_42`
 
 **Flag sets:** output
 
@@ -521,17 +521,17 @@ Returns the user's points ledger, using cursor-based pagination.
 If the user is not accessible with the current credentials, the API returns `404 Not Found` rather than an empty collection.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (created_at, -created_at)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (created_at, -created_at)
 
 **Examples:**
 

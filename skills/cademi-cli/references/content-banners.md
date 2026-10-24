@@ -1,16 +1,16 @@
 ---
 name: cademi-cli-content-banners
-description: "Manage banners shown in the student area — `cademi content banners` (7 commands)"
+description: "Manage banners shown in the student area (`cademi content banners`, 7 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Content Banners Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
-> Domain `cademi content` — Organize showcases, products and learning content.
+> Domain `cademi content`: Organize showcases, products and learning content.
 
 Banners present content and destinations to students. A banner's visibility
 or destination does not itself grant access to a product.
@@ -18,7 +18,7 @@ or destination does not itself grant access to a product.
 **Related:** `cademi content products`
 
 **Related settings:**
-- `cademi settings branding` — Controls the student-area visual identity and certificate logos. (`cademi settings branding get|update`)
+- `cademi settings branding`: Controls the student-area visual identity and certificate logos. (`cademi settings branding get|update`)
 
 **See also in this domain:** `references/content-products.md`, `references/content-products-access-schedules.md`, `references/content-products-exams.md`, `references/content-products-lessons.md`, `references/content-products-modules.md`, `references/content-products-taxonomies.md`, `references/content-showcases.md`
 
@@ -29,27 +29,27 @@ Live catalog for this file: `cademi commands content banners --json` (offline, n
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
@@ -97,7 +97,7 @@ Moves the banner to the trash instead of permanently deleting it. Trashed banner
 Replicated banners are read-only and cannot be deleted. Attempts to delete them return `403` with the `replica_readonly` error code.
 
 **Arguments:**
-- `banner_id` — Public ID of the banner, prefixed with `ban_`. Example: `ban_42`
+- `banner_id`: Public ID of the banner, prefixed with `ban_`. Example: `ban_42`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -121,7 +121,7 @@ The response includes an `ETag` header representing the current revision. Send t
 Banners in the trash are not returned and respond with `404 Not Found`. To restore one, send `deleted: false` to the update operation.
 
 **Arguments:**
-- `banner_id` — Public ID of the banner, prefixed with `ban_`. Example: `ban_42`
+- `banner_id`: Public ID of the banner, prefixed with `ban_`. Example: `ban_42`
 
 **Flag sets:** output
 
@@ -147,15 +147,15 @@ Results are paginated with `limit` and `cursor` and sorted by display position i
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `--deleted` — When 'true', returns only items in the trash. Items in the trash are excluded by default.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200; API default: 50
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--showcase-id <string>` — Only banners displayed in the showcase with this public ID.
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (position, -position)
-- `--status <string>` — Only banners with this status. (active, inactive)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `--deleted`: When 'true', returns only items in the trash. Items in the trash are excluded by default.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200; API default: 50
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--showcase-id <string>`: Only banners displayed in the showcase with this public ID.
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (position, -position)
+- `--status <string>`: Only banners with this status. (active, inactive)
 
 Legacy path: `cademi banners list`
 
@@ -185,12 +185,12 @@ Send the `ETag` returned by the retrieve operation in the `If-Match` header to p
 Replicated banners accept only `status` updates. Including any other field returns `403` with the `replica_readonly` error code.
 
 **Arguments:**
-- `banner_id` — Public ID of the banner, prefixed with `ban_`. Example: `ban_42`
+- `banner_id`: Public ID of the banner, prefixed with `ban_`. Example: `ban_42`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -225,12 +225,12 @@ cademi content banners update ban_42 -f deleted=false --if-match '"<etag>"' --js
 cademi content banners update ban_42 --data @body.json --json
 ```
 
-### `cademi content banners copies` — Duplicate a banner
+### `cademi content banners copies`: Duplicate a banner
 
 Related: `cademi content products`
 
 Related settings:
-- `cademi settings branding` — Controls the student-area visual identity and certificate logos. (`cademi settings branding get|update`)
+- `cademi settings branding`: Controls the student-area visual identity and certificate logos. (`cademi settings branding get|update`)
 
 #### `cademi content banners copies create <banner_id>`
 
@@ -239,7 +239,7 @@ Duplicate a banner · `POST /api/v3/banners/{banner_id}/copies` · permission `b
 Creates a copy of an existing content banner, including its showcase assignments. The copy receives a new public ID and a name derived from the original.
 
 **Arguments:**
-- `banner_id` — Public ID of the banner, prefixed with `ban_`. Example: `ban_42`
+- `banner_id`: Public ID of the banner, prefixed with `ban_`. Example: `ban_42`
 
 **Flag sets:** output, idempotency
 
@@ -252,7 +252,7 @@ Legacy path: `cademi banners copies create`
 cademi content banners copies create ban_42 --json
 ```
 
-### `cademi content banners order` — Reorder banners
+### `cademi content banners order`: Reorder banners
 
 Related: `cademi content banners list`, `cademi guide reordering`
 

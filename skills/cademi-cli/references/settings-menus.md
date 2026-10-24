@@ -1,16 +1,16 @@
 ---
 name: cademi-cli-settings-menus
-description: "Configure student-area navigation menus and items — `cademi settings menus` (8 commands)"
+description: "Configure student-area navigation menus and items (`cademi settings menus`, 8 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Settings Menus Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
-> Domain `cademi settings` — Configure platform behavior, appearance and shared definitions.
+> Domain `cademi settings`: Configure platform behavior, appearance and shared definitions.
 
 Inspect menu containers here and manage their links through items.
 Navigation settings do not grant access to linked products.
@@ -26,22 +26,22 @@ Live catalog for this file: `cademi commands settings menus --json` (offline, no
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
@@ -54,7 +54,7 @@ Retrieves a menu from the fixed set of menus provided by the platform.
 The `sidebar_hidden` field reflects the current account's setting for hiding the sidebar menu.
 
 **Arguments:**
-- `menu_key` — Key of the menu. Example: `student-area`
+- `menu_key`: Key of the menu. Example: `student-area`
 
 **Flag sets:** output
 
@@ -86,7 +86,7 @@ Legacy path: `cademi menus list`
 cademi settings menus list --json
 ```
 
-### `cademi settings menus items` — Menu item changes
+### `cademi settings menus items`: Menu item changes
 
 Updates a navigation item label, destination and browser target.
 
@@ -101,7 +101,7 @@ Creates a menu item. New items are added to the end of the menu.
 URL and embed destinations must use the HTTP or HTTPS scheme. Product and showcase destinations must reference a product or showcase that exists in the current account.
 
 **Arguments:**
-- `menu_key` — Key of the menu. Example: `student-area`
+- `menu_key`: Key of the menu. Example: `student-area`
 
 **Flag sets:** output, body, idempotency
 
@@ -135,8 +135,8 @@ Delete a menu item · `DELETE /api/v3/menus/{menu_key}/items/{menu_item_id}` · 
 Deletes a menu item and removes it from the menu.
 
 **Arguments:**
-- `menu_key` — Key of the menu. Example: `student-area`
-- `menu_item_id` — Public ID of the menu item, prefixed with `mnu_`. Example: `mnu_42`
+- `menu_key`: Key of the menu. Example: `student-area`
+- `menu_item_id`: Public ID of the menu item, prefixed with `mnu_`. Example: `mnu_42`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -158,8 +158,8 @@ Retrieves a menu item by its public ID.
 The response includes an `ETag` representing the current revision. Send this value in the `If-Match` header when updating the menu item to avoid overwriting a newer version.
 
 **Arguments:**
-- `menu_key` — Key of the menu. Example: `student-area`
-- `menu_item_id` — Public ID of the menu item, prefixed with `mnu_`. Example: `mnu_42`
+- `menu_key`: Key of the menu. Example: `student-area`
+- `menu_item_id`: Public ID of the menu item, prefixed with `mnu_`. Example: `mnu_42`
 
 **Flag sets:** output
 
@@ -179,7 +179,7 @@ List menu items · `GET /api/v3/menus/{menu_key}/items` · permission `menu_item
 Returns every item in the menu, in display order, in a single response while preserving the standard collection response format.
 
 **Arguments:**
-- `menu_key` — Key of the menu. Example: `student-area`
+- `menu_key`: Key of the menu. Example: `student-area`
 
 **Flag sets:** output
 
@@ -203,13 +203,13 @@ Items cannot be nested or moved to another menu.
 Send the `ETag` returned by the retrieve operation in the `If-Match` header to avoid overwriting changes made since the item was retrieved.
 
 **Arguments:**
-- `menu_key` — Key of the menu. Example: `student-area`
-- `menu_item_id` — Public ID of the menu item, prefixed with `mnu_`. Example: `mnu_42`
+- `menu_key`: Key of the menu. Example: `student-area`
+- `menu_item_id`: Public ID of the menu item, prefixed with `mnu_`. Example: `mnu_42`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -239,7 +239,7 @@ cademi settings menus items update student-area mnu_42 -f destination.embed=<des
 cademi settings menus items update student-area mnu_42 --data @body.json --json
 ```
 
-### `cademi settings menus items order` — Reorder menu items
+### `cademi settings menus items order`: Reorder menu items
 
 #### `cademi settings menus items order update <menu_key>`
 
@@ -250,7 +250,7 @@ Sets the display order of the menu items.
 The `ids` array must contain the public ID of every item in the menu, in the desired order. Partial reordering is not supported. If the supplied set does not match, the API returns the `order_set_mismatch` error code and the existing order remains unchanged.
 
 **Arguments:**
-- `menu_key` — Key of the menu. Example: `student-area`
+- `menu_key`: Key of the menu. Example: `student-area`
 
 **Flag sets:** output, body, idempotency
 

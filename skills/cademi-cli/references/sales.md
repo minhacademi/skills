@@ -1,14 +1,14 @@
 ---
 name: cademi-cli-sales
-description: "Connect gateways, deliveries and incoming sales — `cademi sales` (21 commands)"
+description: "Connect gateways, deliveries and incoming sales (`cademi sales`, 21 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Sales Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Gateways send sales events. Deliveries connect gateway products to content
 access. Inspect events and processing attempts to investigate sales handling.
@@ -30,32 +30,32 @@ Live catalog for this file: `cademi commands sales --json` (offline, no credenti
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **async**
-- `--wait` — When the API answers 202, wait for the operation to finish
-- `--wait-timeout <duration>` — Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
+- `--wait`: When the API answers 202, wait for the operation to finish
+- `--wait-timeout <duration>`: Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
 
 ## Commands
 
-### `cademi sales deliveries` — Define content access granted by a sale or enrollment
+### `cademi sales deliveries`: Define content access granted by a sale or enrollment
 
 A delivery defines covered products, access duration and release schedules.
 products shows coverage; rules describes delivery rules. These deliveries
@@ -116,7 +116,7 @@ Archived deliveries can still be retrieved, which allows them to be restored thr
 The response includes an `ETag` representing the current revision. Send this value in the `If-Match` header when modifying the delivery to avoid overwriting a newer version.
 
 **Arguments:**
-- `delivery_id` — Public ID of the delivery, prefixed with `dlv_`. Example: `dlv_42`
+- `delivery_id`: Public ID of the delivery, prefixed with `dlv_`. Example: `dlv_42`
 
 **Flag sets:** output
 
@@ -138,17 +138,17 @@ Credentials restricted to specific products only see deliveries whose products a
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `--external-id <string>` — Only deliveries whose 'external_ids' include this value.
-- `--gateway <string>` — Only deliveries of the gateway with this public ID.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--product-id <string>` — Only deliveries that grant access to the product with this public ID.
-- `--q <string>` — Text search term.
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
-- `--status <string>` — Only deliveries with this status. (active, archived)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `--external-id <string>`: Only deliveries whose 'external_ids' include this value.
+- `--gateway <string>`: Only deliveries of the gateway with this public ID.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--product-id <string>`: Only deliveries that grant access to the product with this public ID.
+- `--q <string>`: Text search term.
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (id, -id)
+- `--status <string>`: Only deliveries with this status. (active, archived)
 
 Legacy path: `cademi deliveries list`
 
@@ -178,12 +178,12 @@ To avoid overwriting a newer version, send the delivery's current `ETag` in the 
 Replicated deliveries are read-only; updating or archiving them returns `403` with the `replica_readonly` error code.
 
 **Arguments:**
-- `delivery_id` — Public ID of the delivery, prefixed with `dlv_`. Example: `dlv_42`
+- `delivery_id`: Public ID of the delivery, prefixed with `dlv_`. Example: `dlv_42`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -210,7 +210,7 @@ cademi sales deliveries update dlv_42 -F deleted=true --if-match '"<etag>"' --js
 cademi sales deliveries update dlv_42 --data @body.json --json
 ```
 
-### `cademi sales deliveries copies` — Duplicate a delivery
+### `cademi sales deliveries copies`: Duplicate a delivery
 
 Related: `cademi sales gateways`, `cademi users enrollments`, `cademi content products access-schedules`
 
@@ -223,7 +223,7 @@ Creates a copy of the delivery and returns it.
 The copy does not include the gateway product codes or the secret, because these identify the original delivery with the gateway. Configure them on the copy before using it to process sales.
 
 **Arguments:**
-- `delivery_id` — Public ID of the delivery, prefixed with `dlv_`. Example: `dlv_42`
+- `delivery_id`: Public ID of the delivery, prefixed with `dlv_`. Example: `dlv_42`
 
 **Flag sets:** output, idempotency
 
@@ -236,7 +236,7 @@ Legacy path: `cademi deliveries copies create`
 cademi sales deliveries copies create dlv_42 --json
 ```
 
-### `cademi sales deliveries products` — Manage sales deliveries products
+### `cademi sales deliveries products`: Manage sales deliveries products
 
 Related: `cademi sales gateways`, `cademi users enrollments`, `cademi content products access-schedules`
 
@@ -249,7 +249,7 @@ Returns the set of products the delivery grants access to, including the access 
 `ignored_external_product_ids` is read-only. It lists the gateway product codes ignored during sales processing for the entire account, not only for this delivery, and cannot be changed through the API.
 
 **Arguments:**
-- `delivery_id` — Public ID of the delivery, prefixed with `dlv_`. Example: `dlv_42`
+- `delivery_id`: Public ID of the delivery, prefixed with `dlv_`. Example: `dlv_42`
 
 **Flag sets:** output
 
@@ -273,12 +273,12 @@ The delivery is live: the new set applies to existing enrollments unless the use
 To avoid overwriting a newer version, send the delivery's current `ETag` in the `If-Match` header.
 
 **Arguments:**
-- `delivery_id` — Public ID of the delivery, prefixed with `dlv_`. Example: `dlv_42`
+- `delivery_id`: Public ID of the delivery, prefixed with `dlv_`. Example: `dlv_42`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body (required):**
 
@@ -300,7 +300,7 @@ cademi sales deliveries products update dlv_42 --data '{"entries":[...]}' --json
 cademi sales deliveries products update dlv_42 --data @body.json --json
 ```
 
-### `cademi sales deliveries rules` — Manage sales deliveries rules
+### `cademi sales deliveries rules`: Manage sales deliveries rules
 
 Related: `cademi sales gateways`, `cademi users enrollments`, `cademi content products access-schedules`
 
@@ -313,7 +313,7 @@ Returns the release schedules applied by the delivery, with one entry for each p
 Products without a release schedule are included with a null `schedule_id`, meaning their content is released without a schedule.
 
 **Arguments:**
-- `delivery_id` — Public ID of the delivery, prefixed with `dlv_`. Example: `dlv_42`
+- `delivery_id`: Public ID of the delivery, prefixed with `dlv_`. Example: `dlv_42`
 
 **Flag sets:** output
 
@@ -335,12 +335,12 @@ Replaces the release schedules applied by the delivery.
 The delivery is live: existing enrollments follow the new schedules unless the user has an individual `schedule_id` lock. That lock is changed per user in the product access update operation.
 
 **Arguments:**
-- `delivery_id` — Public ID of the delivery, prefixed with `dlv_`. Example: `dlv_42`
+- `delivery_id`: Public ID of the delivery, prefixed with `dlv_`. Example: `dlv_42`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body (required):**
 
@@ -362,7 +362,7 @@ cademi sales deliveries rules update dlv_42 --data '{"entries":[...]}' --json
 cademi sales deliveries rules update dlv_42 --data @body.json --json
 ```
 
-### `cademi sales deliveries tags` — Manage sales deliveries tags
+### `cademi sales deliveries tags`: Manage sales deliveries tags
 
 Related: `cademi sales gateways`, `cademi users enrollments`, `cademi content products access-schedules`
 
@@ -375,7 +375,7 @@ Returns the tags automatically applied to users who purchase through the deliver
 Deleted tags are not included, because they are no longer applied.
 
 **Arguments:**
-- `delivery_id` — Public ID of the delivery, prefixed with `dlv_`. Example: `dlv_42`
+- `delivery_id`: Public ID of the delivery, prefixed with `dlv_`. Example: `dlv_42`
 
 **Flag sets:** output
 
@@ -397,7 +397,7 @@ Replaces the set of tags automatically applied by the delivery.
 The new set applies only to subsequent sales. Tags are not added to or removed from users who have already purchased; to apply the current tags to them, use the tag application operation.
 
 **Arguments:**
-- `delivery_id` — Public ID of the delivery, prefixed with `dlv_`. Example: `dlv_42`
+- `delivery_id`: Public ID of the delivery, prefixed with `dlv_`. Example: `dlv_42`
 
 **Flag sets:** output, body, idempotency
 
@@ -421,7 +421,7 @@ cademi sales deliveries tags update dlv_42 -f 'tag_ids[]=<value>' --json
 cademi sales deliveries tags update dlv_42 --data @body.json --json
 ```
 
-### `cademi sales deliveries tags applications` — Apply delivery tags to existing users
+### `cademi sales deliveries tags applications`: Apply delivery tags to existing users
 
 Related: `cademi sales gateways`, `cademi users enrollments`, `cademi content products access-schedules`
 
@@ -434,7 +434,7 @@ Starts an asynchronous operation that applies the delivery's tags to every user 
 Repeating the operation does not duplicate tags already applied to a user.
 
 **Arguments:**
-- `delivery_id` — Public ID of the delivery, prefixed with `dlv_`. Example: `dlv_42`
+- `delivery_id`: Public ID of the delivery, prefixed with `dlv_`. Example: `dlv_42`
 
 **Flag sets:** output, idempotency, async
 
@@ -447,7 +447,7 @@ Legacy path: `cademi deliveries tags applications create`
 cademi sales deliveries tags applications create dlv_42 --wait --json
 ```
 
-### `cademi sales events` — Inspect incoming sales events and processing attempts
+### `cademi sales events`: Inspect incoming sales events and processing attempts
 
 Events are incoming sales notifications. Inspect processing attempts to
 investigate failures. Creating an attempt requests reprocessing.
@@ -465,7 +465,7 @@ The original request headers sent by the gateway are never returned. The raw gat
 Imported data is not available through this operation; use the imports resource instead.
 
 **Arguments:**
-- `event_id` — Public ID of the event, prefixed with `sev_`. Example: `sev_42`
+- `event_id`: Public ID of the event, prefixed with `sev_`. Example: `sev_42`
 
 **Flag sets:** output
 
@@ -489,19 +489,19 @@ The raw gateway payload is included only for credentials with the `sales_events.
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `--delivery-id <string>` — Only events of the delivery with this public ID.
-- `--gateway <string>` — Only events received from the gateway with this public ID.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--processing <string>` — Only events with this processing state. (queued, processed, failed, ignored)
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--received-after <string>` — Only items received after this date and time (ISO 8601).
-- `--received-before <string>` — Only items received before this date and time (ISO 8601).
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
-- `--status <string>` — Only events with this sale status.
-- `--transaction-id <string>` — Only events of the transaction with this public ID.
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `--delivery-id <string>`: Only events of the delivery with this public ID.
+- `--gateway <string>`: Only events received from the gateway with this public ID.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--processing <string>`: Only events with this processing state. (queued, processed, failed, ignored)
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--received-after <string>`: Only items received after this date and time (ISO 8601).
+- `--received-before <string>`: Only items received before this date and time (ISO 8601).
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (id, -id)
+- `--status <string>`: Only events with this sale status.
+- `--transaction-id <string>`: Only events of the transaction with this public ID.
 
 Legacy path: `cademi sales-events list`
 
@@ -518,7 +518,7 @@ cademi sales events list --limit 200 --raw --json
 cademi sales events list --all --jq '[.[] | {id}]'
 ```
 
-### `cademi sales events processing-attempts` — Manage sales events processing-attempts
+### `cademi sales events processing-attempts`: Manage sales events processing-attempts
 
 Related: `cademi sales transactions`, `cademi sales deliveries`
 
@@ -531,7 +531,7 @@ Requests that the sales event be processed again. The event is queued for reproc
 Requires an `Idempotency-Key` header.
 
 **Arguments:**
-- `event_id` — Public ID of the event, prefixed with `sev_`. Example: `sev_42`
+- `event_id`: Public ID of the event, prefixed with `sev_`. Example: `sev_42`
 
 **Flag sets:** output, idempotency, async
 
@@ -551,8 +551,8 @@ Retrieve a processing attempt · `GET /api/v3/sales/events/{event_id}/processing
 Retrieves a processing attempt of a sales event. The attempt must belong to the sales event specified in the path.
 
 **Arguments:**
-- `event_id` — Public ID of the event, prefixed with `sev_`. Example: `sev_42`
-- `attempt_id` — Public ID of the attempt, prefixed with `pat_`. Example: `pat_7`
+- `event_id`: Public ID of the event, prefixed with `sev_`. Example: `sev_42`
+- `attempt_id`: Public ID of the attempt, prefixed with `pat_`. Example: `pat_7`
 
 **Flag sets:** output
 
@@ -572,7 +572,7 @@ List processing attempts · `GET /api/v3/sales/events/{event_id}/processing-atte
 Returns all processing attempts of a sales event in a single response while preserving the standard collection response format.
 
 **Arguments:**
-- `event_id` — Public ID of the event, prefixed with `sev_`. Example: `sev_42`
+- `event_id`: Public ID of the event, prefixed with `sev_`. Example: `sev_42`
 
 **Flag sets:** output
 
@@ -585,7 +585,7 @@ Legacy path: `cademi sales-events processing-attempts list`
 cademi sales events processing-attempts list sev_42 --json
 ```
 
-### `cademi sales gateways` — Discover payment gateways supported by deliveries
+### `cademi sales gateways`: Discover payment gateways supported by deliveries
 
 Inspect the gateway catalog before creating a delivery. Gateway selection
 determines integration configuration and whether a secret is required.
@@ -599,7 +599,7 @@ Retrieve a gateway · `GET /api/v3/sales/gateways/{gateway_id}` · permission `g
 Retrieves a payment gateway from the catalog. Gateway IDs use the `gtw_` prefix followed by the gateway key, for example `gtw_<alias>`; the key without the prefix is not accepted.
 
 **Arguments:**
-- `gateway_id` — Public ID of the gateway, prefixed with `gtw_`. Example: `gtw_hotmart`
+- `gateway_id`: Public ID of the gateway, prefixed with `gtw_`. Example: `gtw_hotmart`
 
 **Flag sets:** output
 
@@ -629,7 +629,7 @@ Legacy path: `cademi gateways list`
 cademi sales gateways list --json
 ```
 
-### `cademi sales transactions` — Inspect sales transactions
+### `cademi sales transactions`: Inspect sales transactions
 
 Inspect transactions and use sales events for incoming notifications and
 processing history. User enrollments describe the resulting access grants.
@@ -645,7 +645,7 @@ Retrieves a sales transaction, which aggregates the events of a single sale or s
 A transaction is addressed only by its own ID. IDs of later events in the same transaction return `404 Not Found`.
 
 **Arguments:**
-- `transaction_id` — Public ID of the transaction, prefixed with `trx_`. Example: `trx_42`
+- `transaction_id`: Public ID of the transaction, prefixed with `trx_`. Example: `trx_42`
 
 **Flag sets:** output
 
@@ -667,18 +667,18 @@ Returns sales transactions. Each transaction aggregates the events of a single s
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `--delivery-id <string>` — Only transactions of the delivery with this public ID.
-- `--external-id <string>` — Only transactions with this 'external_id'.
-- `--gateway <string>` — Only transactions from the gateway with this public ID.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
-- `--status <string>` — Only transactions with this sale status.
-- `--updated-after <string>` — Only items updated after this date and time (ISO 8601).
-- `--user-id <string>` — Only transactions of the user with this public ID.
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `--delivery-id <string>`: Only transactions of the delivery with this public ID.
+- `--external-id <string>`: Only transactions with this 'external_id'.
+- `--gateway <string>`: Only transactions from the gateway with this public ID.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (id, -id)
+- `--status <string>`: Only transactions with this sale status.
+- `--updated-after <string>`: Only items updated after this date and time (ISO 8601).
+- `--user-id <string>`: Only transactions of the user with this public ID.
 
 Legacy path: `cademi sales-transactions list`
 

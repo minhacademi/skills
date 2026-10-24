@@ -2,13 +2,13 @@
 name: cademi-cli-core
 description: "Built-in commands: authentication and profiles, raw API requests, events, declarative configuration, files, diagnostics and updates"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Core Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Commands that are not generated from the API contract. Resource commands (`cademi <domain> ...`) live in the other reference files; `cademi guide` topics are in `guides.md`.
 
@@ -17,24 +17,24 @@ Commands that are not generated from the API contract. Resource commands (`cadem
 Each command lists the sets it accepts. The flags of a set are:
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **async**
-- `--wait` — When the API answers 202, wait for the operation to finish
-- `--wait-timeout <duration>` — Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
+- `--wait`: When the API answers 202, wait for the operation to finish
+- `--wait-timeout <duration>`: Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
@@ -62,12 +62,12 @@ rejected with exit 2. Use --skip-validation to call something newer than that re
 **Flag sets:** output-basic, body, idempotency, async
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `-H, --header <stringArray>` — Add a request header: 'Name: value'
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--skip-validation` — Send query parameters and body fields that the embedded API contract does not know
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `-H, --header <stringArray>`: Add a request header: 'Name: value'
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--skip-validation`: Send query parameters and body fields that the embedded API contract does not know
 
 **Examples:**
 
@@ -97,11 +97,11 @@ tokens or personal data. Report security vulnerabilities privately (see SECURITY
 in that repository), and questions about your account or data to Cademí support.
 
 **Flags:**
-- `--api` — Report an API bug (the response contradicts the documentation) instead of a CLI bug
-- `--endpoint <string>` — With --api: method and path, e.g. "GET /api/v3/products"
-- `--print` — Print the issue URL instead of opening the browser
-- `--request-id <string>` — The request_id of the API call (error body or X-Request-Id header)
-- `--title <string>` — Issue title
+- `--api`: Report an API bug (the response contradicts the documentation) instead of a CLI bug
+- `--endpoint <string>`: With --api: method and path, e.g. "GET /api/v3/products"
+- `--print`: Print the issue URL instead of opening the browser
+- `--request-id <string>`: The request_id of the API call (error body or X-Request-Id header)
+- `--title <string>`: Issue title
 
 **Examples:**
 
@@ -136,16 +136,16 @@ uses the bundled contract and makes no API requests. JSON is the default for --s
 --builtin cannot be combined with --generated or --groups.
 
 **Arguments:**
-- `prefix` (optional) (repeatable) — Command path prefix, supplied as separate words; accepts canonical and legacy paths.
+- `prefix` (optional) (repeatable): Command path prefix, supplied as separate words; accepts canonical and legacy paths.
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--brief` — Only command, route, summary and argument names; combine with --groups for a compact index (conflicts with `--schema`)
-- `--builtin` — Only built-in commands (auth, api, listen, config…) (conflicts with `--generated`, `--groups`)
-- `--generated` — Only commands generated from the API (conflicts with `--builtin`)
-- `--groups` — List immediate resource groups below the prefix instead of commands (conflicts with `--builtin`, `--schema`)
-- `--schema` — Include complete OpenAPI input schemas and field context (JSON by default) (conflicts with `--brief`, `--groups`)
+- `--brief`: Only command, route, summary and argument names; combine with --groups for a compact index (conflicts with `--schema`)
+- `--builtin`: Only built-in commands (auth, api, listen, config…) (conflicts with `--generated`, `--groups`)
+- `--generated`: Only commands generated from the API (conflicts with `--builtin`)
+- `--groups`: List immediate resource groups below the prefix instead of commands (conflicts with `--builtin`, `--schema`)
+- `--schema`: Include complete OpenAPI input schemas and field context (JSON by default) (conflicts with `--brief`, `--groups`)
 
 **Examples:**
 
@@ -177,7 +177,7 @@ Download a file through a short-lived link
 - `file_id`
 
 **Flags:**
-- `-O, --output-file <string>` — Where to save the file, or - for stdout (default: the file name)
+- `-O, --output-file <string>`: Where to save the file, or - for stdout (default: the file name)
 
 **Examples:**
 
@@ -236,15 +236,15 @@ In a sandbox, run a test scenario in another terminal to produce events:
   cademi sandbox run <scenario_id>
 
 **Flags:**
-- `--events <stringSlice>` — Only these event types (e.g. product.created,user.updated)
-- `--forward-to <string>` — POST each event to this URL (e.g. localhost:3000/webhooks)
-- `--json` — Print each event as one JSON line
-- `--keep` — Do not revoke the temporary event stream on exit
-- `--last-event-id <string>` — Resume after this event ID
-- `--print-secret` — Print the local signing secret and exit
-- `--replay` — Also deliver the retained events published before listen started
-- `--resources <stringSlice>` — Only events about these resource types (e.g. product,user)
-- `--stream <string>` — Use an existing event stream instead of creating a temporary one
+- `--events <stringSlice>`: Only these event types (e.g. product.created,user.updated)
+- `--forward-to <string>`: POST each event to this URL (e.g. localhost:3000/webhooks)
+- `--json`: Print each event as one JSON line
+- `--keep`: Do not revoke the temporary event stream on exit
+- `--last-event-id <string>`: Resume after this event ID
+- `--print-secret`: Print the local signing secret and exit
+- `--replay`: Also deliver the retained events published before listen started
+- `--resources <stringSlice>`: Only events about these resource types (e.g. product,user)
+- `--stream <string>`: Use an existing event stream instead of creating a temporary one
 
 **Examples:**
 
@@ -272,11 +272,11 @@ it is already installed (see `cademi skills`).
 Installed with Homebrew? Use `brew upgrade cademi` instead.
 
 **Flags:**
-- `--auto <string>` — Turn automatic updates on or off
-- `--channel <string>` — Set the update channel: stable or beta
-- `--check` — Only check whether a newer version exists
-- `--force` — Reinstall even if up to date, or replace a development/Homebrew build
-- `--version <string>` — Install this version instead of the latest (also to roll back)
+- `--auto <string>`: Turn automatic updates on or off
+- `--channel <string>`: Set the update channel: stable or beta
+- `--check`: Only check whether a newer version exists
+- `--force`: Reinstall even if up to date, or replace a development/Homebrew build
+- `--version <string>`: Install this version instead of the latest (also to roll back)
 
 **Examples:**
 
@@ -303,10 +303,10 @@ resource that needs it (lesson attachment, showcase image, import spreadsheet…
 **Flag sets:** output-basic
 
 **Flags:**
-- `--content-type <string>` — Content type (default: detected)
-- `--name <string>` — File name to record (default: the local file name)
-- `--parallel <int>` — Parts uploaded in parallel
-- `--purpose <string>` — Upload purpose: image, pdf, import, editor or document (required)
+- `--content-type <string>`: Content type (default: detected)
+- `--name <string>`: File name to record (default: the local file name)
+- `--parallel <int>`: Parts uploaded in parallel
+- `--purpose <string>`: Upload purpose: image, pdf, import, editor or document (required)
 
 **Examples:**
 
@@ -344,10 +344,10 @@ With --api-key-only the profile uses only the secret of an API credential
 Secrets are stored in the operating system keychain, never in files.
 
 **Flags:**
-- `--api-key-only` — Use only the API credential (autonomous mode), without OAuth
-- `--no-browser` — Print the authorization URL instead of opening the browser
-- `--platform <string>` — Your account's address (acme.cademi.com.br, a custom domain or its subdomain); saved in the profile
-- `--with-key` — Read the API key secret from stdin (with --api-key-only)
+- `--api-key-only`: Use only the API credential (autonomous mode), without OAuth
+- `--no-browser`: Print the authorization URL instead of opening the browser
+- `--platform <string>`: Your account's address (acme.cademi.com.br, a custom domain or its subdomain); saved in the profile
+- `--with-key`: Read the API key secret from stdin (with --api-key-only)
 
 **Examples:**
 
@@ -402,8 +402,8 @@ still needed when the plan has secrets (***), to fill in their real values.
 **Flag sets:** output-basic, confirm
 
 **Flags:**
-- `--no-wait` — Do not wait for the operation to finish
-- `--plan <string>` — Apply a plan `file` saved with cademi config plan --out
+- `--no-wait`: Do not wait for the operation to finish
+- `--plan <file>`: Apply a plan file saved with cademi config plan --out
 
 **Examples:**
 
@@ -426,7 +426,7 @@ it later with `cademi config apply --plan <file> <manifest>`.
 **Flag sets:** output-basic
 
 **Flags:**
-- `--out <string>` — Save the plan (JSON) to this file
+- `--out <string>`: Save the plan (JSON) to this file
 
 ### `cademi config validate <manifest>`
 
@@ -470,9 +470,9 @@ existing "cademi" entry pointing elsewhere is replaced only with --force.
 - `claude|cursor|vscode|copilot|codex|gemini|opencode`
 
 **Flags:**
-- `--force` — Replace an existing cademi entry that points to another URL
-- `--project` — Add the server to this project only (config file in the current directory)
-- `--url <string>` — MCP server URL
+- `--force`: Replace an existing cademi entry that points to another URL
+- `--project`: Add the server to this project only (config file in the current directory)
+- `--url <string>`: MCP server URL
 
 **Examples:**
 
@@ -526,9 +526,9 @@ directory.
 **Flag sets:** output-basic
 
 **Flags:**
-- `--agent <stringSlice>` — Install for this agent: claude (~/.claude/skills), agents (~/.agents/skills: Codex, Cursor, Gemini CLI, OpenCode, GitHub Copilot and others) or all
-- `--dir <stringSlice>` — Install into this skills directory (the skill goes in <dir>/cademi-cli)
-- `--force` — Replace a cademi-cli directory that is not this skill
+- `--agent <stringSlice>`: Install for this agent: claude (~/.claude/skills), agents (~/.agents/skills: Codex, Cursor, Gemini CLI, OpenCode, GitHub Copilot and others) or all
+- `--dir <stringSlice>`: Install into this skills directory (the skill goes in <dir>/cademi-cli)
+- `--force`: Replace a cademi-cli directory that is not this skill
 
 **Examples:**
 
@@ -553,8 +553,8 @@ and foreign (a cademi-cli directory that is not this skill).
 **Flag sets:** output-basic
 
 **Flags:**
-- `--agent <stringSlice>` — Only this agent: claude (~/.claude/skills), agents (~/.agents/skills: Codex, Cursor, Gemini CLI, OpenCode, GitHub Copilot and others) or all
-- `--dir <stringSlice>` — Check this skills directory too
+- `--agent <stringSlice>`: Only this agent: claude (~/.claude/skills), agents (~/.agents/skills: Codex, Cursor, Gemini CLI, OpenCode, GitHub Copilot and others) or all
+- `--dir <stringSlice>`: Check this skills directory too
 
 **Examples:**
 
@@ -572,8 +572,8 @@ the agents and directories you name). Directories named cademi-cli that are not
 this skill are left alone.
 
 **Flags:**
-- `--agent <stringSlice>` — Only this agent: claude (~/.claude/skills), agents (~/.agents/skills: Codex, Cursor, Gemini CLI, OpenCode, GitHub Copilot and others) or all
-- `--dir <stringSlice>` — Remove from this skills directory
+- `--agent <stringSlice>`: Only this agent: claude (~/.claude/skills), agents (~/.agents/skills: Codex, Cursor, Gemini CLI, OpenCode, GitHub Copilot and others) or all
+- `--dir <stringSlice>`: Remove from this skills directory
 
 **Examples:**
 

@@ -1,14 +1,14 @@
 ---
 name: cademi-cli-users
-description: "Manage students, enrollments and learning progress — `cademi users` (9 commands)"
+description: "Manage students, enrollments and learning progress (`cademi users`, 9 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Users Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Users are students in the platform. Enrollments grant access through a
 delivery. Products access reports effective access, sources and overrides.
@@ -17,10 +17,10 @@ Tags and custom-fields here hold a user's values; definitions are in settings.
 **Related:** `cademi sales deliveries`
 
 **Related settings:**
-- `cademi settings registration` — Controls free sign-up channels, the delivery granted to new students, allowed email domains and document requirements. (`cademi settings registration get|update`)
-- `cademi settings user-profile` — Controls which profile fields students can see or edit and how student names appear in support tools. (`cademi settings user-profile get|update`)
-- `cademi settings tags` — Create and edit tag definitions here. Assign tags to a student through users tags; deliveries may also apply tags when granting access. (`cademi settings tags create|delete|get|list|update`)
-- `cademi settings custom-fields` — Manage field definitions and types. Read or update a student's values through users custom-fields. (`cademi settings custom-fields create|delete|get|list|update`)
+- `cademi settings registration`: Controls free sign-up channels, the delivery granted to new students, allowed email domains and document requirements. (`cademi settings registration get|update`)
+- `cademi settings user-profile`: Controls which profile fields students can see or edit and how student names appear in support tools. (`cademi settings user-profile get|update`)
+- `cademi settings tags`: Create and edit tag definitions here. Assign tags to a student through users tags; deliveries may also apply tags when granting access. (`cademi settings tags create|delete|get|list|update`)
+- `cademi settings custom-fields`: Manage field definitions and types. Read or update a student's values through users custom-fields. (`cademi settings custom-fields create|delete|get|list|update`)
 
 **See also in this domain:** `references/users-learning.md`, `references/users-profile.md`, `references/users-imports.md`, `references/users-products.md`
 
@@ -39,31 +39,31 @@ Live catalog for this file: `cademi commands users --json` (offline, no credenti
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **async**
-- `--wait` — When the API answers 202, wait for the operation to finish
-- `--wait-timeout <duration>` — Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
+- `--wait`: When the API answers 202, wait for the operation to finish
+- `--wait-timeout <duration>`: Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
@@ -113,7 +113,7 @@ Moves the user to the trash. The user's enrollments, access, and associations ar
 To restore the user, send `deleted: false` to the update operation.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -135,7 +135,7 @@ The response includes an `ETag` representing the current revision. Send this val
 The `document` and `phone` fields are returned only when the credentials have the `users.read_personal` permission; otherwise, they are omitted.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output
 
@@ -159,19 +159,19 @@ The `document` and `phone` fields are returned only when the credentials have th
 **Flag sets:** output-basic
 
 **Flags:**
-- `--access <string>` — Platform access state: granted means outside the trash; none means in the trash. This does not test product enrollments or effective product access. Without an explicit deleted filter, access=none selects the trash. (granted, none)
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--created-after <string>` — Only items created after this date and time (ISO 8601).
-- `--created-before <string>` — Only items created before this date and time (ISO 8601).
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `--deleted` — True selects only users in the trash; false selects only users outside it. When omitted, defaults to true for access=none and false otherwise. If both filters are explicit, both apply; contradictory values return no users.
-- `--external-id <string>` — Only users with this external ID.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200; API default: 50
-- `--q <string>` — Text search term.
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--status <string>` — Only users with this activity status. 'active' means the user accessed the platform in the last 30 days. (active, inactive)
-- `--tag-id <stringSlice>` — Only users with any of these tags, by public ID. Repeat the parameter to send several tags.
+- `--access <string>`: Platform access state: granted means outside the trash; none means in the trash. This does not test product enrollments or effective product access. Without an explicit deleted filter, access=none selects the trash. (granted, none)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--created-after <string>`: Only items created after this date and time (ISO 8601).
+- `--created-before <string>`: Only items created before this date and time (ISO 8601).
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `--deleted`: True selects only users in the trash; false selects only users outside it. When omitted, defaults to true for access=none and false otherwise. If both filters are explicit, both apply; contradictory values return no users.
+- `--external-id <string>`: Only users with this external ID.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200; API default: 50
+- `--q <string>`: Text search term.
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--status <string>`: Only users with this activity status. 'active' means the user accessed the platform in the last 30 days. (active, inactive)
+- `--tag-id <stringSlice>`: Only users with any of these tags, by public ID. Repeat the parameter to send several tags.
 
 **Examples:**
 
@@ -199,12 +199,12 @@ To restore a user from the trash, send `deleted: false`.
 To avoid overwriting a newer version, send the `ETag` returned by the retrieve operation in the `If-Match` header.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -233,7 +233,7 @@ cademi users update usr_42 -f deleted=false --if-match '"<etag>"' --json
 cademi users update usr_42 --data @body.json --json
 ```
 
-### `cademi users access` — Update access duration for all products
+### `cademi users access`: Update access duration for all products
 
 #### `cademi users access update <user_id>`
 
@@ -246,7 +246,7 @@ The request is processed asynchronously. The response returns an operation, and 
 An `Idempotency-Key` header is required.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output, body, idempotency, async
 
@@ -270,10 +270,10 @@ cademi users access update usr_42 -F 'duration={...}' -f duration.type=<duration
 cademi users access update usr_42 --data @body.json --wait --json
 ```
 
-### `cademi users access-emails` — Send an access email
+### `cademi users access-emails`: Send an access email
 
 Related settings:
-- `cademi settings emails templates` — Controls whether a transactional email is sent, its access credentials and its editable message body. (`cademi settings emails templates get|list|update`)
+- `cademi settings emails templates`: Controls whether a transactional email is sent, its access credentials and its editable message body. (`cademi settings emails templates get|list|update`)
 
 #### `cademi users access-emails create <user_id>`
 
@@ -284,7 +284,7 @@ Generates a new password for the user and emails the access credentials. The use
 An access email can be sent to the same user at most once every 10 minutes. Earlier attempts return `email_recently_sent`.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output, idempotency
 
@@ -295,7 +295,7 @@ An access email can be sent to the same user at most once every 10 minutes. Earl
 cademi users access-emails create usr_42 --json
 ```
 
-### `cademi users activity` — List user activity
+### `cademi users activity`: List user activity
 
 #### `cademi users activity list <user_id>`
 
@@ -304,7 +304,7 @@ List user activity · `GET /api/v3/users/{user_id}/activity` · permission `user
 Returns the user's 50 most recent activity entries, newest first. IP addresses are not included in the entry context.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output
 
@@ -315,10 +315,10 @@ Returns the user's 50 most recent activity entries, newest first. IP addresses a
 cademi users activity list usr_42 --json
 ```
 
-### `cademi users password-reset-emails` — Send a password reset email
+### `cademi users password-reset-emails`: Send a password reset email
 
 Related settings:
-- `cademi settings emails templates` — Controls whether a transactional email is sent, its access credentials and its editable message body. (`cademi settings emails templates get|list|update`)
+- `cademi settings emails templates`: Controls whether a transactional email is sent, its access credentials and its editable message body. (`cademi settings emails templates get|list|update`)
 
 #### `cademi users password-reset-emails create <user_id>`
 
@@ -329,7 +329,7 @@ Sends the user an email with a link to reset their password.
 A password reset email can be sent to the same user at most once every 10 minutes. Earlier attempts return `email_recently_sent`.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output, idempotency
 

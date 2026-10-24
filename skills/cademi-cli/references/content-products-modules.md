@@ -1,16 +1,16 @@
 ---
 name: cademi-cli-content-products-modules
-description: "Manage a product's modules and module groups — `cademi content products modules` (9 commands)"
+description: "Manage a product's modules and module groups (`cademi content products modules`, 9 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Content Products Modules Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
-> Domain `cademi content` — Organize showcases, products and learning content.
+> Domain `cademi content`: Organize showcases, products and learning content.
 
 Commands require a product ID. A module group contains submodules; regular
 modules contain lessons. Use content list to inspect direct children.
@@ -34,31 +34,31 @@ Live catalog for this file: `cademi commands content products modules --json` (o
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **async**
-- `--wait` — When the API answers 202, wait for the operation to finish
-- `--wait-timeout <duration>` — Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
+- `--wait`: When the API answers 202, wait for the operation to finish
+- `--wait-timeout <duration>`: Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
@@ -73,7 +73,7 @@ To create a submodule, set `parent_id` to the public ID of a group in the same p
 Modules cannot be created in replicated products. Attempts to do so return the `replica_readonly` error code.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output, body, idempotency
 
@@ -111,8 +111,8 @@ Restoring the module through the update operation does not restore those copies.
 Replicated modules cannot be deleted. Attempts to delete them return the `replica_readonly` error code.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `module_id` — Public ID of the module, prefixed with `mod_`. Example: `mod_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `module_id`: Public ID of the module, prefixed with `mod_`. Example: `mod_7`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -134,8 +134,8 @@ Retrieves a module by its public ID, including its typed `settings`.
 The response includes an `ETag` representing the current revision. Send this value in the `If-Match` header when updating the module or reordering its contents to avoid overwriting a newer version.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `module_id` — Public ID of the module, prefixed with `mod_`. Example: `mod_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `module_id`: Public ID of the module, prefixed with `mod_`. Example: `mod_7`
 
 **Flag sets:** output
 
@@ -159,21 +159,21 @@ The collection can be filtered by parent group, status, kind, and deletion state
 If the product is not accessible with the current credentials, the API returns `404 Not Found` instead of an empty collection.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `--deleted` — When 'true', returns only items in the trash. Items in the trash are excluded by default.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--kind <string>` — Only groups or only modules. (group, module)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--parent-id <string>` — Only items inside the group with this public ID.
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (position, -position)
-- `--status <string>` — Only items with this status. (published, draft)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `--deleted`: When 'true', returns only items in the trash. Items in the trash are excluded by default.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--kind <string>`: Only groups or only modules. (group, module)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--parent-id <string>`: Only items inside the group with this public ID.
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (position, -position)
+- `--status <string>`: Only items with this status. (published, draft)
 
 Legacy path: `cademi modules list`
 
@@ -201,8 +201,8 @@ Copies of the module in replicated accounts are published as well. Replicated mo
 The `Idempotency-Key` header is required. Track progress through the returned operation.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `module_id` — Public ID of the module, prefixed with `mod_`. Example: `mod_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `module_id`: Public ID of the module, prefixed with `mod_`. Example: `mod_7`
 
 **Flag sets:** output, idempotency, async
 
@@ -230,13 +230,13 @@ Replicated modules accept only `status`. Requests that include any other field r
 _Full description: `cademi commands content products modules update --json --jq '.commands[0].description'`_
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `module_id` — Public ID of the module, prefixed with `mod_`. Example: `mod_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `module_id`: Public ID of the module, prefixed with `mod_`. Example: `mod_7`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -265,7 +265,7 @@ cademi content products modules update prd_42 mod_7 -f deleted=false --if-match 
 cademi content products modules update prd_42 mod_7 --data @body.json --json
 ```
 
-### `cademi content products modules content` — Inspect and order a module's direct children
+### `cademi content products modules content`: Inspect and order a module's direct children
 
 Lists direct submodules and lessons in display order. Supply both product
 and module IDs; use products content list for the product's root level.
@@ -279,17 +279,17 @@ List module contents · `GET /api/v3/products/{product_id}/modules/{module_id}/c
 Returns the direct contents of a module, meaning its submodules and the lessons placed directly in it, in display order, using cursor-based pagination. Items in the trash are not included.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `module_id` — Public ID of the module, prefixed with `mod_`. Example: `mod_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `module_id`: Public ID of the module, prefixed with `mod_`. Example: `mod_7`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Opaque continuation token from page.next_cursor of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of entries per page; minimum: 1; maximum: 200; API default: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Opaque continuation token from page.next_cursor of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of entries per page; minimum: 1; maximum: 200; API default: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
 
 Legacy path: `cademi modules content list`
 
@@ -306,7 +306,7 @@ cademi content products modules content list prd_42 mod_7 --limit 200 --raw --js
 cademi content products modules content list prd_42 mod_7 --all --jq '[.[] | {id}]'
 ```
 
-### `cademi content products modules content order` — Reorder module contents
+### `cademi content products modules content order`: Reorder module contents
 
 Related: `cademi content products modules content list`, `cademi content products modules get`, `cademi guide reordering`
 
@@ -321,13 +321,13 @@ The `ids` array accepts both module public IDs (`mod_`) and lesson public IDs (`
 _Full description: `cademi commands content products modules content order update --json --jq '.commands[0].description'`_
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `module_id` — Public ID of the module, prefixed with `mod_`. Example: `mod_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `module_id`: Public ID of the module, prefixed with `mod_`. Example: `mod_7`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body (required):**
 
@@ -349,7 +349,7 @@ cademi content products modules content order update prd_42 mod_7 -f 'ids[]=<val
 cademi content products modules content order update prd_42 mod_7 --data @body.json --json
 ```
 
-### `cademi content products modules copies` — Duplicate a module
+### `cademi content products modules copies`: Duplicate a module
 
 Related: `cademi content products lessons`, `cademi content products content`
 
@@ -364,8 +364,8 @@ Requires the `modules.create` permission on the target product. Replicated modul
 The `Idempotency-Key` header is required. Track progress through the returned operation; when it completes, the item result contains `copy_id`, the public ID of the new module.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `module_id` — Public ID of the module, prefixed with `mod_`. Example: `mod_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `module_id`: Public ID of the module, prefixed with `mod_`. Example: `mod_7`
 
 **Flag sets:** output, body, idempotency, async
 

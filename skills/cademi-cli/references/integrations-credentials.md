@@ -1,16 +1,16 @@
 ---
 name: cademi-cli-integrations-credentials
-description: "Manage API credentials and their access policies — `cademi integrations credentials` (15 commands)"
+description: "Manage API credentials and their access policies (`cademi integrations credentials`, 15 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Integrations Credentials Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
-> Domain `cademi integrations` — Manage API credentials, events and webhook delivery.
+> Domain `cademi integrations`: Manage API credentials, events and webhook delivery.
 
 Inspect the current credential or manage credentials and resource policies.
 CLI login and locally saved connections are managed by auth and profiles.
@@ -26,27 +26,27 @@ Live catalog for this file: `cademi commands integrations credentials --json` (o
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
@@ -132,7 +132,7 @@ Credentials that are still valid cannot be deleted and return the `state_conflic
 A credential cannot delete itself.
 
 **Arguments:**
-- `credential_id` — Public ID of the credential, prefixed with `key_`. Example: `key_01J8Z3`
+- `credential_id`: Public ID of the credential, prefixed with `key_`. Example: `key_01J8Z3`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -156,7 +156,7 @@ The `secret` object exposes only metadata, such as the last four characters and 
 The response includes an `ETag` representing the current revision. Send this value in the `If-Match` header when updating the credential to avoid overwriting a newer version.
 
 **Arguments:**
-- `credential_id` — Public ID of the credential, prefixed with `key_`. Example: `key_01J8Z3`
+- `credential_id`: Public ID of the credential, prefixed with `key_`. Example: `key_01J8Z3`
 
 **Flag sets:** output
 
@@ -180,13 +180,13 @@ Results are paginated with a cursor and can be filtered by `status` and sorted b
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (created_at, -created_at)
-- `--status <string>` — Only credentials with this status. (active, suspended, revoked)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (created_at, -created_at)
+- `--status <string>`: Only credentials with this status. (active, suspended, revoked)
 
 Legacy path: `cademi credentials list`
 
@@ -216,12 +216,12 @@ Send the `ETag` returned by the retrieve operation in the `If-Match` header to a
 A credential cannot update itself.
 
 **Arguments:**
-- `credential_id` — Public ID of the credential, prefixed with `key_`. Example: `key_01J8Z3`
+- `credential_id`: Public ID of the credential, prefixed with `key_`. Example: `key_01J8Z3`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body (required):**
 
@@ -246,7 +246,7 @@ cademi integrations credentials update key_01J8Z3 -f expires_at=<expires_at> --i
 cademi integrations credentials update key_01J8Z3 --data @body.json --json
 ```
 
-### `cademi integrations credentials permission-catalog` — Retrieve the permission catalog
+### `cademi integrations credentials permission-catalog`: Retrieve the permission catalog
 
 Related: `cademi auth`, `cademi profiles`, `cademi account capabilities`
 
@@ -269,7 +269,7 @@ Legacy path: `cademi credentials permission-catalog get`
 cademi integrations credentials permission-catalog get --json
 ```
 
-### `cademi integrations credentials policies` — Manage integrations credentials policies
+### `cademi integrations credentials policies`: Manage integrations credentials policies
 
 Related: `cademi auth`, `cademi profiles`, `cademi account capabilities`
 
@@ -284,7 +284,7 @@ Permissions listed in `capabilities` that the calling credential cannot delegate
 A credential cannot modify its own policies, and the policies of a revoked credential cannot be changed (`credential_revoked`).
 
 **Arguments:**
-- `credential_id` — Public ID of the credential, prefixed with `key_`. Example: `key_01J8Z3`
+- `credential_id`: Public ID of the credential, prefixed with `key_`. Example: `key_01J8Z3`
 
 **Flag sets:** output, body, idempotency
 
@@ -320,8 +320,8 @@ Removing the last policy is allowed and leaves the credential without access to 
 A credential cannot modify its own policies, and the policies of a revoked credential cannot be changed (`credential_revoked`).
 
 **Arguments:**
-- `credential_id` — Public ID of the credential, prefixed with `key_`. Example: `key_01J8Z3`
-- `policy_id` — Public ID of the policy, prefixed with `pol_`. Example: `pol_01J8Z3`
+- `credential_id`: Public ID of the credential, prefixed with `key_`. Example: `key_01J8Z3`
+- `policy_id`: Public ID of the policy, prefixed with `pol_`. Example: `pol_01J8Z3`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -345,8 +345,8 @@ Policies that are no longer part of the active revision, or that belong to a dif
 The response includes an `ETag` representing the credential's current revision. Send this value in the `If-Match` header when updating the policy to avoid overwriting a newer version.
 
 **Arguments:**
-- `credential_id` — Public ID of the credential, prefixed with `key_`. Example: `key_01J8Z3`
-- `policy_id` — Public ID of the policy, prefixed with `pol_`. Example: `pol_01J8Z3`
+- `credential_id`: Public ID of the credential, prefixed with `key_`. Example: `key_01J8Z3`
+- `policy_id`: Public ID of the policy, prefixed with `pol_`. Example: `pol_01J8Z3`
 
 **Flag sets:** output
 
@@ -368,7 +368,7 @@ Returns the policies in the credential's active policy revision, one item per po
 A credential without policies returns an empty collection.
 
 **Arguments:**
-- `credential_id` — Public ID of the credential, prefixed with `key_`. Example: `key_01J8Z3`
+- `credential_id`: Public ID of the credential, prefixed with `key_`. Example: `key_01J8Z3`
 
 **Flag sets:** output
 
@@ -392,13 +392,13 @@ Send the `ETag` returned by the retrieve operation in the `If-Match` header to a
 Permissions that the calling credential cannot delegate are rejected with `delegation_limit_exceeded`, and no new revision is published. A credential cannot modify its own policies, and the policies of a revoked credential cannot be changed (`credential_revoked`).
 
 **Arguments:**
-- `credential_id` — Public ID of the credential, prefixed with `key_`. Example: `key_01J8Z3`
-- `policy_id` — Public ID of the policy, prefixed with `pol_`. Example: `pol_01J8Z3`
+- `credential_id`: Public ID of the credential, prefixed with `key_`. Example: `key_01J8Z3`
+- `policy_id`: Public ID of the policy, prefixed with `pol_`. Example: `pol_01J8Z3`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body (required):**
 
@@ -421,7 +421,7 @@ cademi integrations credentials policies update key_01J8Z3 pol_01J8Z3 -f 'capabi
 cademi integrations credentials policies update key_01J8Z3 pol_01J8Z3 --data @body.json --json
 ```
 
-### `cademi integrations credentials policy-templates` — List policy templates
+### `cademi integrations credentials policy-templates`: List policy templates
 
 Related: `cademi auth`, `cademi profiles`, `cademi account capabilities`
 
@@ -444,7 +444,7 @@ Legacy path: `cademi credentials policy-templates list`
 cademi integrations credentials policy-templates list --json
 ```
 
-### `cademi integrations credentials secret-rotations` — Rotate a credential secret
+### `cademi integrations credentials secret-rotations`: Rotate a credential secret
 
 Related: `cademi auth`, `cademi profiles`, `cademi account capabilities`
 
@@ -459,7 +459,7 @@ The previous secret remains valid for an overlap period, set by `overlap_hours` 
 The new secret is returned only in this response and cannot be retrieved again. Store it securely. Retrying the request with the same `Idempotency-Key` does not return the secret again; it returns `409` with the `secret_not_replayable` error code.
 
 **Arguments:**
-- `credential_id` — Public ID of the credential, prefixed with `key_`. Example: `key_01J8Z3`
+- `credential_id`: Public ID of the credential, prefixed with `key_`. Example: `key_01J8Z3`
 
 **Flag sets:** output, body, idempotency
 

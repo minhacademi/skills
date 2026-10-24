@@ -1,16 +1,16 @@
 ---
 name: cademi-cli-support-comments
-description: "Moderate comments and manage their replies — `cademi support comments` (8 commands)"
+description: "Moderate comments and manage their replies (`cademi support comments`, 8 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Support Comments Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
-> Domain `cademi support` — Handle student comments, questions and support tickets.
+> Domain `cademi support`: Handle student comments, questions and support tickets.
 
 Inspect and moderate individual comments here. Use content products comments
 to list a product's comments. Replies belong to their parent comment.
@@ -18,7 +18,7 @@ to list a product's comments. Replies belong to their parent comment.
 **Related:** `cademi content products comments`
 
 **Related settings:**
-- `cademi settings support comments` — Controls lesson comments, publication moderation, spam limits and the administrator inbox. (`cademi settings support comments get|update`)
+- `cademi settings support comments`: Controls lesson comments, publication moderation, spam limits and the administrator inbox. (`cademi settings support comments get|update`)
 
 **See also in this domain:** `references/support.md`, `references/support-faqs.md`, `references/support-questions.md`, `references/support-tickets.md`
 
@@ -29,27 +29,27 @@ Live catalog for this file: `cademi commands support comments --json` (offline, 
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
@@ -62,8 +62,8 @@ Deletes a top-level comment together with all of its replies.
 To remove a single reply while keeping the rest of the conversation, use the delete reply operation.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `comment_id` — Public ID of the comment, prefixed with `cmt_`. Example: `cmt_9`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `comment_id`: Public ID of the comment, prefixed with `cmt_`. Example: `cmt_9`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -85,8 +85,8 @@ Retrieves a top-level comment by its public ID.
 The response includes an `ETag` representing the current revision. Send this value in the `If-Match` header when updating the comment to avoid overwriting a newer version.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `comment_id` — Public ID of the comment, prefixed with `cmt_`. Example: `cmt_9`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `comment_id`: Public ID of the comment, prefixed with `cmt_`. Example: `cmt_9`
 
 **Flag sets:** output
 
@@ -110,13 +110,13 @@ When `status` is omitted, only comments with the `pending` status are returned. 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
-- `--status <string>` — Only comments with this moderation status. (pending, approved, hidden)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (id, -id)
+- `--status <string>`: Only comments with this moderation status. (pending, approved, hidden)
 
 Legacy path: `cademi comments list`
 
@@ -144,13 +144,13 @@ Changing `status` requires the `comments.moderate` permission, and changing `pin
 The retrieve operation returns an `ETag` representing the current revision. Send this value in the optional `If-Match` header to avoid overwriting a newer version; if the comment has changed since that revision, the update is rejected.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `comment_id` — Public ID of the comment, prefixed with `cmt_`. Example: `cmt_9`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `comment_id`: Public ID of the comment, prefixed with `cmt_`. Example: `cmt_9`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -173,12 +173,12 @@ cademi support comments update prd_42 cmt_9 -F pinned=true --if-match '"<etag>"'
 cademi support comments update prd_42 cmt_9 --data @body.json --json
 ```
 
-### `cademi support comments replies` — Manage support comments replies
+### `cademi support comments replies`: Manage support comments replies
 
 Related: `cademi content products comments`
 
 Related settings:
-- `cademi settings support comments` — Controls lesson comments, publication moderation, spam limits and the administrator inbox. (`cademi settings support comments get|update`)
+- `cademi settings support comments`: Controls lesson comments, publication moderation, spam limits and the administrator inbox. (`cademi settings support comments get|update`)
 
 #### `cademi support comments replies create <product_id> <comment_id>`
 
@@ -189,8 +189,8 @@ Adds a reply to a top-level comment.
 Replies created through the API are attributed to the credential that made the request (`author.kind` is `credential`).
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `comment_id` — Public ID of the comment, prefixed with `cmt_`. Example: `cmt_9`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `comment_id`: Public ID of the comment, prefixed with `cmt_`. Example: `cmt_9`
 
 **Flag sets:** output, body, idempotency
 
@@ -224,9 +224,9 @@ Deletes a single reply from a comment. The top-level comment and its other repli
 Staff replies are deleted without removing the top-level comment. A student reply can also be deleted individually when the credentials have `comments.delete`; the rest of the thread is kept.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `comment_id` — Public ID of the comment, prefixed with `cmt_`. Example: `cmt_9`
-- `reply_id` — Public ID of the reply, prefixed with `crp_`. Example: `crp_1`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `comment_id`: Public ID of the comment, prefixed with `cmt_`. Example: `cmt_9`
+- `reply_id`: Public ID of the reply, prefixed with `crp_`. Example: `crp_1`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -248,8 +248,8 @@ Lists the replies to a top-level comment in chronological order.
 Returns all replies in a single response while preserving the standard collection response format.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `comment_id` — Public ID of the comment, prefixed with `cmt_`. Example: `cmt_9`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `comment_id`: Public ID of the comment, prefixed with `cmt_`. Example: `cmt_9`
 
 **Flag sets:** output
 
@@ -273,14 +273,14 @@ Only the text of replies written by an administrator or an API credential (`auth
 To avoid overwriting a newer version, send the optional `If-Match` header built from the reply's `revision` field, in the format `W/"comment_reply:<reply_id>:<revision>"`. If the reply has changed since that revision, the update is rejected.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `comment_id` — Public ID of the comment, prefixed with `cmt_`. Example: `cmt_9`
-- `reply_id` — Public ID of the reply, prefixed with `crp_`. Example: `crp_1`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `comment_id`: Public ID of the comment, prefixed with `cmt_`. Example: `cmt_9`
+- `reply_id`: Public ID of the reply, prefixed with `crp_`. Example: `crp_1`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 

@@ -1,16 +1,16 @@
 ---
 name: cademi-cli-content-products-lessons
-description: "Manage lessons and their content within a product — `cademi content products lessons` (16 commands)"
+description: "Manage lessons and their content within a product (`cademi content products lessons`, 16 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Content Products Lessons Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
-> Domain `cademi content` — Organize showcases, products and learning content.
+> Domain `cademi content`: Organize showcases, products and learning content.
 
 Commands require a product ID. List lessons with --module-id to select a
 module, or --unassigned for lessons outside modules. Inspect content for
@@ -35,31 +35,31 @@ Live catalog for this file: `cademi commands content products lessons --json` (o
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **async**
-- `--wait` — When the API answers 202, wait for the operation to finish
-- `--wait-timeout <duration>` — Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
+- `--wait`: When the API answers 202, wait for the operation to finish
+- `--wait-timeout <duration>`: Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
@@ -74,7 +74,7 @@ Creates a lesson in the product, optionally inside a module. New lessons are cre
 The `Location` header of the response contains the URL of the new lesson. Lessons cannot be created in replicated products; such requests return `replica_readonly`.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output, body, idempotency
 
@@ -113,13 +113,13 @@ A lesson that is the source of connected lessons cannot be deleted and returns `
 Send the lesson's current `ETag` in the `If-Match` header to avoid deleting a newer version.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `lesson_id` — Public ID of the lesson, prefixed with `les_`. Example: `les_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `lesson_id`: Public ID of the lesson, prefixed with `les_`. Example: `les_7`
 
 **Flag sets:** output, idempotency, confirm
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 Legacy path: `cademi lessons delete`
 
@@ -139,8 +139,8 @@ Retrieves a lesson by its public ID. The lesson body is available through the co
 The response includes an `ETag` representing the current revision. Send this value in the `If-Match` header when changing the lesson to avoid overwriting a newer version.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `lesson_id` — Public ID of the lesson, prefixed with `les_`. Example: `les_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `lesson_id`: Public ID of the lesson, prefixed with `les_`. Example: `les_7`
 
 **Flag sets:** output
 
@@ -162,23 +162,23 @@ Returns the lessons of a product, using cursor pagination. Lesson bodies are not
 The collection can be filtered by module, status, format, and name. Set `unassigned` to `true` to return only lessons that are not in a module. Trashed lessons are excluded by default; set `deleted` to `true` to return only lessons in the trash.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `--deleted` — When 'true', returns only items in the trash. Items in the trash are excluded by default.
-- `--format <string>` — Only lessons in this format. (standard, quiz, live_youtube, live_vimeo)
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200; API default: 50
-- `--module-id <string>` — Only lessons in the module with this public ID.
-- `--q <string>` — Text search term.
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
-- `--status <string>` — Only lessons with this status. (published, draft)
-- `--unassigned` — When 'true', returns only lessons that are not in a module.
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `--deleted`: When 'true', returns only items in the trash. Items in the trash are excluded by default.
+- `--format <string>`: Only lessons in this format. (standard, quiz, live_youtube, live_vimeo)
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200; API default: 50
+- `--module-id <string>`: Only lessons in the module with this public ID.
+- `--q <string>`: Text search term.
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (id, -id)
+- `--status <string>`: Only lessons with this status. (published, draft)
+- `--unassigned`: When 'true', returns only lessons that are not in a module.
 
 Legacy path: `cademi lessons list`
 
@@ -210,13 +210,13 @@ Replicated lessons accept only `status`; any other field is rejected with `repli
 _Full description: `cademi commands content products lessons update --json --jq '.commands[0].description'`_
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `lesson_id` — Public ID of the lesson, prefixed with `les_`. Example: `les_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `lesson_id`: Public ID of the lesson, prefixed with `les_`. Example: `les_7`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -248,7 +248,7 @@ cademi content products lessons update prd_42 les_7 -f deleted=false --if-match 
 cademi content products lessons update prd_42 les_7 --data @body.json --json
 ```
 
-### `cademi content products lessons attachments` — Manage content products lessons attachments
+### `cademi content products lessons attachments`: Manage content products lessons attachments
 
 Related: `cademi content products lessons content get`, `cademi content products modules`, `cademi content products exams`
 
@@ -263,14 +263,14 @@ Attachments without a `file_id` cannot be removed with this operation; remove th
 Send the lesson's current `ETag` in the `If-Match` header to avoid overwriting a newer version. Replicated lessons are read-only, and requests to change them return `replica_readonly`.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `lesson_id` — Public ID of the lesson, prefixed with `les_`. Example: `les_7`
-- `file_id` — Public ID of the file, prefixed with `file_`. Example: `file_9`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `lesson_id`: Public ID of the lesson, prefixed with `les_`. Example: `les_7`
+- `file_id`: Public ID of the file, prefixed with `file_`. Example: `file_9`
 
 **Flag sets:** output, idempotency, confirm
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 Legacy path: `cademi lessons attachments delete`
 
@@ -288,8 +288,8 @@ List lesson attachments · `GET /api/v3/products/{product_id}/lessons/{lesson_id
 Returns the files and images attached to the lesson. Attachments are the file and image blocks of the lesson body, so they also appear in the lesson content.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `lesson_id` — Public ID of the lesson, prefixed with `les_`. Example: `les_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `lesson_id`: Public ID of the lesson, prefixed with `les_`. Example: `les_7`
 
 **Flag sets:** output
 
@@ -311,14 +311,14 @@ Attaches a file to the lesson body, or updates the title and kind of an existing
 Send the lesson's current `ETag` in the `If-Match` header to avoid overwriting a newer version. Replicated lessons are read-only, and requests to change them return `replica_readonly`.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `lesson_id` — Public ID of the lesson, prefixed with `les_`. Example: `les_7`
-- `file_id` — Public ID of the file, prefixed with `file_`. Example: `file_9`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `lesson_id`: Public ID of the lesson, prefixed with `les_`. Example: `les_7`
+- `file_id`: Public ID of the file, prefixed with `file_`. Example: `file_9`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -341,7 +341,7 @@ cademi content products lessons attachments update prd_42 les_7 file_9 -f kind=f
 cademi content products lessons attachments update prd_42 les_7 file_9 --data @body.json --json
 ```
 
-### `cademi content products lessons connection` — Manage content products lessons connection
+### `cademi content products lessons connection`: Manage content products lessons connection
 
 Related: `cademi content products lessons content get`, `cademi content products modules`, `cademi content products exams`
 
@@ -354,8 +354,8 @@ Disconnects the lesson from its source lesson, so it no longer mirrors that less
 If the lesson is not connected, the request fails with `state_conflict`. Replicated lessons are read-only, and requests to change them return `replica_readonly`.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `lesson_id` — Public ID of the lesson, prefixed with `les_`. Example: `les_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `lesson_id`: Public ID of the lesson, prefixed with `les_`. Example: `les_7`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -375,8 +375,8 @@ Retrieve a lesson connection · `GET /api/v3/products/{product_id}/lessons/{less
 Returns whether the lesson is connected to a source lesson and, if so, identifies the source lesson, its product, and its module. Lessons without a connection return `connected` set to `false`.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `lesson_id` — Public ID of the lesson, prefixed with `les_`. Example: `les_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `lesson_id`: Public ID of the lesson, prefixed with `les_`. Example: `les_7`
 
 **Flag sets:** output
 
@@ -400,13 +400,13 @@ Requires the `lessons.connect` permission on the lesson being connected. The sou
 Send the lesson's current `ETag` in the `If-Match` header to avoid overwriting a newer version. Replicated lessons are read-only, and requests to change them return `replica_readonly`.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `lesson_id` — Public ID of the lesson, prefixed with `les_`. Example: `les_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `lesson_id`: Public ID of the lesson, prefixed with `les_`. Example: `les_7`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body (required):**
 
@@ -428,7 +428,7 @@ cademi content products lessons connection update prd_42 les_7 -f source_lesson_
 cademi content products lessons connection update prd_42 les_7 --data @body.json --json
 ```
 
-### `cademi content products lessons content` — Read and edit lesson bodies
+### `cademi content products lessons content`: Read and edit lesson bodies
 
 Lesson bodies are separate from the metadata returned by lessons get.
 Supply product and lesson IDs. Accepted content depends on lesson format.
@@ -444,8 +444,8 @@ Returns the lesson body in Editor.js block format, along with its video and embe
 The response includes an `ETag` representing the current revision of the lesson. Send this value in the `If-Match` header when changing the lesson to avoid overwriting a newer version.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `lesson_id` — Public ID of the lesson, prefixed with `les_`. Example: `les_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `lesson_id`: Public ID of the lesson, prefixed with `les_`. Example: `les_7`
 
 **Flag sets:** output
 
@@ -469,13 +469,13 @@ The body is a list of Editor.js blocks. Each block has a `type`, a `data` object
 _Full description: `cademi commands content products lessons content update --json --jq '.commands[0].description'`_
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `lesson_id` — Public ID of the lesson, prefixed with `les_`. Example: `les_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `lesson_id`: Public ID of the lesson, prefixed with `les_`. Example: `les_7`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -500,7 +500,7 @@ cademi content products lessons content update prd_42 les_7 -f video.url=<video.
 cademi content products lessons content update prd_42 les_7 --data @body.json --json
 ```
 
-### `cademi content products lessons copies` — Duplicate a lesson
+### `cademi content products lessons copies`: Duplicate a lesson
 
 Related: `cademi content products lessons content get`, `cademi content products modules`, `cademi content products exams`
 
@@ -515,8 +515,8 @@ This operation requires an `Idempotency-Key` header. The response returns the op
 Requires the `lessons.create` permission on the destination product. Replicated lessons cannot be copied, and lessons cannot be copied into replicated products; both cases return `replica_readonly`.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `lesson_id` — Public ID of the lesson, prefixed with `les_`. Example: `les_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `lesson_id`: Public ID of the lesson, prefixed with `les_`. Example: `les_7`
 
 **Flag sets:** output, body, idempotency, async
 
@@ -542,7 +542,7 @@ cademi content products lessons copies create prd_42 les_7 -f target_product_id=
 cademi content products lessons copies create prd_42 les_7 --data @body.json --wait --json
 ```
 
-### `cademi content products lessons taxonomy-terms` — Manage content products lessons taxonomy-terms
+### `cademi content products lessons taxonomy-terms`: Manage content products lessons taxonomy-terms
 
 Related: `cademi content products lessons content get`, `cademi content products modules`, `cademi content products exams`
 
@@ -555,8 +555,8 @@ Returns the taxonomy terms assigned to the lesson.
 Only lessons in products with the `blog` format support taxonomies. For products in other formats, the API returns `format_unsupported` instead of an empty list.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `lesson_id` — Public ID of the lesson, prefixed with `les_`. Example: `les_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `lesson_id`: Public ID of the lesson, prefixed with `les_`. Example: `les_7`
 
 **Flag sets:** output
 
@@ -580,13 +580,13 @@ Only lessons in products with the `blog` format support taxonomies. For products
 Send the lesson's current `ETag` in the `If-Match` header to avoid overwriting a newer version.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `lesson_id` — Public ID of the lesson, prefixed with `les_`. Example: `les_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `lesson_id`: Public ID of the lesson, prefixed with `les_`. Example: `les_7`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body (required):**
 

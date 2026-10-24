@@ -1,14 +1,14 @@
 ---
 name: cademi-cli-reports
-description: "Inspect activity, learning results and account-wide records — `cademi reports` (13 commands)"
+description: "Inspect activity, learning results and account-wide records (`cademi reports`, 13 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Reports Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Reports provide aggregate views across the account. enrollments lists
 grants across users; users enrollments manages an individual user's grants.
@@ -30,24 +30,24 @@ Live catalog for this file: `cademi commands reports --json` (offline, no creden
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 ## Commands
 
@@ -70,7 +70,7 @@ Returns the whole catalog in a single response while preserving the standard col
 cademi reports list --json
 ```
 
-### `cademi reports activity` — List recent user activity
+### `cademi reports activity`: List recent user activity
 
 #### `cademi reports activity list`
 
@@ -85,9 +85,9 @@ The `email`, `document`, and `phone` fields are included only when the credentia
 **Flag sets:** output
 
 **Flags:**
-- `--from <string>` — First day of the date range (ISO 8601). (required)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 100; minimum: 1; maximum: 100
-- `--to <string>` — Last day of the date range (ISO 8601). (required)
+- `--from <string>`: First day of the date range (ISO 8601). (required)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 100; minimum: 1; maximum: 100
+- `--to <string>`: Last day of the date range (ISO 8601). (required)
 
 **Examples:**
 
@@ -96,7 +96,7 @@ The `email`, `document`, and `phone` fields are included only when the credentia
 cademi reports activity list --from <YYYY-MM-DD> --to <YYYY-MM-DD> --limit 20 --json
 ```
 
-### `cademi reports certificates` — List certificate issuance by product
+### `cademi reports certificates`: List certificate issuance by product
 
 #### `cademi reports certificates list`
 
@@ -109,12 +109,12 @@ This report contains aggregate counts only and does not identify individual user
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (id, -id)
 
 **Examples:**
 
@@ -129,7 +129,7 @@ cademi reports certificates list --limit 200 --raw --json
 cademi reports certificates list --all --jq '[.[] | {id}]'
 ```
 
-### `cademi reports email-bounces` — Manage reports email-bounces
+### `cademi reports email-bounces`: Manage reports email-bounces
 
 #### `cademi reports email-bounces list`
 
@@ -144,13 +144,13 @@ The `email` field is included only when the credentials also have the `users.rea
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `--ignored` — When 'true', returns only ignored email bounces instead of the active ones.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `--ignored`: When 'true', returns only ignored email bounces instead of the active ones.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (id, -id)
 
 **Examples:**
 
@@ -176,12 +176,12 @@ The only accepted value is `ignored: true`. This change cannot be reverted throu
 To make the update conditional, send an `If-Match` header built from the bounce's `revision` field, in the format `W/"email_bounce:<bounce_id>:<revision>"`. If the bounce has changed since that revision, the update is rejected.
 
 **Arguments:**
-- `bounce_id` — Public ID of the bounce, prefixed with `bnc_`. Example: `bnc_42`
+- `bounce_id`: Public ID of the bounce, prefixed with `bnc_`. Example: `bnc_42`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body (required):**
 
@@ -201,7 +201,7 @@ cademi reports email-bounces update bnc_42 -f ignored=true --json
 cademi reports email-bounces update bnc_42 --data @body.json --json
 ```
 
-### `cademi reports enrollments` — List enrollment grants across users
+### `cademi reports enrollments`: List enrollment grants across users
 
 This collection is for account-wide discovery. To create, inspect or
 update an individual enrollment, use users enrollments with a user ID.
@@ -221,18 +221,18 @@ Each item includes a `links.self` URL pointing to the enrollment under its user.
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `--deleted` — When 'true', returns only items in the trash. Items in the trash are excluded by default.
-- `--delivery-id <string>` — Only enrollments granted by the delivery with this public ID.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--origin <string>` — Only enrollments with this origin. (manual, sale, subscription)
-- `--product-id <string>` — Only enrollments in the product with this public ID.
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--status <string>` — Only enrollments with this status. (active, suspended, revoked)
-- `--updated-after <string>` — Only items updated after this date and time (ISO 8601).
-- `--user-id <string>` — Only enrollments of the user with this public ID.
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `--deleted`: When 'true', returns only items in the trash. Items in the trash are excluded by default.
+- `--delivery-id <string>`: Only enrollments granted by the delivery with this public ID.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--origin <string>`: Only enrollments with this origin. (manual, sale, subscription)
+- `--product-id <string>`: Only enrollments in the product with this public ID.
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--status <string>`: Only enrollments with this status. (active, suspended, revoked)
+- `--updated-after <string>`: Only items updated after this date and time (ISO 8601).
+- `--user-id <string>`: Only enrollments of the user with this public ID.
 
 Legacy path: `cademi enrollments list`
 
@@ -249,7 +249,7 @@ cademi reports enrollments list --limit 200 --raw --json
 cademi reports enrollments list --all --jq '[.[] | {id}]'
 ```
 
-### `cademi reports exams` — List exam performance
+### `cademi reports exams`: List exam performance
 
 #### `cademi reports exams list`
 
@@ -262,13 +262,13 @@ This report does not include individual answers or user names.
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--product-id <string>` — Only exams of the product with this public ID.
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--product-id <string>`: Only exams of the product with this public ID.
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (id, -id)
 
 **Examples:**
 
@@ -283,7 +283,7 @@ cademi reports exams list --limit 200 --raw --json
 cademi reports exams list --all --jq '[.[] | {id}]'
 ```
 
-### `cademi reports exports` — Retrieve export metrics
+### `cademi reports exports`: Retrieve export metrics
 
 #### `cademi reports exports get`
 
@@ -302,7 +302,7 @@ To page through all exports, use the exports collection endpoint, which requires
 cademi reports exports get --json
 ```
 
-### `cademi reports lessons` — List lesson performance for a product
+### `cademi reports lessons`: List lesson performance for a product
 
 #### `cademi reports lessons list`
 
@@ -313,13 +313,13 @@ Returns performance metrics for each lesson of the product identified by `produc
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--product-id <string>` — Public ID of the product whose lessons are reported. (required)
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--product-id <string>`: Public ID of the product whose lessons are reported. (required)
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (id, -id)
 
 **Examples:**
 
@@ -334,7 +334,7 @@ cademi reports lessons list --product-id <product-id> --limit 200 --raw --json
 cademi reports lessons list --product-id <product-id> --all --jq '[.[] | {id}]'
 ```
 
-### `cademi reports products` — List product performance
+### `cademi reports products`: List product performance
 
 #### `cademi reports products list`
 
@@ -347,12 +347,12 @@ This report does not include user data.
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (id, -id)
 
 **Examples:**
 
@@ -367,11 +367,11 @@ cademi reports products list --limit 200 --raw --json
 cademi reports products list --all --jq '[.[] | {id}]'
 ```
 
-### `cademi reports rankings` — Retrieve the points ranking
+### `cademi reports rankings`: Retrieve the points ranking
 
 #### `cademi reports rankings list`
 
-Retrieve the points ranking · `GET /api/v3/reports/rankings` · permission `reports.read`, `rankings.read`
+Retrieve the points ranking · `GET /api/v3/reports/rankings` · permission `reports.read` or `rankings.read`
 
 Returns the same points ranking as the gamification ranking endpoint. Either the `reports.read` or the `rankings.read` permission grants access.
 
@@ -380,11 +380,11 @@ Results are limited to the products and users accessible with the current creden
 **Flag sets:** output
 
 **Flags:**
-- `--from <string>` — Required when 'period' is 'custom'.
-- `--limit <int64>` — Maximum number of items to return, from 1 to 100; minimum: 1; maximum: 100
-- `--period <string>` — Time window of the ranking. With 'custom', send 'from' and 'to'. (all, today, last_7_days, last_30_days, custom)
-- `--product-id <stringSlice>` — Only points related to these products, by public ID. Repeat the parameter to send several products.
-- `--to <string>` — Required when 'period' is 'custom'.
+- `--from <string>`: Required when 'period' is 'custom'.
+- `--limit <int64>`: Maximum number of items to return, from 1 to 100; minimum: 1; maximum: 100
+- `--period <string>`: Time window of the ranking. With 'custom', send 'from' and 'to'. (all, today, last_7_days, last_30_days, custom)
+- `--product-id <stringSlice>`: Only points related to these products, by public ID. Repeat the parameter to send several products.
+- `--to <string>`: Required when 'period' is 'custom'.
 
 **Examples:**
 
@@ -393,7 +393,7 @@ Results are limited to the products and users accessible with the current creden
 cademi reports rankings list --limit 20 --json
 ```
 
-### `cademi reports support` — Retrieve support metrics
+### `cademi reports support`: Retrieve support metrics
 
 #### `cademi reports support get`
 
@@ -406,8 +406,8 @@ Returns message volume and response metrics for each support channel within the 
 **Flag sets:** output
 
 **Flags:**
-- `--from <string>` — First day of the date range (ISO 8601). (required)
-- `--to <string>` — Last day of the date range (ISO 8601). (required)
+- `--from <string>`: First day of the date range (ISO 8601). (required)
+- `--to <string>`: Last day of the date range (ISO 8601). (required)
 
 **Examples:**
 
@@ -416,7 +416,7 @@ Returns message volume and response metrics for each support channel within the 
 cademi reports support get --from <YYYY-MM-DD> --to <YYYY-MM-DD> --json
 ```
 
-### `cademi reports users` — Retrieve the users report
+### `cademi reports users`: Retrieve the users report
 
 #### `cademi reports users get`
 
@@ -431,8 +431,8 @@ Figures are aggregated periodically rather than in real time. The `consistency` 
 **Flag sets:** output
 
 **Flags:**
-- `--from <string>` — First day of the date range (ISO 8601). Defaults to 90 days before 'to'.
-- `--to <string>` — Last day of the date range (ISO 8601). Defaults to today.
+- `--from <string>`: First day of the date range (ISO 8601). Defaults to 90 days before 'to'.
+- `--to <string>`: Last day of the date range (ISO 8601). Defaults to today.
 
 **Examples:**
 

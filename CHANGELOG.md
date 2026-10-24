@@ -1,6 +1,14 @@
 # Changelog
 
 All notable changes to the skills in this repository. Each skill carries its own version in the `metadata` block of its `SKILL.md`.
+## cademi-cli 0.1.15 (2026-10-23)
+
+References follow the `cademi` CLI 0.5.1 and API 3.18.0.
+
+- SDK: `APIError.Error()` includes the `reason` of each `details` item (`; field: message (reason: x)`); an item without `message` shows its `code`. The `code (HTTP n): message` prefix and the `[request_id x]` suffix are unchanged.
+- `--wait` and `operations wait`: a `failed` or `canceled` operation with an `error` reports its `field`, message, `code` and `reason` (`operation op_1 failed: file: ... (import_column_missing, reason: email)`); without `error`, the usual message.
+- References no longer use em dashes (flag, argument and related setting are separated by a colon); alternative permissions are written as "`a` or `b`" (`reports rankings list`); `config apply --plan <file>` shows the value name, as in `--help`.
+
 ## cademi-cli 0.1.14 (2026-10-22)
 
 References follow the `cademi` CLI 0.5.0 and API 3.18.0 (includes 3.15.3, 3.15.4, 3.16.0 and 3.17.0).

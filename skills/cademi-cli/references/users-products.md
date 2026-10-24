@@ -1,16 +1,16 @@
 ---
 name: cademi-cli-users-products
-description: "Inspect a user's effective product access and progress — `cademi users products` (9 commands)"
+description: "Inspect a user's effective product access and progress (`cademi users products`, 9 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Users Products Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
-> Domain `cademi users` — Manage students, enrollments and learning progress.
+> Domain `cademi users`: Manage students, enrollments and learning progress.
 
 These commands describe products from one user's perspective. To edit the
 product itself, use content products. Access and progress are separate views.
@@ -26,24 +26,24 @@ Live catalog for this file: `cademi commands users products --json` (offline, no
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 ## Commands
 
@@ -56,17 +56,17 @@ Returns the user's effective access to each product, using cursor-based paginati
 If the current credentials are restricted to specific products, only those products are included.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (product_id, -product_id)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (product_id, -product_id)
 
 **Examples:**
 
@@ -81,7 +81,7 @@ cademi users products list usr_42 --limit 200 --raw --json
 cademi users products list usr_42 --all --jq '[.[] | {id}]'
 ```
 
-### `cademi users products access` — Inspect access sources, denial reasons and user overrides
+### `cademi users products access`: Inspect access sources, denial reasons and user overrides
 
 Supply user and product IDs. get returns effective access, enrollment
 sources, denial_reason and overrides. update changes individual overrides.
@@ -103,8 +103,8 @@ Retrieves the user's effective access to a product, including the sources that g
 The response includes an `ETag` representing the current revision. Send this value in the `If-Match` header when updating the product access to avoid overwriting a newer version.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_7`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_7`
 
 **Flag sets:** output
 
@@ -128,13 +128,13 @@ Overrides the user's access to a product. Only the fields supplied in the reques
 To avoid overwriting a newer version, send the `ETag` returned by the retrieve operation in the `If-Match` header.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_7`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_7`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -158,7 +158,7 @@ cademi users products access update usr_42 prd_7 -f duration.type=<duration.type
 cademi users products access update usr_42 prd_7 --data @body.json --json
 ```
 
-### `cademi users products access calendar` — Retrieve a release calendar
+### `cademi users products access calendar`: Retrieve a release calendar
 
 Related: `cademi users enrollments`, `cademi content products access-schedules`
 
@@ -169,8 +169,8 @@ Retrieve a release calendar · `GET /api/v3/users/{user_id}/products/{product_id
 Returns the content release rules currently in effect for the user in each module and lesson of the product. The response describes the rules, not a list of dated release events.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_7`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_7`
 
 **Flag sets:** output
 
@@ -181,7 +181,7 @@ Returns the content release rules currently in effect for the user in each modul
 cademi users products access calendar get usr_42 prd_7 --json
 ```
 
-### `cademi users products progress` — Manage users products progress
+### `cademi users products progress`: Manage users products progress
 
 Related: `cademi content products`, `cademi users enrollments`
 
@@ -192,8 +192,8 @@ Retrieve product progress · `GET /api/v3/users/{user_id}/products/{product_id}/
 Retrieves the user's progress in a single product, in the same format used when listing the user's progress across products.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output
 
@@ -204,7 +204,7 @@ Retrieves the user's progress in a single product, in the same format used when 
 cademi users products progress get usr_42 prd_42 --json
 ```
 
-### `cademi users products progress adjustments` — Manage users products progress adjustments
+### `cademi users products progress adjustments`: Manage users products progress adjustments
 
 Related: `cademi content products`, `cademi users enrollments`
 
@@ -219,8 +219,8 @@ Points and certificates already earned are not reverted by a reset.
 A reset requires the user to have started the product. When the user has never opened it, there is no progress to reset and the request fails with `409 progress_not_started` (`details[].reason` is `not_started`).
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output, body, idempotency
 
@@ -250,9 +250,9 @@ Retrieve a progress adjustment · `GET /api/v3/users/{user_id}/products/{product
 Retrieves a progress adjustment recorded for the user in a product.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `adjustment_id` — Public ID of the adjustment, prefixed with `adj_`. Example: `adj_9`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `adjustment_id`: Public ID of the adjustment, prefixed with `adj_`. Example: `adj_9`
 
 **Flag sets:** output
 
@@ -272,17 +272,17 @@ Returns the progress adjustments recorded for the user in a product, using curso
 Each adjustment identifies its author as either an administrator (`admin`) or an API credential (`credential`).
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
 
 **Examples:**
 
@@ -297,7 +297,7 @@ cademi users products progress adjustments list usr_42 prd_42 --limit 200 --raw 
 cademi users products progress adjustments list usr_42 prd_42 --all --jq '[.[] | {id}]'
 ```
 
-### `cademi users products progress lessons` — List lesson progress
+### `cademi users products progress lessons`: List lesson progress
 
 Related: `cademi content products`, `cademi users enrollments`
 
@@ -308,17 +308,17 @@ List lesson progress · `GET /api/v3/users/{user_id}/products/{product_id}/progr
 Returns the user's progress in each lesson of a product, using cursor-based pagination. Each entry identifies the lesson and its module by public ID.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
 
 **Examples:**
 

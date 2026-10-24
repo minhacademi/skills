@@ -8,5 +8,5 @@
 
 ## Related
 
-- https://cademi.dev/llms.txt — API, CLI and MCP documentation index
-- https://github.com/minhacademi/developers — issues and discussions for the API and the CLI
+- https://cademi.dev/llms.txt: API, CLI and MCP documentation index
+- https://github.com/minhacademi/developers: issues and discussions for the API and the CLI

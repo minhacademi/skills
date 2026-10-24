@@ -1,14 +1,14 @@
 ---
 name: cademi-cli-settings-definitions
-description: "Shared definitions: custom fields, tags, custom code and declarative configuration — `cademi settings` (18 commands)"
+description: "Shared definitions: custom fields, tags, custom code and declarative configuration (`cademi settings`, 18 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Settings Definitions Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Shared definitions: custom fields, tags, custom code and declarative configuration. The rest of `cademi settings` is in the sibling files below.
 
@@ -23,35 +23,35 @@ Live catalog for this file: `cademi commands settings --json` (offline, no crede
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **async**
-- `--wait` — When the API answers 202, wait for the operation to finish
-- `--wait-timeout <duration>` — Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
+- `--wait`: When the API answers 202, wait for the operation to finish
+- `--wait-timeout <duration>`: Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
-### `cademi settings configuration applications` — Apply a configuration plan
+### `cademi settings configuration applications`: Apply a configuration plan
 
 #### `cademi settings configuration applications create`
 
@@ -89,7 +89,7 @@ cademi settings configuration applications create -f plan_id=<plan_id> -f signat
 cademi settings configuration applications create --data @body.json --wait --json
 ```
 
-### `cademi settings configuration plans` — Create a configuration plan
+### `cademi settings configuration plans`: Create a configuration plan
 
 #### `cademi settings configuration plans create`
 
@@ -125,7 +125,7 @@ cademi settings configuration plans create --data '{"resources":[...]}' --json
 cademi settings configuration plans create --data @body.json --json
 ```
 
-### `cademi settings configuration validations` — Validate a configuration manifest
+### `cademi settings configuration validations`: Validate a configuration manifest
 
 #### `cademi settings configuration validations create`
 
@@ -161,12 +161,12 @@ cademi settings configuration validations create --data '{"resources":[...]}' --
 cademi settings configuration validations create --data @body.json --json
 ```
 
-### `cademi settings custom-code` — Manage custom scripts and styles
+### `cademi settings custom-code`: Manage custom scripts and styles
 
 Manage custom code applied to the platform's presentation.
 
 Related settings:
-- `cademi settings branding` — Controls the student-area visual identity and certificate logos. (`cademi settings branding get|update`)
+- `cademi settings branding`: Controls the student-area visual identity and certificate logos. (`cademi settings branding get|update`)
 
 #### `cademi settings custom-code create`
 
@@ -218,7 +218,7 @@ Moves the custom code block to the trash instead of permanently deleting it.
 A block in the trash can be restored with the update operation by sending `deleted: false`.
 
 **Arguments:**
-- `custom_code_id` — Public ID of the custom code, prefixed with `cc_`. Example: `cc_42`
+- `custom_code_id`: Public ID of the custom code, prefixed with `cc_`. Example: `cc_42`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -242,7 +242,7 @@ The block metadata is always returned. The `content` object (`header`, `body`, `
 The response includes an `ETag` representing the current revision. Send this value in the `If-Match` header when updating the block to avoid overwriting a newer version.
 
 **Arguments:**
-- `custom_code_id` — Public ID of the custom code, prefixed with `cc_`. Example: `cc_42`
+- `custom_code_id`: Public ID of the custom code, prefixed with `cc_`. Example: `cc_42`
 
 **Flag sets:** output
 
@@ -268,12 +268,12 @@ The `content` object is never included in this collection. To read a block's cod
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `--deleted` — When 'true', returns only items in the trash. Items in the trash are excluded by default.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `--deleted`: When 'true', returns only items in the trash. Items in the trash are excluded by default.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
 
 Legacy path: `cademi custom-code list`
 
@@ -303,12 +303,12 @@ Send `deleted: false` to restore a block from the trash.
 Send the `ETag` returned by the retrieve operation in the `If-Match` header to avoid overwriting changes made since the block was retrieved.
 
 **Arguments:**
-- `custom_code_id` — Public ID of the custom code, prefixed with `cc_`. Example: `cc_42`
+- `custom_code_id`: Public ID of the custom code, prefixed with `cc_`. Example: `cc_42`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -340,7 +340,7 @@ cademi settings custom-code update cc_42 -f content.body=<content.body> --if-mat
 cademi settings custom-code update cc_42 --data @body.json --json
 ```
 
-### `cademi settings custom-fields` — Define custom fields for student profiles
+### `cademi settings custom-fields`: Define custom fields for student profiles
 
 Manage field definitions and types. Read or update a student's values
 through users custom-fields.
@@ -387,7 +387,7 @@ Deletes a custom field definition.
 Only the definition is removed. Values that users have already filled in for this field are retained but are no longer returned with the user's custom field values.
 
 **Arguments:**
-- `custom_field_id` — Public ID of the custom field, prefixed with `cfd_`. Example: `cfd_7`
+- `custom_field_id`: Public ID of the custom field, prefixed with `cfd_`. Example: `cfd_7`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -409,7 +409,7 @@ Retrieves a custom field definition by its public ID.
 The response includes an `ETag` representing the current revision. Send this value in the `If-Match` header when updating the custom field to avoid overwriting a newer version.
 
 **Arguments:**
-- `custom_field_id` — Public ID of the custom field, prefixed with `cfd_`. Example: `cfd_7`
+- `custom_field_id`: Public ID of the custom field, prefixed with `cfd_`. Example: `cfd_7`
 
 **Flag sets:** output
 
@@ -452,12 +452,12 @@ The `type` of a field cannot be changed once users have filled in values for it.
 To avoid overwriting a newer version, send the `ETag` returned by the retrieve operation in the `If-Match` header.
 
 **Arguments:**
-- `custom_field_id` — Public ID of the custom field, prefixed with `cfd_`. Example: `cfd_7`
+- `custom_field_id`: Public ID of the custom field, prefixed with `cfd_`. Example: `cfd_7`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -482,7 +482,7 @@ cademi settings custom-fields update cfd_7 -f label=<label> --if-match '"<etag>"
 cademi settings custom-fields update cfd_7 --data @body.json --json
 ```
 
-### `cademi settings tags` — Define tags used to classify students
+### `cademi settings tags`: Define tags used to classify students
 
 Create and edit tag definitions here. Assign tags to a student through
 users tags; deliveries may also apply tags when granting access.
@@ -530,7 +530,7 @@ A tag used by an access rule cannot be deleted; the API returns `409 Conflict` w
 Replicated tags are read-only and cannot be deleted. Attempts to delete them return `403 Forbidden` with the `replica_readonly` error code.
 
 **Arguments:**
-- `tag_id` — Public ID of the tag, prefixed with `tag_`. Example: `tag_42`
+- `tag_id`: Public ID of the tag, prefixed with `tag_`. Example: `tag_42`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -552,7 +552,7 @@ Retrieves a tag by its public ID, including the number of users it is assigned t
 The response includes an `ETag` representing the current revision. Send this value in the `If-Match` header when updating the tag to avoid overwriting a newer version.
 
 **Arguments:**
-- `tag_id` — Public ID of the tag, prefixed with `tag_`. Example: `tag_42`
+- `tag_id`: Public ID of the tag, prefixed with `tag_`. Example: `tag_42`
 
 **Flag sets:** output
 
@@ -574,12 +574,12 @@ Lists the user tags of the account, sorted alphabetically by name by default. Ea
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (name, -name); API default: name
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (name, -name); API default: name
 
 Legacy path: `cademi tags list`
 
@@ -607,12 +607,12 @@ To avoid overwriting a newer version, send the `ETag` returned by the retrieve o
 Replicated tags are read-only. Attempts to update them return `403 Forbidden` with the `replica_readonly` error code.
 
 **Arguments:**
-- `tag_id` — Public ID of the tag, prefixed with `tag_`. Example: `tag_42`
+- `tag_id`: Public ID of the tag, prefixed with `tag_`. Example: `tag_42`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 

@@ -1,14 +1,14 @@
 ---
 name: cademi-cli-operations
-description: "Inspect and wait for asynchronous API operations — `cademi operations` (9 commands)"
+description: "Inspect and wait for asynchronous API operations (`cademi operations`, 9 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Operations Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Some writes return an operation instead of a completed result. Use wait
 with its operation ID, or --wait on commands that start asynchronous work.
@@ -26,28 +26,28 @@ Live catalog for this file: `cademi commands operations --json` (offline, no cre
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **async**
-- `--wait` — When the API answers 202, wait for the operation to finish
-- `--wait-timeout <duration>` — Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
+- `--wait`: When the API answers 202, wait for the operation to finish
+- `--wait-timeout <duration>`: Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
 
 ## Commands
 
@@ -58,7 +58,7 @@ Retrieve an operation · `GET /api/v3/operations/{operation_id}` · permission `
 Retrieves the status and progress of an asynchronous operation. Poll this endpoint until the operation reaches a terminal status: `succeeded`, `partially_succeeded`, `failed`, or `canceled`.
 
 **Arguments:**
-- `operation_id` — Public ID of the operation, prefixed with `op_`. Example: `op_01J8Z3`
+- `operation_id`: Public ID of the operation, prefixed with `op_`. Example: `op_01J8Z3`
 
 **Flag sets:** output, async
 
@@ -76,16 +76,16 @@ List operation items · `GET /api/v3/operations/{operation_id}/items` · permiss
 Lists the items of a batch operation in the order they were submitted, using cursor-based pagination.
 
 **Arguments:**
-- `operation_id` — Public ID of the operation, prefixed with `op_`. Example: `op_01J8Z3`
+- `operation_id`: Public ID of the operation, prefixed with `op_`. Example: `op_01J8Z3`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
 
 **Examples:**
 
@@ -111,14 +111,14 @@ The collection can be filtered by status and type and sorted by creation date.
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (created_at, -created_at)
-- `--status <string>` — Only operations with this status. (queued, running, succeeded, partially_succeeded, failed, canceled)
-- `--type <string>` — Only operations of this type. (credential.revoke, sandbox.reset, webhook.replay, product.publish_all, product.copy, module.publish_all, module.copy, email.send_test, lesson.copy, access.apply_all, sandbox.run_scenario, configuration.apply, delivery.apply_tags, sales_event.reprocess, diamond.reprocess_membership, import.analyze, import.process, export.generate)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (created_at, -created_at)
+- `--status <string>`: Only operations with this status. (queued, running, succeeded, partially_succeeded, failed, canceled)
+- `--type <string>`: Only operations of this type. (credential.revoke, sandbox.reset, webhook.replay, product.publish_all, product.copy, module.publish_all, module.copy, email.send_test, lesson.copy, access.apply_all, sandbox.run_scenario, configuration.apply, delivery.apply_tags, sales_event.reprocess, diamond.reprocess_membership, import.analyze, import.process, export.generate)
 
 **Examples:**
 
@@ -144,7 +144,7 @@ Cancellation is cooperative: a queued operation is canceled immediately, while a
 Setting `cancellation_requested` to `false` has no effect; a cancellation request cannot be withdrawn. Operations that have already reached a terminal status return `operation_not_cancelable`.
 
 **Arguments:**
-- `operation_id` — Public ID of the operation, prefixed with `op_`. Example: `op_01J8Z3`
+- `operation_id`: Public ID of the operation, prefixed with `op_`. Example: `op_01J8Z3`
 
 **Flag sets:** output, body, idempotency, async
 
@@ -186,9 +186,9 @@ The terminal operation is printed on stdout even when failed or canceled.
 **Flag sets:** output-basic
 
 **Flags:**
-- `--timeout <duration>` — Give up after a duration, e.g. 30s or 2m (default: no limit)
+- `--timeout <duration>`: Give up after a duration, e.g. 30s or 2m (default: no limit)
 
-### `cademi operations attempts` — Manage operations attempts
+### `cademi operations attempts`: Manage operations attempts
 
 #### `cademi operations attempts create <operation_id>`
 
@@ -201,7 +201,7 @@ Only operations in the `failed` status that still have recoverable items (items 
 Repeating the request with the same `Idempotency-Key` returns the same operation without resuming it again.
 
 **Arguments:**
-- `operation_id` — Public ID of the operation, prefixed with `op_`. Example: `op_01J8Z3`
+- `operation_id`: Public ID of the operation, prefixed with `op_`. Example: `op_01J8Z3`
 
 **Flag sets:** output, idempotency, async
 
@@ -219,8 +219,8 @@ Retrieve an operation attempt · `GET /api/v3/operations/{operation_id}/attempts
 Retrieves a single execution attempt of an operation, identified by its sequence number within that operation.
 
 **Arguments:**
-- `operation_id` — Public ID of the operation, prefixed with `op_`. Example: `op_01J8Z3`
-- `attempt_id` — Sequence number of the attempt within the operation. Example: `1`
+- `operation_id`: Public ID of the operation, prefixed with `op_`. Example: `op_01J8Z3`
+- `attempt_id`: Sequence number of the attempt within the operation. Example: `1`
 
 **Flag sets:** output
 
@@ -238,16 +238,16 @@ List operation attempts · `GET /api/v3/operations/{operation_id}/attempts` · p
 Lists the execution attempts of an operation, most recent first, using cursor-based pagination.
 
 **Arguments:**
-- `operation_id` — Public ID of the operation, prefixed with `op_`. Example: `op_01J8Z3`
+- `operation_id`: Public ID of the operation, prefixed with `op_`. Example: `op_01J8Z3`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
 
 **Examples:**
 
@@ -262,7 +262,7 @@ cademi operations attempts list op_01J8Z3 --limit 200 --raw --json
 cademi operations attempts list op_01J8Z3 --all --jq '[.[] | {id}]'
 ```
 
-### `cademi operations batches` — Create a batch operation
+### `cademi operations batches`: Create a batch operation
 
 #### `cademi operations batches create`
 

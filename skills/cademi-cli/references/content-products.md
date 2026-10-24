@@ -1,16 +1,16 @@
 ---
 name: cademi-cli-content-products
-description: "Manage products, modules, lessons and release schedules — `cademi content products` (15 commands)"
+description: "Manage products, modules, lessons and release schedules (`cademi content products`, 15 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Content Products Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
-> Domain `cademi content` — Organize showcases, products and learning content.
+> Domain `cademi content`: Organize showcases, products and learning content.
 
 Products belong to showcases and have a format: course, flix, blog, link or
 alias. Explore modules, lessons, exams and access-schedules from this group.
@@ -36,31 +36,31 @@ Live catalog for this file: `cademi commands content products --json` (offline, 
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **async**
-- `--wait` — When the API answers 202, wait for the operation to finish
-- `--wait-timeout <duration>` — Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
+- `--wait`: When the API answers 202, wait for the operation to finish
+- `--wait-timeout <duration>`: Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
@@ -109,7 +109,7 @@ Restoring the product does not restore its copies in replicated accounts.
 Replicated products are read-only and cannot be deleted; these requests return the `replica_readonly` error code.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -133,7 +133,7 @@ The `offer` object is included only when the credentials have the `products.read
 The response includes an `ETag` representing the current revision. Send this value in the `If-Match` header when updating the product to avoid overwriting a newer version.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output
 
@@ -157,17 +157,17 @@ If the credentials are limited to specific products, only those products are ret
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `--deleted` — When 'true', returns only items in the trash. Items in the trash are excluded by default.
-- `--external-id <string>` — Only products with this external ID.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--q <string>` — Text search term.
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--showcase-id <string>` — Only products in the showcase with this public ID.
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
-- `--status <string>` — Only products with this status. (published, draft, unlisted, hidden)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `--deleted`: When 'true', returns only items in the trash. Items in the trash are excluded by default.
+- `--external-id <string>`: Only products with this external ID.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--q <string>`: Text search term.
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--showcase-id <string>`: Only products in the showcase with this public ID.
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (id, -id)
+- `--status <string>`: Only products with this status. (published, draft, unlisted, hidden)
 
 Legacy path: `cademi products list`
 
@@ -195,7 +195,7 @@ Publishing also publishes the product's copies in replicated accounts. Replicate
 The response returns an operation. Track it through the URL in the `Location` header.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output, idempotency, async
 
@@ -223,12 +223,12 @@ Replicated products accept only `status`; any other field returns the `replica_r
 Send the current `ETag` value in the `If-Match` header to avoid overwriting a newer version.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -258,7 +258,7 @@ cademi content products update prd_42 -f deleted=false --if-match '"<etag>"' --j
 cademi content products update prd_42 --data @body.json --json
 ```
 
-### `cademi content products certificate template` — Manage content products certificate template
+### `cademi content products certificate template`: Manage content products certificate template
 
 Related: `cademi users certificates`
 
@@ -271,7 +271,7 @@ The certificate template has no ID of its own and is addressed through its produ
 The response includes an `ETag` representing the current revision of the product. Send this value in the `If-Match` header when replacing the template to avoid overwriting a newer version. Because the revision covers the whole product, other changes to the product also produce a new `ETag`.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output
 
@@ -295,12 +295,12 @@ The certificate criteria, QR code position, and font must use one of the support
 Send the `ETag` returned by the retrieve operation in the `If-Match` header to avoid overwriting a newer version. Templates of replicated products are read-only.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body (required):**
 
@@ -347,7 +347,7 @@ cademi content products certificate template update prd_42 -F 'criteria={...}' -
 cademi content products certificate template update prd_42 --data @body.json --json
 ```
 
-### `cademi content products certificate template previews` — Preview a certificate template
+### `cademi content products certificate template previews`: Preview a certificate template
 
 Related: `cademi users certificates`
 
@@ -362,7 +362,7 @@ A preview is not an issued certificate: it does not appear in certificate listin
 Templates of replicated products cannot be previewed.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output, idempotency
 
@@ -375,12 +375,12 @@ Legacy path: `cademi certificates template previews create`
 cademi content products certificate template previews create prd_42 --json
 ```
 
-### `cademi content products comments` — List product comments
+### `cademi content products comments`: List product comments
 
 Related: `cademi support comments`
 
 Related settings:
-- `cademi settings support comments` — Controls lesson comments, publication moderation, spam limits and the administrator inbox. (`cademi settings support comments get|update`)
+- `cademi settings support comments`: Controls lesson comments, publication moderation, spam limits and the administrator inbox. (`cademi settings support comments get|update`)
 
 #### `cademi content products comments list <product_id>`
 
@@ -391,21 +391,21 @@ Lists the top-level comments posted on a product's lessons. Replies are availabl
 The collection can be filtered by lesson, user, status, and a text search term. Results are paginated with a cursor and sorted by ID, newest first by default; use `sort=id` for oldest first.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--lesson-id <string>` — Only comments on the lesson with this public ID.
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--q <string>` — Text search term.
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
-- `--status <string>` — Only comments with this moderation status. (pending, approved, hidden)
-- `--user-id <string>` — Only comments written by the user with this public ID.
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--lesson-id <string>`: Only comments on the lesson with this public ID.
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--q <string>`: Text search term.
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (id, -id)
+- `--status <string>`: Only comments with this moderation status. (pending, approved, hidden)
+- `--user-id <string>`: Only comments written by the user with this public ID.
 
 Legacy path: `cademi products comments list`
 
@@ -422,7 +422,7 @@ cademi content products comments list prd_42 --limit 200 --raw --json
 cademi content products comments list prd_42 --all --jq '[.[] | {id}]'
 ```
 
-### `cademi content products content` — Inspect and order the product's top-level content
+### `cademi content products content`: Inspect and order the product's top-level content
 
 Lists root modules and lessons outside modules in display order. This is
 one level of the tree. Use modules content list to inspect a module.
@@ -436,17 +436,17 @@ List product content · `GET /api/v3/products/{product_id}/content` · permissio
 Lists the top-level content of a product: its root modules and the lessons that do not belong to any module, in their display order, using cursor-based pagination.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Opaque continuation token from page.next_cursor of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of entries per page; minimum: 1; maximum: 200; API default: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--status <string>` — Only content with this status. (published, draft)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Opaque continuation token from page.next_cursor of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of entries per page; minimum: 1; maximum: 200; API default: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--status <string>`: Only content with this status. (published, draft)
 
 Legacy path: `cademi products content list`
 
@@ -463,7 +463,7 @@ cademi content products content list prd_42 --limit 200 --raw --json
 cademi content products content list prd_42 --all --jq '[.[] | {id}]'
 ```
 
-### `cademi content products content order` — Reorder product content
+### `cademi content products content order`: Reorder product content
 
 Related: `cademi content products content list`, `cademi content products get`, `cademi guide reordering`
 
@@ -482,12 +482,12 @@ Discover the required set through GET /products/{product_id}/content, following 
 _Full description: `cademi commands content products content order update --json --jq '.commands[0].description'`_
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body (required):**
 
@@ -509,7 +509,7 @@ cademi content products content order update prd_42 -f 'ids[]=<value>' --json
 cademi content products content order update prd_42 --data @body.json --json
 ```
 
-### `cademi content products copies` — Copy a product
+### `cademi content products copies`: Copy a product
 
 Related: `cademi content showcases`, `cademi sales deliveries`, `cademi users enrollments`
 
@@ -524,7 +524,7 @@ The response returns an operation. Track it through the URL in the `Location` he
 Replicated products cannot be copied and replicated showcases cannot receive copies; these requests return the `replica_readonly` error code.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output, body, idempotency, async
 
@@ -549,7 +549,7 @@ cademi content products copies create prd_42 -f name=<name> -f showcase_id=<show
 cademi content products copies create prd_42 --data @body.json --wait --json
 ```
 
-### `cademi content products order` — Reorder showcase products
+### `cademi content products order`: Reorder showcase products
 
 Related: `cademi content showcases products list`, `cademi content showcases get`, `cademi guide reordering`
 
@@ -566,12 +566,12 @@ Send the showcase's current `ETag` value in the `If-Match` header to avoid overw
 _Full description: `cademi commands content products order update --json --jq '.commands[0].description'`_
 
 **Arguments:**
-- `showcase_id` — Public ID of the showcase, prefixed with `shw_`. Example: `shw_42`
+- `showcase_id`: Public ID of the showcase, prefixed with `shw_`. Example: `shw_42`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body (required):**
 
@@ -593,12 +593,12 @@ cademi content products order update shw_42 -f 'ids[]=<value>' --json
 cademi content products order update shw_42 --data @body.json --json
 ```
 
-### `cademi content products questions` — List questions for a product
+### `cademi content products questions`: List questions for a product
 
 Related: `cademi support questions`
 
 Related settings:
-- `cademi settings support questions` — Controls lesson questions, publication moderation and the administrator inbox. (`cademi settings support questions get|update`)
+- `cademi settings support questions`: Controls lesson questions, publication moderation and the administrator inbox. (`cademi settings support questions get|update`)
 
 #### `cademi content products questions list <product_id>`
 
@@ -609,21 +609,21 @@ Returns the questions users have asked in the lessons of a product. Results are 
 The `has_draft` field is included only when the credentials also have the `questions.read_private` permission.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--answered <string>` — When 'true', only answered questions; when 'false', only questions without an answer. (true, false)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--lesson-id <string>` — Only questions asked in the lesson with this public ID.
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--q <string>` — Text search term.
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
-- `--user-id <string>` — Only questions asked by the user with this public ID.
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--answered <string>`: When 'true', only answered questions; when 'false', only questions without an answer. (true, false)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--lesson-id <string>`: Only questions asked in the lesson with this public ID.
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--q <string>`: Text search term.
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (id, -id)
+- `--user-id <string>`: Only questions asked by the user with this public ID.
 
 Legacy path: `cademi products questions list`
 

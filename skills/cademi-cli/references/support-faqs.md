@@ -1,21 +1,21 @@
 ---
 name: cademi-cli-support-faqs
-description: "Maintain frequently asked questions — `cademi support faqs` (6 commands)"
+description: "Maintain frequently asked questions (`cademi support faqs`, 6 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Support Faqs Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
-> Domain `cademi support` — Handle student comments, questions and support tickets.
+> Domain `cademi support`: Handle student comments, questions and support tickets.
 
 Manage reusable answers and their display order in the student area.
 
 **Related settings:**
-- `cademi settings support faq` — Controls whether the FAQ page is available and the title and guidance shown above its answers. (`cademi settings support faq get|update`)
+- `cademi settings support faq`: Controls whether the FAQ page is available and the title and guidance shown above its answers. (`cademi settings support faq get|update`)
 
 **See also in this domain:** `references/support.md`, `references/support-comments.md`, `references/support-questions.md`, `references/support-tickets.md`
 
@@ -26,22 +26,22 @@ Live catalog for this file: `cademi commands support faqs --json` (offline, no c
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
@@ -88,7 +88,7 @@ Delete an FAQ entry · `DELETE /api/v3/support/faqs/{faq_id}` · permission `faq
 Deletes an FAQ entry. Deleted entries no longer appear in the collection and can no longer be retrieved.
 
 **Arguments:**
-- `faq_id` — Public ID of the faq, prefixed with `faq_`. Example: `faq_9`
+- `faq_id`: Public ID of the faq, prefixed with `faq_`. Example: `faq_9`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -110,7 +110,7 @@ Retrieves an FAQ entry by its public ID, including the answer content in `answer
 The response includes an `ETag` representing the current revision. Send this value in the `If-Match` header when updating the entry to avoid overwriting a newer version.
 
 **Arguments:**
-- `faq_id` — Public ID of the faq, prefixed with `faq_`. Example: `faq_9`
+- `faq_id`: Public ID of the faq, prefixed with `faq_`. Example: `faq_9`
 
 **Flag sets:** output
 
@@ -136,8 +136,8 @@ Collection items do not include the answer. Use the retrieve operation to obtain
 **Flag sets:** output
 
 **Flags:**
-- `--group <string>` — Only entries in the group with this name.
-- `--status <string>` — Only entries with this status. (draft, published)
+- `--group <string>`: Only entries in the group with this name.
+- `--status <string>`: Only entries with this status. (draft, published)
 
 Legacy path: `cademi faqs list`
 
@@ -159,12 +159,12 @@ Setting `position` moves the entry within its group; positions start at 1. When 
 To avoid overwriting a newer version, send the `ETag` returned by the retrieve operation in the `If-Match` header. The header is optional; when it is omitted, the update is applied to the current revision.
 
 **Arguments:**
-- `faq_id` — Public ID of the faq, prefixed with `faq_`. Example: `faq_9`
+- `faq_id`: Public ID of the faq, prefixed with `faq_`. Example: `faq_9`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -190,10 +190,10 @@ cademi support faqs update faq_9 -f group=<group> --if-match '"<etag>"' --json
 cademi support faqs update faq_9 --data @body.json --json
 ```
 
-### `cademi support faqs order` — Reorder FAQ entries
+### `cademi support faqs order`: Reorder FAQ entries
 
 Related settings:
-- `cademi settings support faq` — Controls whether the FAQ page is available and the title and guidance shown above its answers. (`cademi settings support faq get|update`)
+- `cademi settings support faq`: Controls whether the FAQ page is available and the title and guidance shown above its answers. (`cademi settings support faq get|update`)
 
 #### `cademi support faqs order update`
 

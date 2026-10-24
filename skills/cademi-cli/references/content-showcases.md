@@ -1,16 +1,16 @@
 ---
 name: cademi-cli-content-showcases
-description: "Organize products in showcases and showcase groups — `cademi content showcases` (8 commands)"
+description: "Organize products in showcases and showcase groups (`cademi content showcases`, 8 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Content Showcases Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
-> Domain `cademi content` — Organize showcases, products and learning content.
+> Domain `cademi content`: Organize showcases, products and learning content.
 
 Groups contain showcases; showcases contain products. Groups are top-level.
 Lists return top-level items by default; use --parent-id to explore a group.
@@ -26,27 +26,27 @@ Live catalog for this file: `cademi commands content showcases --json` (offline,
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
@@ -92,7 +92,7 @@ Moves the showcase to the trash. Its child showcases, the products in the showca
 Replicated showcases are read-only and cannot be deleted. Attempts to delete them return the `replica_readonly` error code.
 
 **Arguments:**
-- `showcase_id` — Public ID of the showcase, prefixed with `shw_`. Example: `shw_42`
+- `showcase_id`: Public ID of the showcase, prefixed with `shw_`. Example: `shw_42`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -116,7 +116,7 @@ The response includes an `ETag` representing the current revision. Send this val
 Showcases that do not exist or are not accessible with the current credentials return `404 Not Found`.
 
 **Arguments:**
-- `showcase_id` — Public ID of the showcase, prefixed with `shw_`. Example: `shw_42`
+- `showcase_id`: Public ID of the showcase, prefixed with `shw_`. Example: `shw_42`
 
 **Flag sets:** output
 
@@ -142,17 +142,17 @@ Credentials limited to specific showcases only see those showcases.
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `--deleted` — When 'true', returns only items in the trash. Items in the trash are excluded by default.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--kind <string>` — Only groups or only showcases. (group, showcase)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200; API default: 50
-- `--parent-id <string>` — Only showcases inside the group with this public ID. Without it, only top-level items are returned.
-- `--q <string>` — Text search term.
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (position, -position)
-- `--status <string>` — Only items with this status. (published, draft, unlisted, hidden)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `--deleted`: When 'true', returns only items in the trash. Items in the trash are excluded by default.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--kind <string>`: Only groups or only showcases. (group, showcase)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200; API default: 50
+- `--parent-id <string>`: Only showcases inside the group with this public ID. Without it, only top-level items are returned.
+- `--q <string>`: Text search term.
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (position, -position)
+- `--status <string>`: Only items with this status. (published, draft, unlisted, hidden)
 
 Legacy path: `cademi showcases list`
 
@@ -184,12 +184,12 @@ Replicated showcases accept only `status`; a request that includes any other fie
 _Full description: `cademi commands content showcases update --json --jq '.commands[0].description'`_
 
 **Arguments:**
-- `showcase_id` — Public ID of the showcase, prefixed with `shw_`. Example: `shw_42`
+- `showcase_id`: Public ID of the showcase, prefixed with `shw_`. Example: `shw_42`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -216,7 +216,7 @@ cademi content showcases update shw_42 -f deleted=false --if-match '"<etag>"' --
 cademi content showcases update shw_42 --data @body.json --json
 ```
 
-### `cademi content showcases copies` — Duplicate a showcase
+### `cademi content showcases copies`: Duplicate a showcase
 
 Related: `cademi content products`
 
@@ -227,7 +227,7 @@ Duplicate a showcase · `POST /api/v3/showcases/{showcase_id}/copies` · permiss
 Creates a copy of the showcase in the same account. Copying a showcase to a different account is not supported.
 
 **Arguments:**
-- `showcase_id` — Public ID of the showcase, prefixed with `shw_`. Example: `shw_42`
+- `showcase_id`: Public ID of the showcase, prefixed with `shw_`. Example: `shw_42`
 
 **Flag sets:** output, idempotency
 
@@ -240,7 +240,7 @@ Legacy path: `cademi showcases copies create`
 cademi content showcases copies create shw_42 --json
 ```
 
-### `cademi content showcases order` — Reorder showcases
+### `cademi content showcases order`: Reorder showcases
 
 Related: `cademi content showcases list`, `cademi guide reordering`
 
@@ -279,7 +279,7 @@ cademi content showcases order update -f 'ids[]=<value>' --json
 cademi content showcases order update --data @body.json --json
 ```
 
-### `cademi content showcases products` — List showcase products
+### `cademi content showcases products`: List showcase products
 
 Related: `cademi content products`
 
@@ -292,17 +292,17 @@ Lists the products in a showcase in summary form, ordered by position and pagina
 Credentials limited to specific products only see those products.
 
 **Arguments:**
-- `showcase_id` — Public ID of the showcase, prefixed with `shw_`. Example: `shw_42`
+- `showcase_id`: Public ID of the showcase, prefixed with `shw_`. Example: `shw_42`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200; API default: 50
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (position, -position)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200; API default: 50
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (position, -position)
 
 Legacy path: `cademi showcases products list`
 

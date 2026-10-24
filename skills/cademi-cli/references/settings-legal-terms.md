@@ -1,16 +1,16 @@
 ---
 name: cademi-cli-settings-legal-terms
-description: "Manage legal terms presented to students — `cademi settings legal-terms` (6 commands)"
+description: "Manage legal terms presented to students (`cademi settings legal-terms`, 6 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Settings Legal Terms Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
-> Domain `cademi settings` — Configure platform behavior, appearance and shared definitions.
+> Domain `cademi settings`: Configure platform behavior, appearance and shared definitions.
 
 Define legal terms here. A student's recorded acceptances are available
 through users term-acceptances.
@@ -26,24 +26,24 @@ Live catalog for this file: `cademi commands settings legal-terms --json` (offli
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 ## Commands
 
@@ -93,7 +93,7 @@ The legal term ID is derived from its scope: `trm_platform` for the platform ter
 The response includes an `ETag` representing the current revision. Send this value in the `If-Match` header when updating the legal term to avoid overwriting a newer version.
 
 **Arguments:**
-- `legal_term_id` — Public ID of the legal term, prefixed with `trm_`. Example: `trm_platform`
+- `legal_term_id`: Public ID of the legal term, prefixed with `trm_`. Example: `trm_platform`
 
 **Flag sets:** output
 
@@ -119,8 +119,8 @@ Returns all matching legal terms in a single response while preserving the stand
 **Flag sets:** output
 
 **Flags:**
-- `--product-id <string>` — Only the term of the product with this public ID.
-- `--scope <string>` — Only the platform term or only product terms. (platform, product)
+- `--product-id <string>`: Only the term of the product with this public ID.
+- `--scope <string>`: Only the platform term or only product terms. (platform, product)
 
 Legacy path: `cademi legal-terms list`
 
@@ -142,12 +142,12 @@ Changing the text does not invalidate acceptances already recorded, and users ar
 Send the `ETag` returned by the retrieve operation in the `If-Match` header to avoid overwriting a newer version. Legal terms of replicated accounts and replicated products are read-only.
 
 **Arguments:**
-- `legal_term_id` — Public ID of the legal term, prefixed with `trm_`. Example: `trm_platform`
+- `legal_term_id`: Public ID of the legal term, prefixed with `trm_`. Example: `trm_platform`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body (required):**
 
@@ -170,7 +170,7 @@ cademi settings legal-terms update trm_platform -F 'body={...}' --data '{"body.b
 cademi settings legal-terms update trm_platform --data @body.json --json
 ```
 
-### `cademi settings legal-terms acceptances` — Manage settings legal-terms acceptances
+### `cademi settings legal-terms acceptances`: Manage settings legal-terms acceptances
 
 #### `cademi settings legal-terms acceptances get <legal_term_id> <term_acceptance_id>`
 
@@ -181,8 +181,8 @@ Retrieves an acceptance of a legal term by its public ID. This is the canonical 
 The `proof` object, containing the IP address and user agent recorded at acceptance, is included only when the credentials have the `legal_terms.read_proof` permission. Otherwise, it is omitted from the response.
 
 **Arguments:**
-- `legal_term_id` — Public ID of the legal term, prefixed with `trm_`. Example: `trm_platform`
-- `term_acceptance_id` — Public ID of the term acceptance, prefixed with `tac_`. Example: `tac_9`
+- `legal_term_id`: Public ID of the legal term, prefixed with `trm_`. Example: `trm_platform`
+- `term_acceptance_id`: Public ID of the term acceptance, prefixed with `tac_`. Example: `tac_9`
 
 **Flag sets:** output
 
@@ -206,20 +206,20 @@ The collection can be filtered by user and by acceptance date. When the credenti
 The `proof` object is included only when the credentials have the `legal_terms.read_proof` permission.
 
 **Arguments:**
-- `legal_term_id` — Public ID of the legal term, prefixed with `trm_`. Example: `trm_platform`
+- `legal_term_id`: Public ID of the legal term, prefixed with `trm_`. Example: `trm_platform`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--accepted-after <string>` — Only items accepted after this date and time (ISO 8601).
-- `--accepted-before <string>` — Only items accepted before this date and time (ISO 8601).
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
-- `--user-id <string>` — Only acceptances by the user with this public ID.
+- `--accepted-after <string>`: Only items accepted after this date and time (ISO 8601).
+- `--accepted-before <string>`: Only items accepted before this date and time (ISO 8601).
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (id, -id)
+- `--user-id <string>`: Only acceptances by the user with this public ID.
 
 Legacy path: `cademi legal-terms acceptances list`
 

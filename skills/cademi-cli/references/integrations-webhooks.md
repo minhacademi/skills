@@ -1,16 +1,16 @@
 ---
 name: cademi-cli-integrations-webhooks
-description: "Configure webhook endpoints and inspect notification delivery — `cademi integrations webhooks` (13 commands)"
+description: "Configure webhook endpoints and inspect notification delivery (`cademi integrations webhooks`, 13 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Integrations Webhooks Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
-> Domain `cademi integrations` — Manage API credentials, events and webhook delivery.
+> Domain `cademi integrations`: Manage API credentials, events and webhook delivery.
 
 Webhooks send account events to external endpoints. deliveries records
 outgoing notifications and their attempts; replays request event replay.
@@ -27,31 +27,31 @@ Live catalog for this file: `cademi commands integrations webhooks --json` (offl
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **async**
-- `--wait` — When the API answers 202, wait for the operation to finish
-- `--wait-timeout <duration>` — Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
+- `--wait`: When the API answers 202, wait for the operation to finish
+- `--wait-timeout <duration>`: Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
@@ -103,7 +103,7 @@ Deletes a webhook endpoint so that it no longer receives events.
 Deliveries that are still pending are canceled. Deliveries that have already completed are not affected.
 
 **Arguments:**
-- `webhook_id` — Public ID of the webhook, prefixed with `whk_`. Example: `whk_01J8Z3`
+- `webhook_id`: Public ID of the webhook, prefixed with `whk_`. Example: `whk_01J8Z3`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -125,7 +125,7 @@ Retrieves a webhook endpoint, including its current `revision` and a `health` su
 The response includes an `ETag` representing the current revision. Send this value in the `If-Match` header when updating the endpoint to avoid overwriting a newer version.
 
 **Arguments:**
-- `webhook_id` — Public ID of the webhook, prefixed with `whk_`. Example: `whk_01J8Z3`
+- `webhook_id`: Public ID of the webhook, prefixed with `whk_`. Example: `whk_01J8Z3`
 
 **Flag sets:** output
 
@@ -147,14 +147,14 @@ Returns the webhook endpoints of the current account, paginated by cursor. The c
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `--event-type <string>` — Only endpoints subscribed to this event type.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (created_at, -created_at)
-- `--status <string>` — Only endpoints with this status. (active, inactive)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `--event-type <string>`: Only endpoints subscribed to this event type.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (created_at, -created_at)
+- `--status <string>`: Only endpoints with this status. (active, inactive)
 
 Legacy path: `cademi webhooks list`
 
@@ -184,12 +184,12 @@ Changing `payload_detail` to `full`, or changing the event types of an endpoint 
 _Full description: `cademi commands integrations webhooks update --json --jq '.commands[0].description'`_
 
 **Arguments:**
-- `webhook_id` — Public ID of the webhook, prefixed with `whk_`. Example: `whk_01J8Z3`
+- `webhook_id`: Public ID of the webhook, prefixed with `whk_`. Example: `whk_01J8Z3`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body (required):**
 
@@ -217,7 +217,7 @@ cademi integrations webhooks update whk_01J8Z3 -f description=<description> --if
 cademi integrations webhooks update whk_01J8Z3 --data @body.json --json
 ```
 
-### `cademi integrations webhooks deliveries` — Inspect outgoing webhook deliveries and retry attempts
+### `cademi integrations webhooks deliveries`: Inspect outgoing webhook deliveries and retry attempts
 
 These deliveries are outgoing HTTP notifications. Inspect attempts for
 delivery results; creating an attempt requests another delivery attempt.
@@ -232,8 +232,8 @@ Retrieve a webhook delivery · `GET /api/v3/webhooks/{webhook_id}/deliveries/{we
 Retrieves a webhook delivery, including `attempts_count`, `next_attempt_at`, and its most recent attempt.
 
 **Arguments:**
-- `webhook_id` — Public ID of the webhook, prefixed with `whk_`. Example: `whk_01J8Z3`
-- `webhook_delivery_id` — Public ID of the webhook delivery, prefixed with `whd_`. Example: `whd_01J8Z3`
+- `webhook_id`: Public ID of the webhook, prefixed with `whk_`. Example: `whk_01J8Z3`
+- `webhook_delivery_id`: Public ID of the webhook delivery, prefixed with `whd_`. Example: `whd_01J8Z3`
 
 **Flag sets:** output
 
@@ -253,22 +253,22 @@ List deliveries for a webhook endpoint · `GET /api/v3/webhooks/{webhook_id}/del
 Returns the deliveries of a webhook endpoint, paginated by cursor. The collection can be filtered by status, event ID, event type, and creation time. Deliveries are retained for at least 60 days after they are created, together with their attempts. A delivery that has not reached a final status (`pending` or `in_progress`) is never removed.
 
 **Arguments:**
-- `webhook_id` — Public ID of the webhook, prefixed with `whk_`. Example: `whk_01J8Z3`
+- `webhook_id`: Public ID of the webhook, prefixed with `whk_`. Example: `whk_01J8Z3`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--created-after <string>` — Only items created after this date and time (ISO 8601).
-- `--created-before <string>` — Only items created before this date and time (ISO 8601).
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `--event-id <string>` — Only deliveries of the event with this public ID.
-- `--event-type <string>` — Only deliveries of events of this type.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (created_at, -created_at)
-- `--status <string>` — Only deliveries with this status. (pending, in_progress, delivered, failed, dead, canceled)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--created-after <string>`: Only items created after this date and time (ISO 8601).
+- `--created-before <string>`: Only items created before this date and time (ISO 8601).
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `--event-id <string>`: Only deliveries of the event with this public ID.
+- `--event-type <string>`: Only deliveries of events of this type.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (created_at, -created_at)
+- `--status <string>`: Only deliveries with this status. (pending, in_progress, delivered, failed, dead, canceled)
 
 Legacy path: `cademi webhooks deliveries list`
 
@@ -294,17 +294,17 @@ Returns webhook deliveries across all webhook endpoints accessible with the curr
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--created-after <string>` — Only items created after this date and time (ISO 8601).
-- `--created-before <string>` — Only items created before this date and time (ISO 8601).
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `--event-type <string>` — Only deliveries of events of this type.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (created_at, -created_at)
-- `--status <string>` — Only deliveries with this status. (pending, in_progress, delivered, failed, dead, canceled)
-- `--webhook-id <string>` — Only deliveries to the webhook endpoint with this public ID.
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--created-after <string>`: Only items created after this date and time (ISO 8601).
+- `--created-before <string>`: Only items created before this date and time (ISO 8601).
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `--event-type <string>`: Only deliveries of events of this type.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (created_at, -created_at)
+- `--status <string>`: Only deliveries with this status. (pending, in_progress, delivered, failed, dead, canceled)
+- `--webhook-id <string>`: Only deliveries to the webhook endpoint with this public ID.
 
 Legacy path: `cademi webhooks deliveries list-all`
 
@@ -321,7 +321,7 @@ cademi integrations webhooks deliveries list-all --limit 200 --raw --json
 cademi integrations webhooks deliveries list-all --all --jq '[.[] | {id}]'
 ```
 
-### `cademi integrations webhooks deliveries attempts` — Manage integrations webhooks deliveries attempts
+### `cademi integrations webhooks deliveries attempts`: Manage integrations webhooks deliveries attempts
 
 Related: `cademi integrations events`
 
@@ -334,8 +334,8 @@ Manually resends a completed webhook delivery. Only deliveries with status `deli
 The destination URL is validated again before the delivery is queued. The delivery keeps the same event ID, and the new attempt is recorded when it is actually sent; previous attempts are preserved.
 
 **Arguments:**
-- `webhook_id` — Public ID of the webhook, prefixed with `whk_`. Example: `whk_01J8Z3`
-- `webhook_delivery_id` — Public ID of the webhook delivery, prefixed with `whd_`. Example: `whd_01J8Z3`
+- `webhook_id`: Public ID of the webhook, prefixed with `whk_`. Example: `whk_01J8Z3`
+- `webhook_delivery_id`: Public ID of the webhook delivery, prefixed with `whd_`. Example: `whd_01J8Z3`
 
 **Flag sets:** output, idempotency
 
@@ -355,9 +355,9 @@ Retrieve a delivery attempt · `GET /api/v3/webhooks/{webhook_id}/deliveries/{we
 Retrieves a single attempt of a webhook delivery. The response excerpt captured from the receiving endpoint is masked.
 
 **Arguments:**
-- `webhook_id` — Public ID of the webhook, prefixed with `whk_`. Example: `whk_01J8Z3`
-- `webhook_delivery_id` — Public ID of the webhook delivery, prefixed with `whd_`. Example: `whd_01J8Z3`
-- `attempt_id` — Public ID of the attempt, prefixed with `wha_`. Example: `wha_42`
+- `webhook_id`: Public ID of the webhook, prefixed with `whk_`. Example: `whk_01J8Z3`
+- `webhook_delivery_id`: Public ID of the webhook delivery, prefixed with `whd_`. Example: `whd_01J8Z3`
+- `attempt_id`: Public ID of the attempt, prefixed with `wha_`. Example: `wha_42`
 
 **Flag sets:** output
 
@@ -377,8 +377,8 @@ List delivery attempts · `GET /api/v3/webhooks/{webhook_id}/deliveries/{webhook
 Returns every attempt of a webhook delivery in a single response, ordered by attempt `number`, together with the time of the next scheduled attempt. Response excerpts captured from the receiving endpoint are masked. Attempts are retained with their delivery, for at least 60 days after the delivery is created.
 
 **Arguments:**
-- `webhook_id` — Public ID of the webhook, prefixed with `whk_`. Example: `whk_01J8Z3`
-- `webhook_delivery_id` — Public ID of the webhook delivery, prefixed with `whd_`. Example: `whd_01J8Z3`
+- `webhook_id`: Public ID of the webhook, prefixed with `whk_`. Example: `whk_01J8Z3`
+- `webhook_delivery_id`: Public ID of the webhook delivery, prefixed with `whd_`. Example: `whd_01J8Z3`
 
 **Flag sets:** output
 
@@ -391,7 +391,7 @@ Legacy path: `cademi webhooks deliveries attempts list`
 cademi integrations webhooks deliveries attempts list whk_01J8Z3 whd_01J8Z3 --json
 ```
 
-### `cademi integrations webhooks replays` — Replay webhook events
+### `cademi integrations webhooks replays`: Replay webhook events
 
 Related: `cademi integrations events`
 
@@ -406,7 +406,7 @@ The replay is processed asynchronously as an operation with one item per event. 
 A replay adds new attempts to the existing deliveries; it never creates new deliveries. The request is rejected if no eligible events match the selection.
 
 **Arguments:**
-- `webhook_id` — Public ID of the webhook, prefixed with `whk_`. Example: `whk_01J8Z3`
+- `webhook_id`: Public ID of the webhook, prefixed with `whk_`. Example: `whk_01J8Z3`
 
 **Flag sets:** output, body, idempotency, async
 
@@ -433,7 +433,7 @@ cademi integrations webhooks replays create whk_01J8Z3 -f occurred_after=<occurr
 cademi integrations webhooks replays create whk_01J8Z3 --data @body.json --wait --json
 ```
 
-### `cademi integrations webhooks secret-rotations` — Rotate a webhook signing secret
+### `cademi integrations webhooks secret-rotations`: Rotate a webhook signing secret
 
 Related: `cademi integrations events`
 
@@ -448,7 +448,7 @@ The previous secret remains valid for `overlap_hours` (24 hours by default, up t
 The new secret is returned only once. Retrying the request with the same `Idempotency-Key` does not return the secret again.
 
 **Arguments:**
-- `webhook_id` — Public ID of the webhook, prefixed with `whk_`. Example: `whk_01J8Z3`
+- `webhook_id`: Public ID of the webhook, prefixed with `whk_`. Example: `whk_01J8Z3`
 
 **Flag sets:** output, body, idempotency
 

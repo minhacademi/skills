@@ -1,16 +1,16 @@
 ---
 name: cademi-cli-users-imports
-description: "Import student records and inspect import processing — `cademi users imports` (10 commands)"
+description: "Import student records and inspect import processing (`cademi users imports`, 10 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Users Imports Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
-> Domain `cademi users` — Manage students, enrollments and learning progress.
+> Domain `cademi users`: Manage students, enrollments and learning progress.
 
 Imports create or update student data in bulk. Inspect the operation's
 required input and processing results before retrying a failed import.
@@ -26,31 +26,31 @@ Live catalog for this file: `cademi commands users imports --json` (offline, no 
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **async**
-- `--wait` — When the API answers 202, wait for the operation to finish
-- `--wait-timeout <duration>` — Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
+- `--wait`: When the API answers 202, wait for the operation to finish
+- `--wait-timeout <duration>`: Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
@@ -97,7 +97,7 @@ Moves the import to the trash. Only imports that have not been processed can be 
 Deleting an import does not undo its effects: rows already queued for processing continue, and enrollments already granted remain in place.
 
 **Arguments:**
-- `import_id` — Public ID of the import, prefixed with `imp_`. Example: `imp_42`
+- `import_id`: Public ID of the import, prefixed with `imp_`. Example: `imp_42`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -121,7 +121,7 @@ File-level errors, such as an unreadable spreadsheet or a missing required colum
 The response includes an `ETag` representing the current revision. Send this value in the `If-Match` header when updating the import to avoid overwriting a newer version.
 
 **Arguments:**
-- `import_id` — Public ID of the import, prefixed with `imp_`. Example: `imp_42`
+- `import_id`: Public ID of the import, prefixed with `imp_`. Example: `imp_42`
 
 **Flag sets:** output
 
@@ -147,17 +147,17 @@ The `rows` summary of each import reflects its analysis. To follow the processin
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--created-after <string>` — Only items created after this date and time (ISO 8601).
-- `--created-before <string>` — Only items created before this date and time (ISO 8601).
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `--deleted` — When 'true', returns only items in the trash. Items in the trash are excluded by default.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
-- `--status <string>` — Only imports with this status. (pending, analyzed, processing, processed, failed)
-- `--type <string>` — Only imports of this type.
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--created-after <string>`: Only items created after this date and time (ISO 8601).
+- `--created-before <string>`: Only items created before this date and time (ISO 8601).
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `--deleted`: When 'true', returns only items in the trash. Items in the trash are excluded by default.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (id, -id)
+- `--status <string>`: Only imports with this status. (pending, analyzed, processing, processed, failed)
+- `--type <string>`: Only imports of this type.
 
 Legacy path: `cademi imports list`
 
@@ -185,12 +185,12 @@ The duplicate policy can only be changed before the import is processed.
 Send the `ETag` returned by the retrieve operation in the `If-Match` header to avoid overwriting a newer version.
 
 **Arguments:**
-- `import_id` — Public ID of the import, prefixed with `imp_`. Example: `imp_42`
+- `import_id`: Public ID of the import, prefixed with `imp_`. Example: `imp_42`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body (required):**
 
@@ -213,7 +213,7 @@ cademi users imports update imp_42 -f deleted=false --if-match '"<etag>"' --json
 cademi users imports update imp_42 --data @body.json --json
 ```
 
-### `cademi users imports analyses` — Analyze an import
+### `cademi users imports analyses`: Analyze an import
 
 Related: `cademi files`, `cademi operations`
 
@@ -226,7 +226,7 @@ Starts an asynchronous analysis of the import spreadsheet and returns the operat
 Requires the `imports.analyze` permission. An import can be analyzed again before it is processed; the new analysis replaces the previous one.
 
 **Arguments:**
-- `import_id` — Public ID of the import, prefixed with `imp_`. Example: `imp_42`
+- `import_id`: Public ID of the import, prefixed with `imp_`. Example: `imp_42`
 
 **Flag sets:** output, idempotency, async
 
@@ -239,7 +239,7 @@ Legacy path: `cademi imports analyses create`
 cademi users imports analyses create imp_42 --wait --json
 ```
 
-### `cademi users imports processing-attempts` — Manage users imports processing-attempts
+### `cademi users imports processing-attempts`: Manage users imports processing-attempts
 
 Related: `cademi files`, `cademi operations`
 
@@ -256,7 +256,7 @@ The import must have a completed analysis with no errors. Use `mode=initial` (de
 The first import of an account is released by the Cademí team: until the account has a processed import, `mode=initial` is rejected with `409`, the `feature_disabled` error code, and `details[].reason` set to `first_import_requires_release`. Contact support to release it; later imports are processed normally.
 
 **Arguments:**
-- `import_id` — Public ID of the import, prefixed with `imp_`. Example: `imp_42`
+- `import_id`: Public ID of the import, prefixed with `imp_`. Example: `imp_42`
 
 **Flag sets:** output, body, idempotency, async
 
@@ -289,8 +289,8 @@ Retrieves a processing attempt of the specified import. An attempt that belongs 
 If the attempt failed, `error` explains why the rows could not be queued. Errors for individual rows are reported by the list import rows operation.
 
 **Arguments:**
-- `import_id` — Public ID of the import, prefixed with `imp_`. Example: `imp_42`
-- `attempt_id` — Public ID of the attempt, prefixed with `pat_`. Example: `pat_7`
+- `import_id`: Public ID of the import, prefixed with `imp_`. Example: `imp_42`
+- `attempt_id`: Public ID of the attempt, prefixed with `pat_`. Example: `pat_7`
 
 **Flag sets:** output
 
@@ -312,7 +312,7 @@ Returns the processing attempts requested through the API for the specified impo
 Returns all attempts in a single response while preserving the standard collection response format.
 
 **Arguments:**
-- `import_id` — Public ID of the import, prefixed with `imp_`. Example: `imp_42`
+- `import_id`: Public ID of the import, prefixed with `imp_`. Example: `imp_42`
 
 **Flag sets:** output
 
@@ -325,7 +325,7 @@ Legacy path: `cademi imports processing-attempts list`
 cademi users imports processing-attempts list imp_42 --json
 ```
 
-### `cademi users imports rows` — List import rows
+### `cademi users imports rows`: List import rows
 
 Related: `cademi files`, `cademi operations`
 
@@ -340,19 +340,19 @@ The `email` of each row is returned only when the current credentials also have 
 The `processing` object reports the processing state of each row after a processing attempt has queued it.
 
 **Arguments:**
-- `import_id` — Public ID of the import, prefixed with `imp_`. Example: `imp_42`
+- `import_id`: Public ID of the import, prefixed with `imp_`. Example: `imp_42`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--q <string>` — Text search term.
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (row_number, -row_number)
-- `--status <string>` — Only rows with this status. (ready, not_ready, ignored)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--q <string>`: Text search term.
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (row_number, -row_number)
+- `--status <string>`: Only rows with this status. (ready, not_ready, ignored)
 
 Legacy path: `cademi imports rows list`
 

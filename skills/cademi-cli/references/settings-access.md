@@ -1,14 +1,14 @@
 ---
 name: cademi-cli-settings-access
-description: "Sign-in, security, registration and student profile settings — `cademi settings` (8 commands)"
+description: "Sign-in, security, registration and student profile settings (`cademi settings`, 8 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Settings Access Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Sign-in, security, registration and student profile settings. The rest of `cademi settings` is in the sibling files below.
 
@@ -23,23 +23,23 @@ Live catalog for this file: `cademi commands settings --json` (offline, no crede
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 ## Commands
 
-### `cademi settings authentication` — Authentication settings
+### `cademi settings authentication`: Authentication settings
 
 Controls student passwords, login protection, Google sign-in, device limits and access-screen appearance.
 
@@ -77,7 +77,7 @@ To avoid overwriting a newer version, send the `ETag` returned by the retrieve o
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -129,7 +129,7 @@ cademi settings authentication update -f access_screens.accent_color=<access_scr
 cademi settings authentication update --data @body.json --json
 ```
 
-### `cademi settings registration` — Registration settings
+### `cademi settings registration`: Registration settings
 
 Controls free sign-up channels, the delivery granted to new students, allowed email domains and document requirements.
 
@@ -165,7 +165,7 @@ To avoid overwriting a newer version, send the `ETag` returned by the retrieve o
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -196,7 +196,7 @@ cademi settings registration update -F document.required=true --if-match '"<etag
 cademi settings registration update --data @body.json --json
 ```
 
-### `cademi settings security` — Content protection settings
+### `cademi settings security`: Content protection settings
 
 Controls document and video identification and credentials for video-provider integrations.
 
@@ -234,7 +234,7 @@ To avoid overwriting a newer version, send the `ETag` returned by the retrieve o
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -276,7 +276,7 @@ cademi settings security update -F drm.enabled=true --if-match '"<etag>"' --json
 cademi settings security update --data @body.json --json
 ```
 
-### `cademi settings user-profile` — Student profile settings
+### `cademi settings user-profile`: Student profile settings
 
 Controls which profile fields students can see or edit and how student names appear in support tools.
 
@@ -312,7 +312,7 @@ To avoid overwriting a newer version, send the `ETag` returned by the retrieve o
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 

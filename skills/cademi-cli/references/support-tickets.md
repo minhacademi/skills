@@ -1,16 +1,16 @@
 ---
 name: cademi-cli-support-tickets
-description: "Manage support conversations and their messages — `cademi support tickets` (9 commands)"
+description: "Manage support conversations and their messages (`cademi support tickets`, 9 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Support Tickets Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
-> Domain `cademi support` — Handle student comments, questions and support tickets.
+> Domain `cademi support`: Handle student comments, questions and support tickets.
 
 Tickets represent support conversations. Inspect messages within a ticket
 and use departments to organize the support queue.
@@ -18,7 +18,7 @@ and use departments to organize the support queue.
 **Related:** `cademi support tickets replies list`, `cademi support tickets replies create`, `cademi support departments`
 
 **Related settings:**
-- `cademi settings support` — Controls availability of the student support channel and how administrators open conversations. (`cademi settings support get|update`)
+- `cademi settings support`: Controls availability of the student support channel and how administrators open conversations. (`cademi settings support get|update`)
 
 **See also in this domain:** `references/support.md`, `references/support-comments.md`, `references/support-faqs.md`, `references/support-questions.md`
 
@@ -37,27 +37,27 @@ Live catalog for this file: `cademi commands support tickets --json` (offline, n
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
@@ -108,7 +108,7 @@ The response includes an `ETag` representing the current revision. Send this val
 If the credentials are restricted to specific users or products, tickets outside that scope return `404 Not Found`, the same response as a ticket that does not exist.
 
 **Arguments:**
-- `ticket_id` — Public ID of the ticket, prefixed with `tkt_`. Example: `tkt_42`
+- `ticket_id`: Public ID of the ticket, prefixed with `tkt_`. Example: `tkt_42`
 
 **Flag sets:** output
 
@@ -134,19 +134,19 @@ If the credentials are restricted to specific users or products, only tickets wi
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `--department-id <string>` — Only tickets assigned to the department with this public ID.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--product-id <string>` — Only tickets about the product with this public ID.
-- `--q <string>` — Text search term.
-- `--queue <string>` — Inbox queue: open (awaiting staff), answered (awaiting user), or closed. (open, answered, closed)
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (updated_at, -updated_at)
-- `--status <string>` — Lifecycle status: open or closed. (open, closed)
-- `--updated-after <string>` — Only items updated after this date and time (ISO 8601).
-- `--user-id <string>` — Only tickets opened by the user with this public ID.
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `--department-id <string>`: Only tickets assigned to the department with this public ID.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--product-id <string>`: Only tickets about the product with this public ID.
+- `--q <string>`: Text search term.
+- `--queue <string>`: Inbox queue: open (awaiting staff), answered (awaiting user), or closed. (open, answered, closed)
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (updated_at, -updated_at)
+- `--status <string>`: Lifecycle status: open or closed. (open, closed)
+- `--updated-after <string>`: Only items updated after this date and time (ISO 8601).
+- `--user-id <string>`: Only tickets opened by the user with this public ID.
 
 Legacy path: `cademi tickets list`
 
@@ -174,12 +174,12 @@ Changing `status` requires the `tickets.close` permission in addition to `ticket
 Send the `ETag` returned by the retrieve operation in the `If-Match` header to avoid overwriting a newer version.
 
 **Arguments:**
-- `ticket_id` — Public ID of the ticket, prefixed with `tkt_`. Example: `tkt_42`
+- `ticket_id`: Public ID of the ticket, prefixed with `tkt_`. Example: `tkt_42`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -203,12 +203,12 @@ cademi support tickets update tkt_42 -f department_id=<department_id> --if-match
 cademi support tickets update tkt_42 --data @body.json --json
 ```
 
-### `cademi support tickets replies` — Manage support tickets replies
+### `cademi support tickets replies`: Manage support tickets replies
 
 Related: `cademi support tickets replies list`, `cademi support tickets replies create`, `cademi support departments`
 
 Related settings:
-- `cademi settings support` — Controls availability of the student support channel and how administrators open conversations. (`cademi settings support get|update`)
+- `cademi settings support`: Controls availability of the student support channel and how administrators open conversations. (`cademi settings support get|update`)
 
 #### `cademi support tickets replies create <ticket_id>`
 
@@ -217,7 +217,7 @@ Create a ticket reply · `POST /api/v3/support/tickets/{ticket_id}/replies` · p
 Adds a reply to the ticket conversation on behalf of the support team. The reply is attributed to the credential that made the request (`author.kind` is `credential`).
 
 **Arguments:**
-- `ticket_id` — Public ID of the ticket, prefixed with `tkt_`. Example: `tkt_42`
+- `ticket_id`: Public ID of the ticket, prefixed with `tkt_`. Example: `tkt_42`
 
 **Flag sets:** output, body, idempotency
 
@@ -251,8 +251,8 @@ Removes a support team reply from the ticket conversation. The reply is no longe
 Only replies written by the support team (`author.kind` of `admin` or `credential`) can be deleted. Attempting to delete any other message returns `403` with the `permission_denied` error code and `details[].field` set to `author.kind`.
 
 **Arguments:**
-- `ticket_id` — Public ID of the ticket, prefixed with `tkt_`. Example: `tkt_42`
-- `reply_id` — Public ID of the reply, prefixed with `trp_`. Example: `trp_9`
+- `ticket_id`: Public ID of the ticket, prefixed with `tkt_`. Example: `tkt_42`
+- `reply_id`: Public ID of the reply, prefixed with `trp_`. Example: `trp_9`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -274,8 +274,8 @@ Retrieves a single message from the ticket conversation. The message must belong
 The response includes an `ETag` representing the current revision. Send this value in the `If-Match` header when updating the reply to avoid overwriting a newer version.
 
 **Arguments:**
-- `ticket_id` — Public ID of the ticket, prefixed with `tkt_`. Example: `tkt_42`
-- `reply_id` — Public ID of the reply, prefixed with `trp_`. Example: `trp_9`
+- `ticket_id`: Public ID of the ticket, prefixed with `tkt_`. Example: `tkt_42`
+- `reply_id`: Public ID of the reply, prefixed with `trp_`. Example: `trp_9`
 
 **Flag sets:** output
 
@@ -295,16 +295,16 @@ List ticket replies · `GET /api/v3/support/tickets/{ticket_id}/replies` · perm
 Returns the ticket conversation in chronological order, oldest message first, using cursor-based pagination. The collection includes messages from the user and from the support team. Messages are ordered by created_at and then id. There is no newest-first, reverse, or last-page query: obtaining the latest messages requires traversing to the end. Use page.next_cursor unchanged to continue; null or empty means the end. A small limit bounds each page, not the total conversation.
 
 **Arguments:**
-- `ticket_id` — Public ID of the ticket, prefixed with `tkt_`. Example: `tkt_42`
+- `ticket_id`: Public ID of the ticket, prefixed with `tkt_`. Example: `tkt_42`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Opaque continuation token from page.next_cursor of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of messages per page; minimum: 1; maximum: 200; API default: 50
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Opaque continuation token from page.next_cursor of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of messages per page; minimum: 1; maximum: 200; API default: 50
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
 
 Legacy path: `cademi tickets replies list`
 
@@ -332,13 +332,13 @@ Only replies written by the support team (`author.kind` of `admin` or `credentia
 Send the `ETag` returned by the retrieve operation in the `If-Match` header to avoid overwriting a newer version.
 
 **Arguments:**
-- `ticket_id` — Public ID of the ticket, prefixed with `tkt_`. Example: `tkt_42`
-- `reply_id` — Public ID of the reply, prefixed with `trp_`. Example: `trp_9`
+- `ticket_id`: Public ID of the ticket, prefixed with `tkt_`. Example: `tkt_42`
+- `reply_id`: Public ID of the reply, prefixed with `trp_`. Example: `trp_9`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body (required):**
 

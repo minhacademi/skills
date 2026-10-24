@@ -1,16 +1,16 @@
 ---
 name: cademi-cli-content-products-taxonomies
-description: "Classify a product's lessons with taxonomies and terms — `cademi content products taxonomies` (10 commands)"
+description: "Classify a product's lessons with taxonomies and terms (`cademi content products taxonomies`, 10 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Content Products Taxonomies Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
-> Domain `cademi content` — Organize showcases, products and learning content.
+> Domain `cademi content`: Organize showcases, products and learning content.
 
 Define taxonomies and their terms for a product. Assign terms through
 lessons taxonomy-terms. Supported classification depends on product format.
@@ -26,27 +26,27 @@ Live catalog for this file: `cademi commands content products taxonomies --json`
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
@@ -61,7 +61,7 @@ Taxonomies are available only for products in the `blog` format. For other forma
 Taxonomies cannot be created in replicated products. Attempts to do so return `403 Forbidden` with the `replica_readonly` error code.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output, body, idempotency
 
@@ -97,13 +97,13 @@ Send the `ETag` returned by the retrieve operation in the `If-Match` header to a
 Taxonomies of replicated products are read-only and cannot be deleted. Attempts to delete them return `403 Forbidden` with the `replica_readonly` error code.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `taxonomy_id` — Public ID of the taxonomy, prefixed with `tax_`. Example: `tax_9`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `taxonomy_id`: Public ID of the taxonomy, prefixed with `tax_`. Example: `tax_9`
 
 **Flag sets:** output, idempotency, confirm
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 Legacy path: `cademi taxonomies delete`
 
@@ -123,8 +123,8 @@ Retrieves a taxonomy of a product by its public ID.
 The response includes an `ETag` representing the current revision. Send this value in the `If-Match` header when updating or deleting the taxonomy to avoid overwriting a newer version.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `taxonomy_id` — Public ID of the taxonomy, prefixed with `tax_`. Example: `tax_9`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `taxonomy_id`: Public ID of the taxonomy, prefixed with `tax_`. Example: `tax_9`
 
 **Flag sets:** output
 
@@ -146,16 +146,16 @@ Lists the taxonomies of a product. Results are paginated with `limit` and `curso
 Taxonomies are available only for products in the `blog` format. For other formats, the API returns `409 Conflict` with the `format_unsupported` error code instead of an empty collection.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
 
 Legacy path: `cademi taxonomies list`
 
@@ -183,13 +183,13 @@ Send the `ETag` returned by the retrieve operation in the `If-Match` header to a
 Taxonomies of replicated products are read-only. Attempts to update them return `403 Forbidden` with the `replica_readonly` error code.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `taxonomy_id` — Public ID of the taxonomy, prefixed with `tax_`. Example: `tax_9`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `taxonomy_id`: Public ID of the taxonomy, prefixed with `tax_`. Example: `tax_9`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -212,7 +212,7 @@ cademi content products taxonomies update prd_42 tax_9 -f name=<name> --if-match
 cademi content products taxonomies update prd_42 tax_9 --data @body.json --json
 ```
 
-### `cademi content products taxonomies terms` — Manage content products taxonomies terms
+### `cademi content products taxonomies terms`: Manage content products taxonomies terms
 
 Related: `cademi content products lessons taxonomy-terms`
 
@@ -227,8 +227,8 @@ The optional `image` field accepts the ID of a file previously uploaded to the a
 Terms cannot be created in taxonomies of replicated products. Attempts to do so return `403 Forbidden` with the `replica_readonly` error code.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `taxonomy_id` — Public ID of the taxonomy, prefixed with `tax_`. Example: `tax_9`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `taxonomy_id`: Public ID of the taxonomy, prefixed with `tax_`. Example: `tax_9`
 
 **Flag sets:** output, body, idempotency
 
@@ -264,14 +264,14 @@ Send the `ETag` returned by the retrieve operation in the `If-Match` header to a
 Terms of replicated products are read-only and cannot be deleted. Attempts to delete them return `403 Forbidden` with the `replica_readonly` error code.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `taxonomy_id` — Public ID of the taxonomy, prefixed with `tax_`. Example: `tax_9`
-- `taxonomy_term_id` — Public ID of the taxonomy term, prefixed with `ttm_`. Example: `ttm_3`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `taxonomy_id`: Public ID of the taxonomy, prefixed with `tax_`. Example: `tax_9`
+- `taxonomy_term_id`: Public ID of the taxonomy term, prefixed with `ttm_`. Example: `ttm_3`
 
 **Flag sets:** output, idempotency, confirm
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 Legacy path: `cademi taxonomies terms delete`
 
@@ -291,9 +291,9 @@ Retrieves a taxonomy term by its public ID.
 The response includes an `ETag` representing the current revision. Send this value in the `If-Match` header when updating or deleting the term to avoid overwriting a newer version.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `taxonomy_id` — Public ID of the taxonomy, prefixed with `tax_`. Example: `tax_9`
-- `taxonomy_term_id` — Public ID of the taxonomy term, prefixed with `ttm_`. Example: `ttm_3`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `taxonomy_id`: Public ID of the taxonomy, prefixed with `tax_`. Example: `tax_9`
+- `taxonomy_term_id`: Public ID of the taxonomy term, prefixed with `ttm_`. Example: `ttm_3`
 
 **Flag sets:** output
 
@@ -313,17 +313,17 @@ List taxonomy terms · `GET /api/v3/products/{product_id}/taxonomies/{taxonomy_i
 Lists the terms of a taxonomy, sorted alphabetically by name. Results are paginated with `limit` and `cursor`.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `taxonomy_id` — Public ID of the taxonomy, prefixed with `tax_`. Example: `tax_9`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `taxonomy_id`: Public ID of the taxonomy, prefixed with `tax_`. Example: `tax_9`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
 
 Legacy path: `cademi taxonomies terms list`
 
@@ -351,14 +351,14 @@ Send the `ETag` returned by the retrieve operation in the `If-Match` header to a
 Terms of replicated products are read-only. Attempts to update them return `403 Forbidden` with the `replica_readonly` error code.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `taxonomy_id` — Public ID of the taxonomy, prefixed with `tax_`. Example: `tax_9`
-- `taxonomy_term_id` — Public ID of the taxonomy term, prefixed with `ttm_`. Example: `ttm_3`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `taxonomy_id`: Public ID of the taxonomy, prefixed with `tax_`. Example: `tax_9`
+- `taxonomy_term_id`: Public ID of the taxonomy term, prefixed with `ttm_`. Example: `ttm_3`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 

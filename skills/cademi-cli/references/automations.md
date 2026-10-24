@@ -1,14 +1,14 @@
 ---
 name: cademi-cli-automations
-description: "Manage learning and sales automation journeys — `cademi automations` (18 commands)"
+description: "Manage learning and sales automation journeys (`cademi automations`, 18 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Automations Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Diamond funnels coordinate a lead's journey through lessons and an offer.
 They connect learning content, access deliveries and webhook triggers.
@@ -22,35 +22,35 @@ Live catalog for this file: `cademi commands automations --json` (offline, no cr
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **async**
-- `--wait` — When the API answers 202, wait for the operation to finish
-- `--wait-timeout <duration>` — Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
+- `--wait`: When the API answers 202, wait for the operation to finish
+- `--wait-timeout <duration>`: Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
-### `cademi automations diamonds` — Manage Diamond funnels, memberships and stage triggers
+### `cademi automations diamonds`: Manage Diamond funnels, memberships and stage triggers
 
 Creating a Diamond also creates its product, three lessons, internal access
 delivery and stage triggers. The internal delivery grants lesson access;
@@ -102,7 +102,7 @@ Moves the Diamond to the trash.
 A Diamond that still has memberships cannot be deleted through the API, and deletion cannot be forced. Such requests return `409` with the `state_conflict` error code and `details[].reason` set to `has_memberships`. The API has no operation to remove memberships; delete the Diamond in the dashboard instead.
 
 **Arguments:**
-- `diamond_id` — Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
+- `diamond_id`: Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -124,7 +124,7 @@ Retrieves a Diamond with its settings and the IDs of its related product, showca
 The response includes an `ETag` representing the current revision. Send this value in the `If-Match` header when updating the Diamond or one of its stages to avoid overwriting a newer version.
 
 **Arguments:**
-- `diamond_id` — Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
+- `diamond_id`: Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
 
 **Flag sets:** output
 
@@ -148,16 +148,16 @@ The collection can be filtered by product, showcase, status, and deletion state.
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `--deleted` — When 'true', returns only items in the trash. Items in the trash are excluded by default.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--product-id <string>` — Only Diamonds of the product with this public ID.
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--showcase-id <string>` — Only Diamonds of the showcase with this public ID.
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
-- `--status <string>` — Only Diamonds with this status. (active, inactive)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `--deleted`: When 'true', returns only items in the trash. Items in the trash are excluded by default.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--product-id <string>`: Only Diamonds of the product with this public ID.
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--showcase-id <string>`: Only Diamonds of the showcase with this public ID.
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (id, -id)
+- `--status <string>`: Only Diamonds with this status. (active, inactive)
 
 Legacy path: `cademi diamonds list`
 
@@ -187,12 +187,12 @@ Interval changes apply to future scheduling; communications already scheduled fo
 Send the current `ETag` in the `If-Match` header to avoid overwriting a newer version.
 
 **Arguments:**
-- `diamond_id` — Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
+- `diamond_id`: Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -217,7 +217,7 @@ cademi automations diamonds update dmd_42 -f name=<name> --if-match '"<etag>"' -
 cademi automations diamonds update dmd_42 --data @body.json --json
 ```
 
-### `cademi automations diamonds memberships` — Manage automations diamonds memberships
+### `cademi automations diamonds memberships`: Manage automations diamonds memberships
 
 Related: `cademi sales deliveries`, `cademi integrations webhooks`
 
@@ -232,7 +232,7 @@ If the user is already a member of this Diamond, the existing membership is retu
 In addition to `diamonds.manage_memberships`, this operation requires the `enrollments.create` permission.
 
 **Arguments:**
-- `diamond_id` — Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
+- `diamond_id`: Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
 
 **Flag sets:** output, body, idempotency
 
@@ -267,8 +267,8 @@ The response includes an `ETag` representing the current revision. Send this val
 Credentials scoped to specific users can only access memberships of those users.
 
 **Arguments:**
-- `diamond_id` — Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
-- `membership_id` — Public ID of the membership, prefixed with `mbr_`. Example: `mbr_7`
+- `diamond_id`: Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
+- `membership_id`: Public ID of the membership, prefixed with `mbr_`. Example: `mbr_7`
 
 **Flag sets:** output
 
@@ -290,20 +290,20 @@ Returns the leads in a Diamond, paginated by cursor. The collection can be filte
 Credentials scoped to specific users only see the memberships of those users.
 
 **Arguments:**
-- `diamond_id` — Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
+- `diamond_id`: Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
-- `--stage-id <string>` — Only memberships currently in this stage.
-- `--updated-after <string>` — Only items updated after this date and time (ISO 8601).
-- `--user-id <string>` — Only memberships of the user with this public ID.
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (id, -id)
+- `--stage-id <string>`: Only memberships currently in this stage.
+- `--updated-after <string>`: Only items updated after this date and time (ISO 8601).
+- `--user-id <string>`: Only memberships of the user with this public ID.
 
 Legacy path: `cademi diamonds memberships list`
 
@@ -333,13 +333,13 @@ Leads only move forward: a target stage at or before the current stage is reject
 Send the membership's current `ETag` in the `If-Match` header to avoid overwriting a newer version.
 
 **Arguments:**
-- `diamond_id` — Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
-- `membership_id` — Public ID of the membership, prefixed with `mbr_`. Example: `mbr_7`
+- `diamond_id`: Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
+- `membership_id`: Public ID of the membership, prefixed with `mbr_`. Example: `mbr_7`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body (required):**
 
@@ -362,7 +362,7 @@ cademi automations diamonds memberships update dmd_42 mbr_7 -f reason=<reason> -
 cademi automations diamonds memberships update dmd_42 mbr_7 --data @body.json --json
 ```
 
-### `cademi automations diamonds memberships processing-attempts` — Manage automations diamonds memberships processing-attempts
+### `cademi automations diamonds memberships processing-attempts`: Manage automations diamonds memberships processing-attempts
 
 Related: `cademi sales deliveries`, `cademi integrations webhooks`
 
@@ -377,8 +377,8 @@ The communication is queued for delivery. If the corresponding stage has already
 A membership with no recorded failure is rejected with `409 state_conflict` and `details[].reason` = `no_failed_run`.
 
 **Arguments:**
-- `diamond_id` — Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
-- `membership_id` — Public ID of the membership, prefixed with `mbr_`. Example: `mbr_7`
+- `diamond_id`: Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
+- `membership_id`: Public ID of the membership, prefixed with `mbr_`. Example: `mbr_7`
 
 **Flag sets:** output, idempotency, async
 
@@ -400,9 +400,9 @@ Retrieves a processing attempt requested for the membership.
 Only attempts that belong to the membership in the path can be retrieved; attempts of other memberships return `404 Not Found`.
 
 **Arguments:**
-- `diamond_id` — Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
-- `membership_id` — Public ID of the membership, prefixed with `mbr_`. Example: `mbr_7`
-- `attempt_id` — Public ID of the attempt, prefixed with `pat_`. Example: `pat_9`
+- `diamond_id`: Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
+- `membership_id`: Public ID of the membership, prefixed with `mbr_`. Example: `mbr_7`
+- `attempt_id`: Public ID of the attempt, prefixed with `pat_`. Example: `pat_9`
 
 **Flag sets:** output
 
@@ -422,8 +422,8 @@ List processing attempts · `GET /api/v3/automations/diamond/{diamond_id}/member
 Returns the processing attempts requested for the membership. All attempts are returned in a single response, without pagination.
 
 **Arguments:**
-- `diamond_id` — Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
-- `membership_id` — Public ID of the membership, prefixed with `mbr_`. Example: `mbr_7`
+- `diamond_id`: Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
+- `membership_id`: Public ID of the membership, prefixed with `mbr_`. Example: `mbr_7`
 
 **Flag sets:** output
 
@@ -436,7 +436,7 @@ Legacy path: `cademi diamonds memberships processing-attempts list`
 cademi automations diamonds memberships processing-attempts list dmd_42 mbr_7 --json
 ```
 
-### `cademi automations diamonds stages` — Manage automations diamonds stages
+### `cademi automations diamonds stages`: Manage automations diamonds stages
 
 Related: `cademi sales deliveries`, `cademi integrations webhooks`
 
@@ -447,7 +447,7 @@ List stages · `GET /api/v3/automations/diamond/{diamond_id}/stages` · permissi
 Returns all eleven stages of the Diamond, in order. The set of stages is fixed: stages cannot be created or deleted.
 
 **Arguments:**
-- `diamond_id` — Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
+- `diamond_id`: Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
 
 **Flag sets:** output
 
@@ -471,13 +471,13 @@ The change applies to future scheduling; communications already scheduled for le
 Stages share the Diamond's revision: send the Diamond's current `ETag` in the `If-Match` header to avoid overwriting a newer version.
 
 **Arguments:**
-- `diamond_id` — Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
-- `stage_id` — Public ID of the stage, prefixed with `class_`. Example: `class_1_not_initiated`
+- `diamond_id`: Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
+- `stage_id`: Public ID of the stage, prefixed with `class_`. Example: `class_1_not_initiated`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body (required):**
 
@@ -499,7 +499,7 @@ cademi automations diamonds stages update dmd_42 class_1_not_initiated -F interv
 cademi automations diamonds stages update dmd_42 class_1_not_initiated --data @body.json --json
 ```
 
-### `cademi automations diamonds triggers` — Manage automations diamonds triggers
+### `cademi automations diamonds triggers`: Manage automations diamonds triggers
 
 Related: `cademi sales deliveries`, `cademi integrations webhooks`
 
@@ -512,7 +512,7 @@ Ensures that the trigger for a given stage exists. Every stage already has a tri
 Changes to triggers affect future communications with leads.
 
 **Arguments:**
-- `diamond_id` — Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
+- `diamond_id`: Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
 
 **Flag sets:** output, body, idempotency
 
@@ -547,8 +547,8 @@ The response includes an `ETag` representing the current revision. Send this val
 Only triggers that belong to the Diamond in the path can be retrieved.
 
 **Arguments:**
-- `diamond_id` — Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
-- `trigger_id` — Public ID of the trigger, prefixed with `trg_`. Example: `trg_7`
+- `diamond_id`: Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
+- `trigger_id`: Public ID of the trigger, prefixed with `trg_`. Example: `trg_7`
 
 **Flag sets:** output
 
@@ -572,7 +572,7 @@ Destinations are masked: only the URL host or the last digits of the phone numbe
 Returns all triggers in a single response while preserving the standard collection response format.
 
 **Arguments:**
-- `diamond_id` — Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
+- `diamond_id`: Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
 
 **Flag sets:** output
 
@@ -598,13 +598,13 @@ The change applies to future communications with leads; nothing is sent when the
 Send the trigger's current `ETag` in the `If-Match` header to avoid overwriting a newer version.
 
 **Arguments:**
-- `diamond_id` — Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
-- `trigger_id` — Public ID of the trigger, prefixed with `trg_`. Example: `trg_7`
+- `diamond_id`: Public ID of the diamond, prefixed with `dmd_`. Example: `dmd_42`
+- `trigger_id`: Public ID of the trigger, prefixed with `trg_`. Example: `trg_7`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 

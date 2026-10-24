@@ -1,16 +1,16 @@
 ---
 name: cademi-cli-settings-support
-description: "Support ticket settings — `cademi settings support` (8 commands)"
+description: "Support ticket settings (`cademi settings support`, 8 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Settings Support Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
-> Domain `cademi settings` — Configure platform behavior, appearance and shared definitions.
+> Domain `cademi settings`: Configure platform behavior, appearance and shared definitions.
 
 Controls availability of the student support channel and how administrators open conversations.
 
@@ -27,19 +27,19 @@ Live catalog for this file: `cademi commands settings support --json` (offline, 
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 ## Commands
 
@@ -71,7 +71,7 @@ To avoid overwriting a newer version, send the `ETag` returned by the retrieve o
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -92,7 +92,7 @@ cademi settings support update -F enabled=true --if-match '"<etag>"' --json
 cademi settings support update --data @body.json --json
 ```
 
-### `cademi settings support comments` — Comment settings
+### `cademi settings support comments`: Comment settings
 
 Controls lesson comments, publication moderation, spam limits and the administrator inbox.
 
@@ -130,7 +130,7 @@ To avoid overwriting a newer version, send the `ETag` returned by the retrieve o
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -158,7 +158,7 @@ cademi settings support comments update -F cooldown_minutes=1 --if-match '"<etag
 cademi settings support comments update --data @body.json --json
 ```
 
-### `cademi settings support faq` — FAQ settings
+### `cademi settings support faq`: FAQ settings
 
 Controls whether the FAQ page is available and the title and guidance shown above its answers.
 
@@ -194,7 +194,7 @@ To avoid overwriting a newer version, send the `ETag` returned by the retrieve o
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -216,7 +216,7 @@ cademi settings support faq update -F enabled=true --if-match '"<etag>"' --json
 cademi settings support faq update --data @body.json --json
 ```
 
-### `cademi settings support questions` — Student question settings
+### `cademi settings support questions`: Student question settings
 
 Controls lesson questions, publication moderation and the administrator inbox.
 
@@ -252,7 +252,7 @@ To avoid overwriting a newer version, send the `ETag` returned by the retrieve o
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 

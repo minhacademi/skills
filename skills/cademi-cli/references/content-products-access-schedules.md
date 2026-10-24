@@ -1,16 +1,16 @@
 ---
 name: cademi-cli-content-products-access-schedules
-description: "Define when a product's content becomes available — `cademi content products access-schedules` (10 commands)"
+description: "Define when a product's content becomes available (`cademi content products access-schedules`, 10 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Content Products Access Schedules Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
-> Domain `cademi content` — Organize showcases, products and learning content.
+> Domain `cademi content`: Organize showcases, products and learning content.
 
 Schedules define release rules for nodes of the product tree. Deliveries
 select a schedule for each product, and a user may have an override.
@@ -34,27 +34,27 @@ Live catalog for this file: `cademi commands content products access-schedules -
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
@@ -69,7 +69,7 @@ Each tag and product pair has at most one access schedule. If one already exists
 Access schedules cannot be created for replicated products; these requests return the `replica_readonly` error code.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output, body, idempotency
 
@@ -102,8 +102,8 @@ Moves the access schedule to the trash.
 The default access schedule cannot be deleted and returns the `state_conflict` error code. An access schedule in use by a delivery that is not archived cannot be deleted either and also returns `state_conflict`. Replicated access schedules are read-only and return the `replica_readonly` error code.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `access_schedule_id` — Public ID of the access schedule, prefixed with `acs_`. Example: `acs_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `access_schedule_id`: Public ID of the access schedule, prefixed with `acs_`. Example: `acs_7`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -125,8 +125,8 @@ Retrieves an access schedule by its public ID, including the deliveries that use
 The response includes an `ETag` representing the current revision of the access schedule. Send this value in the `If-Match` header when updating the access schedule or its release rules to avoid overwriting a newer version.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `access_schedule_id` — Public ID of the access schedule, prefixed with `acs_`. Example: `acs_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `access_schedule_id`: Public ID of the access schedule, prefixed with `acs_`. Example: `acs_7`
 
 **Flag sets:** output
 
@@ -146,19 +146,19 @@ List access schedules · `GET /api/v3/products/{product_id}/access-schedules` ·
 Lists the access schedules of a product. Results are paginated with a cursor.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `--deleted` — When 'true', returns only items in the trash. Items in the trash are excluded by default.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
-- `--tag-id <string>` — Only access schedules that apply to the tag with this public ID.
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `--deleted`: When 'true', returns only items in the trash. Items in the trash are excluded by default.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (id, -id)
+- `--tag-id <string>`: Only access schedules that apply to the tag with this public ID.
 
 Legacy path: `cademi products access-schedules list`
 
@@ -188,13 +188,13 @@ Replicated access schedules are read-only and return the `replica_readonly` erro
 Send the current `ETag` value in the `If-Match` header to avoid overwriting a newer version.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `access_schedule_id` — Public ID of the access schedule, prefixed with `acs_`. Example: `acs_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `access_schedule_id`: Public ID of the access schedule, prefixed with `acs_`. Example: `acs_7`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -217,7 +217,7 @@ cademi content products access-schedules update prd_42 acs_7 -f deleted=false --
 cademi content products access-schedules update prd_42 acs_7 --data @body.json --json
 ```
 
-### `cademi content products access-schedules rules` — Manage content products access-schedules rules
+### `cademi content products access-schedules rules`: Manage content products access-schedules rules
 
 Related: `cademi sales deliveries products`, `cademi users products access`
 
@@ -232,8 +232,8 @@ If the node already has its own rule, the request returns the `already_exists` e
 The `hidden` type is not accepted at the `product` level, and the `percentage` type is read-only and cannot be set.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `access_schedule_id` — Public ID of the access schedule, prefixed with `acs_`. Example: `acs_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `access_schedule_id`: Public ID of the access schedule, prefixed with `acs_`. Example: `acs_7`
 
 **Flag sets:** output, body, idempotency
 
@@ -269,9 +269,9 @@ Removes the node's own release rule so that the node inherits the rule of its pa
 At the `product` level there is no parent to inherit from, so removing the rule sets it to `free`.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `access_schedule_id` — Public ID of the access schedule, prefixed with `acs_`. Example: `acs_7`
-- `release_rule_id` — Public ID of the release rule, prefixed with `rul_`. Example: `rul_section_45`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `access_schedule_id`: Public ID of the access schedule, prefixed with `acs_`. Example: `acs_7`
+- `release_rule_id`: Public ID of the release rule, prefixed with `rul_`. Example: `rul_section_45`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -293,9 +293,9 @@ Retrieves the release rule of a single node. Release rule IDs have the format `r
 Nodes without their own rule also return a result, with `explicit` set to `false` and `effective` containing the inherited rule.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `access_schedule_id` — Public ID of the access schedule, prefixed with `acs_`. Example: `acs_7`
-- `release_rule_id` — Public ID of the release rule, prefixed with `rul_`. Example: `rul_section_45`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `access_schedule_id`: Public ID of the access schedule, prefixed with `acs_`. Example: `acs_7`
+- `release_rule_id`: Public ID of the release rule, prefixed with `rul_`. Example: `rul_section_45`
 
 **Flag sets:** output
 
@@ -317,8 +317,8 @@ Lists the release rule of each node in the product tree for the access schedule.
 Returns all nodes in a single response while preserving the standard collection response format.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `access_schedule_id` — Public ID of the access schedule, prefixed with `acs_`. Example: `acs_7`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `access_schedule_id`: Public ID of the access schedule, prefixed with `acs_`. Example: `acs_7`
 
 **Flag sets:** output
 
@@ -340,14 +340,14 @@ Updates the `type` and `params` of a node that already has its own release rule.
 The revision is tracked for the access schedule as a whole. Send the access schedule's current `ETag` value in the `If-Match` header to avoid overwriting a newer version.
 
 **Arguments:**
-- `product_id` — Public ID of the product, prefixed with `prd_`. Example: `prd_42`
-- `access_schedule_id` — Public ID of the access schedule, prefixed with `acs_`. Example: `acs_7`
-- `release_rule_id` — Public ID of the release rule, prefixed with `rul_`. Example: `rul_section_45`
+- `product_id`: Public ID of the product, prefixed with `prd_`. Example: `prd_42`
+- `access_schedule_id`: Public ID of the access schedule, prefixed with `acs_`. Example: `acs_7`
+- `release_rule_id`: Public ID of the release rule, prefixed with `rul_`. Example: `rul_section_45`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body (required):**
 

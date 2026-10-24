@@ -1,24 +1,24 @@
 ---
 name: cademi-cli-users-profile
-description: "Tags, custom field values, notes, attribution, avatar and term acceptances of a user — `cademi users` (17 commands)"
+description: "Tags, custom field values, notes, attribution, avatar and term acceptances of a user (`cademi users`, 17 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Users Profile Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Tags, custom field values, notes, attribution, avatar and term acceptances of a user. The rest of `cademi users` is in the sibling files below.
 
 **Related:** `cademi sales deliveries`
 
 **Related settings:**
-- `cademi settings registration` — Controls free sign-up channels, the delivery granted to new students, allowed email domains and document requirements. (`cademi settings registration get|update`)
-- `cademi settings user-profile` — Controls which profile fields students can see or edit and how student names appear in support tools. (`cademi settings user-profile get|update`)
-- `cademi settings tags` — Create and edit tag definitions here. Assign tags to a student through users tags; deliveries may also apply tags when granting access. (`cademi settings tags create|delete|get|list|update`)
-- `cademi settings custom-fields` — Manage field definitions and types. Read or update a student's values through users custom-fields. (`cademi settings custom-fields create|delete|get|list|update`)
+- `cademi settings registration`: Controls free sign-up channels, the delivery granted to new students, allowed email domains and document requirements. (`cademi settings registration get|update`)
+- `cademi settings user-profile`: Controls which profile fields students can see or edit and how student names appear in support tools. (`cademi settings user-profile get|update`)
+- `cademi settings tags`: Create and edit tag definitions here. Assign tags to a student through users tags; deliveries may also apply tags when granting access. (`cademi settings tags create|delete|get|list|update`)
+- `cademi settings custom-fields`: Manage field definitions and types. Read or update a student's values through users custom-fields. (`cademi settings custom-fields create|delete|get|list|update`)
 
 **See also in this domain:** `references/users-learning.md`, `references/users.md`, `references/users-imports.md`, `references/users-products.md`
 
@@ -37,31 +37,31 @@ Live catalog for this file: `cademi commands users --json` (offline, no credenti
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
-### `cademi users attribution` — Manage users attribution
+### `cademi users attribution`: Manage users attribution
 
 #### `cademi users attribution get <user_id>`
 
@@ -72,7 +72,7 @@ Retrieves the attribution data captured when the user signed up, such as UTM par
 If extra sign-up fields are not enabled for the account, the API returns `feature_disabled`.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output
 
@@ -92,7 +92,7 @@ Saves the user's sign-up attribution data. Fields that are not supported attribu
 If extra sign-up fields are not enabled for the account, the request is rejected with `feature_disabled` instead of being ignored.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output, body, idempotency
 
@@ -127,7 +127,7 @@ cademi users attribution update usr_42 -f adcampaign=<adcampaign> --json
 cademi users attribution update usr_42 --data @body.json --json
 ```
 
-### `cademi users avatar` — Manage users avatar
+### `cademi users avatar`: Manage users avatar
 
 #### `cademi users avatar delete <user_id>`
 
@@ -136,7 +136,7 @@ Delete a user avatar · `DELETE /api/v3/users/{user_id}/avatar` · permission `u
 Removes the user's avatar. The operation is idempotent: removing an avatar that is not set also succeeds.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -154,7 +154,7 @@ Update a user avatar · `PUT /api/v3/users/{user_id}/avatar` · permission `user
 Sets the user's avatar to a file previously uploaded to the account, identified by `file_id`.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output, body, idempotency
 
@@ -176,13 +176,13 @@ cademi users avatar update usr_42 -f file_id=<file_id> --json
 cademi users avatar update usr_42 --data @body.json --json
 ```
 
-### `cademi users custom-fields` — Manage custom field values for one user
+### `cademi users custom-fields`: Manage custom field values for one user
 
 These operations manage a user's values. Field definitions, labels and
 types are managed through settings custom-fields.
 
 Related settings:
-- `cademi settings custom-fields` — Manage field definitions and types. Read or update a student's values through users custom-fields. (`cademi settings custom-fields create|delete|get|list|update`)
+- `cademi settings custom-fields`: Manage field definitions and types. Read or update a student's values through users custom-fields. (`cademi settings custom-fields create|delete|get|list|update`)
 
 #### `cademi users custom-fields delete <user_id> <custom_field_id>`
 
@@ -193,8 +193,8 @@ Clears the user's value for a custom field. The custom field itself is not affec
 The operation is idempotent: clearing a value that is not set also succeeds.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
-- `custom_field_id` — Public ID of the custom field, prefixed with `cfd_`. Example: `cfd_7`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `custom_field_id`: Public ID of the custom field, prefixed with `cfd_`. Example: `cfd_7`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -214,7 +214,7 @@ Returns the user's custom field values, keyed by custom field public ID. Values 
 If custom fields are not enabled for the account, the API returns `feature_disabled`.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output
 
@@ -236,7 +236,7 @@ Values are validated against the field type: `number` fields require a numeric v
 If custom fields are not enabled for the account, the API returns `feature_disabled`.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output, body, idempotency
 
@@ -258,7 +258,7 @@ cademi users custom-fields update usr_42 -F 'values={...}' --json
 cademi users custom-fields update usr_42 --data @body.json --json
 ```
 
-### `cademi users notes` — Manage users notes
+### `cademi users notes`: Manage users notes
 
 #### `cademi users notes create <user_id>`
 
@@ -267,7 +267,7 @@ Create a user note · `POST /api/v3/users/{user_id}/notes` · permission `users.
 Adds an internal note about the user. The note is attributed to the credential that created it, and only that credential can later edit or delete it.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output, body, idempotency
 
@@ -296,8 +296,8 @@ Delete a user note · `DELETE /api/v3/users/{user_id}/notes/{note_id}` · permis
 Deletes an internal note. Only the author of the note can delete it; other callers receive `permission_denied`.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
-- `note_id` — Public ID of the note, prefixed with `note_`. Example: `note_9`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `note_id`: Public ID of the note, prefixed with `note_`. Example: `note_9`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -315,8 +315,8 @@ Retrieve a user note · `GET /api/v3/users/{user_id}/notes/{note_id}` · permiss
 Retrieves an internal note about the user.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
-- `note_id` — Public ID of the note, prefixed with `note_`. Example: `note_9`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `note_id`: Public ID of the note, prefixed with `note_`. Example: `note_9`
 
 **Flag sets:** output
 
@@ -334,7 +334,7 @@ List user notes · `GET /api/v3/users/{user_id}/notes` · permission `users.read
 Returns the internal notes recorded about the user.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output
 
@@ -352,8 +352,8 @@ Update a user note · `PATCH /api/v3/users/{user_id}/notes/{note_id}` · permiss
 Updates the body of an internal note. Only the author of the note, whether an administrator or the credential that created it, can edit it; other callers receive `permission_denied`.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
-- `note_id` — Public ID of the note, prefixed with `note_`. Example: `note_9`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `note_id`: Public ID of the note, prefixed with `note_`. Example: `note_9`
 
 **Flag sets:** output, body, idempotency
 
@@ -375,13 +375,13 @@ cademi users notes update usr_42 note_9 -f body=<body> --json
 cademi users notes update usr_42 note_9 --data @body.json --json
 ```
 
-### `cademi users tags` — Manage tag assignments for one user
+### `cademi users tags`: Manage tag assignments for one user
 
 Supply a user ID to inspect or change their assigned tags. Create and edit
 tag definitions through settings tags.
 
 Related settings:
-- `cademi settings tags` — Create and edit tag definitions here. Assign tags to a student through users tags; deliveries may also apply tags when granting access. (`cademi settings tags create|delete|get|list|update`)
+- `cademi settings tags`: Create and edit tag definitions here. Assign tags to a student through users tags; deliveries may also apply tags when granting access. (`cademi settings tags create|delete|get|list|update`)
 
 #### `cademi users tags create <user_id> <tag_id>`
 
@@ -390,8 +390,8 @@ Assign a tag · `POST /api/v3/users/{user_id}/tags/{tag_id}` · permission `user
 Assigns a tag to the user. The operation is idempotent: the response status indicates whether the tag was newly assigned or was already assigned.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
-- `tag_id` — Public ID of the tag, prefixed with `tag_`. Example: `tag_7`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `tag_id`: Public ID of the tag, prefixed with `tag_`. Example: `tag_7`
 
 **Flag sets:** output, idempotency
 
@@ -409,8 +409,8 @@ Remove a tag · `DELETE /api/v3/users/{user_id}/tags/{tag_id}` · permission `us
 Removes a tag from the user. The operation is idempotent: removing a tag that is not assigned also succeeds.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
-- `tag_id` — Public ID of the tag, prefixed with `tag_`. Example: `tag_7`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `tag_id`: Public ID of the tag, prefixed with `tag_`. Example: `tag_7`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -428,7 +428,7 @@ List user tags · `GET /api/v3/users/{user_id}/tags` · permission `users.read`
 Returns the tags currently assigned to the user.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output
 
@@ -448,7 +448,7 @@ Replaces the user's entire set of tags with the tags supplied in the request. As
 If any supplied tag does not exist in the account, the API returns `404 Not Found` and no changes are made.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output, body, idempotency
 
@@ -470,10 +470,10 @@ cademi users tags update usr_42 -f 'tags[]=<value>' --json
 cademi users tags update usr_42 --data @body.json --json
 ```
 
-### `cademi users term-acceptances` — List a user's legal term acceptances
+### `cademi users term-acceptances`: List a user's legal term acceptances
 
 Related settings:
-- `cademi settings legal-terms` — Define legal terms here. A student's recorded acceptances are available through users term-acceptances. (`cademi settings legal-terms create|get|list|update`)
+- `cademi settings legal-terms`: Define legal terms here. A student's recorded acceptances are available through users term-acceptances. (`cademi settings legal-terms create|get|list|update`)
 
 #### `cademi users term-acceptances list <user_id>`
 
@@ -486,19 +486,19 @@ Each item includes `links.self`, which points to the acceptance under its legal 
 The `proof` object is included only when the credentials have the `legal_terms.read_proof` permission.
 
 **Arguments:**
-- `user_id` — Public ID of the user, prefixed with `usr_`. Example: `usr_42`
+- `user_id`: Public ID of the user, prefixed with `usr_`. Example: `usr_42`
 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--accepted-after <string>` — Only items accepted after this date and time (ISO 8601).
-- `--accepted-before <string>` — Only items accepted before this date and time (ISO 8601).
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (id, -id)
+- `--accepted-after <string>`: Only items accepted after this date and time (ISO 8601).
+- `--accepted-before <string>`: Only items accepted before this date and time (ISO 8601).
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (id, -id)
 
 **Examples:**
 

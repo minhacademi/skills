@@ -1,14 +1,14 @@
 ---
 name: cademi-cli-settings-platform
-description: "Platform-wide settings: platform, app, branding, admin area, embedded pages, sharing and gamification — `cademi settings` (14 commands)"
+description: "Platform-wide settings: platform, app, branding, admin area, embedded pages, sharing and gamification (`cademi settings`, 14 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Settings Platform Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Platform-wide settings: platform, app, branding, admin area, embedded pages, sharing and gamification. The rest of `cademi settings` is in the sibling files below.
 
@@ -23,23 +23,23 @@ Live catalog for this file: `cademi commands settings --json` (offline, no crede
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 ## Commands
 
-### `cademi settings admin-area` — Admin area settings
+### `cademi settings admin-area`: Admin area settings
 
 Controls the administrator dashboard logo, icon and accent color.
 
@@ -73,7 +73,7 @@ To avoid overwriting a newer version, send the `ETag` returned by the retrieve o
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -95,7 +95,7 @@ cademi settings admin-area update -f accent_color=<accent_color> --if-match '"<e
 cademi settings admin-area update --data @body.json --json
 ```
 
-### `cademi settings app` — Progressive web app settings
+### `cademi settings app`: Progressive web app settings
 
 Controls the installed app name, icon, screenshots, theme and Android association.
 
@@ -131,7 +131,7 @@ To avoid overwriting a newer version, send the `ETag` returned by the retrieve o
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -157,7 +157,7 @@ cademi settings app update -f android.package=<android.package> --if-match '"<et
 cademi settings app update --data @body.json --json
 ```
 
-### `cademi settings branding` — Branding settings
+### `cademi settings branding`: Branding settings
 
 Controls the student-area visual identity and certificate logos.
 
@@ -191,7 +191,7 @@ To avoid overwriting a newer version, send the `ETag` returned by the retrieve o
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -216,7 +216,7 @@ cademi settings branding update -f accent_color=<accent_color> --if-match '"<eta
 cademi settings branding update --data @body.json --json
 ```
 
-### `cademi settings embedded-pages` — Embedded page settings
+### `cademi settings embedded-pages`: Embedded page settings
 
 Controls external pages shown at home or first access and whether dynamic content is enabled.
 
@@ -252,7 +252,7 @@ To avoid overwriting a newer version, send the `ETag` returned by the retrieve o
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -274,7 +274,7 @@ cademi settings embedded-pages update -F dynamic_content_enabled=true --if-match
 cademi settings embedded-pages update --data @body.json --json
 ```
 
-### `cademi settings gamification` — Gamification settings
+### `cademi settings gamification`: Gamification settings
 
 Controls ranking presentation and the activities that award points. Changes affect scoring when subsequent activity events are processed; saving settings does not recalculate previously awarded points or replay past activities.
 
@@ -314,7 +314,7 @@ Requires the `gamification.update` permission. To avoid overwriting a newer vers
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -368,7 +368,7 @@ cademi settings gamification update -f comment_scoring=once --if-match '"<etag>"
 cademi settings gamification update --data @body.json --json
 ```
 
-### `cademi settings platform` — Platform settings
+### `cademi settings platform`: Platform settings
 
 Controls the student-area language, navigation, appearance and footer.
 
@@ -404,7 +404,7 @@ To avoid overwriting a newer version, send the `ETag` returned by the retrieve o
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -435,7 +435,7 @@ cademi settings platform update -F dark_mode=true --if-match '"<etag>"' --json
 cademi settings platform update --data @body.json --json
 ```
 
-### `cademi settings sharing` — Sharing settings
+### `cademi settings sharing`: Sharing settings
 
 Controls the title, description and image used when platform links are shared.
 
@@ -469,7 +469,7 @@ To avoid overwriting a newer version, send the `ETag` returned by the retrieve o
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 

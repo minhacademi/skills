@@ -1,14 +1,14 @@
 ---
 name: cademi-cli-support
-description: "Handle student comments, questions and support tickets — `cademi support` (5 commands)"
+description: "Handle student comments, questions and support tickets (`cademi support`, 5 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Support Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Comments, questions and tickets are student communication channels.
 Departments organize support and FAQs provide reusable answers.
@@ -16,10 +16,10 @@ Departments organize support and FAQs provide reusable answers.
 **Related:** `cademi reports support`
 
 **Related settings:**
-- `cademi settings support` — Controls availability of the student support channel and how administrators open conversations. (`cademi settings support get|update`)
-- `cademi settings support comments` — Controls lesson comments, publication moderation, spam limits and the administrator inbox. (`cademi settings support comments get|update`)
-- `cademi settings support questions` — Controls lesson questions, publication moderation and the administrator inbox. (`cademi settings support questions get|update`)
-- `cademi settings support faq` — Controls whether the FAQ page is available and the title and guidance shown above its answers. (`cademi settings support faq get|update`)
+- `cademi settings support`: Controls availability of the student support channel and how administrators open conversations. (`cademi settings support get|update`)
+- `cademi settings support comments`: Controls lesson comments, publication moderation, spam limits and the administrator inbox. (`cademi settings support comments get|update`)
+- `cademi settings support questions`: Controls lesson questions, publication moderation and the administrator inbox. (`cademi settings support questions get|update`)
+- `cademi settings support faq`: Controls whether the FAQ page is available and the title and guidance shown above its answers. (`cademi settings support faq get|update`)
 
 **See also in this domain:** `references/support-comments.md`, `references/support-faqs.md`, `references/support-questions.md`, `references/support-tickets.md`
 
@@ -37,33 +37,33 @@ Live catalog for this file: `cademi commands support --json` (offline, no creden
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
-### `cademi support departments` — Organize support tickets into departments
+### `cademi support departments`: Organize support tickets into departments
 
 Manage the departments used by the support ticket workflow.
 
 Related: `cademi support tickets`
 
 Related settings:
-- `cademi settings support` — Controls availability of the student support channel and how administrators open conversations. (`cademi settings support get|update`)
+- `cademi settings support`: Controls availability of the student support channel and how administrators open conversations. (`cademi settings support get|update`)
 
 #### `cademi support departments create`
 
@@ -105,12 +105,12 @@ Deletes a support department.
 A department that still has tickets assigned to it, including deleted tickets, cannot be deleted unless `unlink_tickets=true` is sent. Without that flag the request is rejected with the `state_conflict` error code. With the flag, tickets are kept and unlinked, matching the dashboard, including deleted tickets, which the API does not list. To keep tickets in a department, move them first with `PATCH /support/tickets/{ticket_id}` (`department_id`).
 
 **Arguments:**
-- `department_id` — Public ID of the department, prefixed with `dep_`. Example: `dep_3`
+- `department_id`: Public ID of the department, prefixed with `dep_`. Example: `dep_3`
 
 **Flag sets:** output, idempotency, confirm
 
 **Flags:**
-- `--unlink-tickets` — When true, unassign tickets (including those in the trash) and delete the department.
+- `--unlink-tickets`: When true, unassign tickets (including those in the trash) and delete the department.
 
 Legacy path: `cademi departments delete`
 
@@ -130,7 +130,7 @@ Retrieves a support department by its public ID.
 The response includes an `ETag` representing the current revision. Send this value in the `If-Match` header when updating the department to avoid overwriting a newer version.
 
 **Arguments:**
-- `department_id` — Public ID of the department, prefixed with `dep_`. Example: `dep_3`
+- `department_id`: Public ID of the department, prefixed with `dep_`. Example: `dep_3`
 
 **Flag sets:** output
 
@@ -169,12 +169,12 @@ Updates a support department. Omitted fields are left unchanged. Send `admin_id`
 The `If-Match` header is optional. When supplied, it must contain the `ETag` returned by the retrieve operation; if the department has changed since then, the update is rejected.
 
 **Arguments:**
-- `department_id` — Public ID of the department, prefixed with `dep_`. Example: `dep_3`
+- `department_id`: Public ID of the department, prefixed with `dep_`. Example: `dep_3`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 

@@ -1,14 +1,14 @@
 ---
 name: cademi-cli-account
-description: "Inspect the account, administrators and available capabilities — `cademi account` (18 commands)"
+description: "Inspect the account, administrators and available capabilities (`cademi account`, 18 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Account Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
 Account operations describe the platform, domains and replicas.
 Administrators manage the platform; users are its students. Capabilities
@@ -23,27 +23,27 @@ Live catalog for this file: `cademi commands account --json` (offline, no creden
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **output-basic**
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **confirm**
-- `-y, --yes` — Do not ask for confirmation
+- `-y, --yes`: Do not ask for confirmation
 
 ## Commands
 
@@ -81,7 +81,7 @@ Requires the `usage.read` permission.
 **Flag sets:** output
 
 **Flags:**
-- `--period <string>` — Time window of the aggregated figures, ending now. (1h, 24h, 7d, 30d) (required)
+- `--period <string>`: Time window of the aggregated figures, ending now. (1h, 24h, 7d, 30d) (required)
 
 **Examples:**
 
@@ -90,7 +90,7 @@ Requires the `usage.read` permission.
 cademi account usage --period 1h --json
 ```
 
-### `cademi account administrators` — Manage administrators and their platform permissions
+### `cademi account administrators`: Manage administrators and their platform permissions
 
 Administrators operate the dashboard and API. Students are managed under
 users; API credential policies are managed under integrations credentials.
@@ -147,7 +147,7 @@ The last `root` administrator in the account cannot be deleted, and an administr
 API credentials created by the deleted administrator are not revoked.
 
 **Arguments:**
-- `administrator_id` — Public ID of the administrator, prefixed with `adm_`. Example: `adm_42`
+- `administrator_id`: Public ID of the administrator, prefixed with `adm_`. Example: `adm_42`
 
 **Flag sets:** output, idempotency, confirm
 
@@ -171,7 +171,7 @@ The response includes an `ETag` representing the current revision. Send this val
 Administrators in the trash are not returned by this operation.
 
 **Arguments:**
-- `administrator_id` — Public ID of the administrator, prefixed with `adm_`. Example: `adm_42`
+- `administrator_id`: Public ID of the administrator, prefixed with `adm_`. Example: `adm_42`
 
 **Flag sets:** output
 
@@ -195,14 +195,14 @@ By default, only active administrators are returned. Set `deleted` to `true` to 
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `--deleted` — When 'true', returns only items in the trash. Items in the trash are excluded by default.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--q <string>` — Text search term.
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--role <string>` — Only administrators with this role.
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `--deleted`: When 'true', returns only items in the trash. Items in the trash are excluded by default.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--q <string>`: Text search term.
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--role <string>`: Only administrators with this role.
 
 Legacy path: `cademi administrators list`
 
@@ -232,12 +232,12 @@ Roles and permissions can only be changed through the update administrator permi
 Send the `ETag` returned by the retrieve operation in the `If-Match` header to avoid overwriting a newer version.
 
 **Arguments:**
-- `administrator_id` — Public ID of the administrator, prefixed with `adm_`. Example: `adm_42`
+- `administrator_id`: Public ID of the administrator, prefixed with `adm_`. Example: `adm_42`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -261,7 +261,7 @@ cademi account administrators update adm_42 -F deleted=true --if-match '"<etag>"
 cademi account administrators update adm_42 --data @body.json --json
 ```
 
-### `cademi account administrators invitation-emails` — Resend the access email
+### `cademi account administrators invitation-emails`: Resend the access email
 
 Related: `cademi integrations credentials`
 
@@ -276,7 +276,7 @@ This operation replaces the administrator's password with a new one, which is se
 An access email can be sent to the same administrator at most once every 10 minutes. Earlier attempts return `email_recently_sent`.
 
 **Arguments:**
-- `administrator_id` — Public ID of the administrator, prefixed with `adm_`. Example: `adm_42`
+- `administrator_id`: Public ID of the administrator, prefixed with `adm_`. Example: `adm_42`
 
 **Flag sets:** output, idempotency
 
@@ -289,7 +289,7 @@ Legacy path: `cademi administrators invitation-emails create`
 cademi account administrators invitation-emails create adm_42 --json
 ```
 
-### `cademi account administrators permissions` — Manage account administrators permissions
+### `cademi account administrators permissions`: Manage account administrators permissions
 
 Related: `cademi integrations credentials`
 
@@ -302,7 +302,7 @@ Returns the administrator's role and the policies of their active policy revisio
 Full-access roles (`root` and `master_admin`) return `full_access: true` and no policies. Use the returned `ETag` in `If-Match` when updating the permissions.
 
 **Arguments:**
-- `administrator_id` — Public ID of the administrator, prefixed with `adm_`. Example: `adm_42`
+- `administrator_id`: Public ID of the administrator, prefixed with `adm_`. Example: `adm_42`
 
 **Flag sets:** output
 
@@ -326,12 +326,12 @@ Full-access roles (`root` and `master_admin`) have no policies: send an empty `p
 _Full description: `cademi commands account administrators permissions update --json --jq '.commands[0].description'`_
 
 **Arguments:**
-- `administrator_id` — Public ID of the administrator, prefixed with `adm_`. Example: `adm_42`
+- `administrator_id`: Public ID of the administrator, prefixed with `adm_`. Example: `adm_42`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body (required):**
 
@@ -354,7 +354,7 @@ cademi account administrators permissions update adm_42 --data '{"policies":[...
 cademi account administrators permissions update adm_42 --data @body.json --json
 ```
 
-### `cademi account audit-entries` — Inspect the administrative audit trail
+### `cademi account audit-entries`: Inspect the administrative audit trail
 
 Inspect recorded administrative changes and their authors.
 
@@ -369,7 +369,7 @@ Retrieves an audit entry by its public ID, which uses the `aud_` prefix (for exa
 Malformed IDs and entries that do not exist or are not accessible with the current credentials return `404 Not Found`.
 
 **Arguments:**
-- `audit_entry_id` — Public ID of the audit entry, prefixed with `aud_`. Example: `aud_42`
+- `audit_entry_id`: Public ID of the audit entry, prefixed with `aud_`. Example: `aud_42`
 
 **Flag sets:** output
 
@@ -395,20 +395,20 @@ Requires the `audit.read` permission for the account.
 **Flag sets:** output-basic
 
 **Flags:**
-- `--action-code <string>` — Only entries with this action code.
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--kind <stringSlice>` — Only entries of these kinds. Repeat the parameter to match any of several kinds.
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--occurred-after <string>` — Only items that occurred after this date and time (ISO 8601).
-- `--occurred-before <string>` — Only items that occurred before this date and time (ISO 8601).
-- `--outcome <stringSlice>` — Only entries with these outcomes. Repeat the parameter to match any of several outcomes.
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
-- `--request-id <string>` — Only entries recorded by the request with this ID, as returned in 'X-Request-Id'.
-- `--resource-id <string>` — Only entries about the resource with this public ID.
-- `--resource-type <string>` — Only entries about resources of this type.
-- `--sort <string>` — Sort order. A leading '-' sorts in descending order. (occurred_at, -occurred_at)
+- `--action-code <string>`: Only entries with this action code.
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--kind <stringSlice>`: Only entries of these kinds. Repeat the parameter to match any of several kinds.
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--occurred-after <string>`: Only items that occurred after this date and time (ISO 8601).
+- `--occurred-before <string>`: Only items that occurred before this date and time (ISO 8601).
+- `--outcome <stringSlice>`: Only entries with these outcomes. Repeat the parameter to match any of several outcomes.
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
+- `--request-id <string>`: Only entries recorded by the request with this ID, as returned in 'X-Request-Id'.
+- `--resource-id <string>`: Only entries about the resource with this public ID.
+- `--resource-type <string>`: Only entries about resources of this type.
+- `--sort <string>`: Sort order. A leading '-' sorts in descending order. (occurred_at, -occurred_at)
 
 Legacy path: `cademi audit-entries list`
 
@@ -425,7 +425,7 @@ cademi account audit-entries list --limit 200 --raw --json
 cademi account audit-entries list --all --jq '[.[] | {id}]'
 ```
 
-### `cademi account capabilities` — Discover features available through the API
+### `cademi account capabilities`: Discover features available through the API
 
 Inspect capabilities before using features that may vary by account.
 
@@ -450,7 +450,7 @@ Legacy path: `cademi capabilities get`
 cademi account capabilities get --json
 ```
 
-### `cademi account domains` — Manage account domains
+### `cademi account domains`: Manage account domains
 
 #### `cademi account domains get <domain_id>`
 
@@ -461,7 +461,7 @@ Retrieves the account's custom domain by its public ID.
 An account has at most one custom domain, and its ID is fixed for the account. Use the ID returned by the list operation. Any other ID returns `404 Not Found`.
 
 **Arguments:**
-- `domain_id` — Public ID of the domain, prefixed with `dom_`. Example: `dom_1`
+- `domain_id`: Public ID of the domain, prefixed with `dom_`. Example: `dom_1`
 
 **Flag sets:** output
 
@@ -491,7 +491,7 @@ Requires the `domains.read` permission.
 cademi account domains list --json
 ```
 
-### `cademi account domains certificate` — Retrieve a domain certificate
+### `cademi account domains certificate`: Retrieve a domain certificate
 
 #### `cademi account domains certificate get <domain_id>`
 
@@ -502,7 +502,7 @@ Returns the TLS certificate status of the account's custom domain.
 The status reflects the last state recorded by Cademí and is not checked live with the certificate provider.
 
 **Arguments:**
-- `domain_id` — Public ID of the domain, prefixed with `dom_`. Example: `dom_1`
+- `domain_id`: Public ID of the domain, prefixed with `dom_`. Example: `dom_1`
 
 **Flag sets:** output
 
@@ -513,7 +513,7 @@ The status reflects the last state recorded by Cademí and is not checked live w
 cademi account domains certificate get dom_1 --json
 ```
 
-### `cademi account replicas` — Manage account replicas
+### `cademi account replicas`: Manage account replicas
 
 #### `cademi account replicas get <replica_id>`
 
@@ -524,7 +524,7 @@ Retrieves a replica of the current account by its public ID.
 Only replicas of the account associated with the current credentials can be retrieved. Accounts that only share billing with the current account are not replicas. Any other ID, including the current account's own, returns `404 Not Found`.
 
 **Arguments:**
-- `replica_id` — Public ID of the replica, prefixed with `rep_`. Example: `rep_1`
+- `replica_id`: Public ID of the replica, prefixed with `rep_`. Example: `rep_1`
 
 **Flag sets:** output
 
@@ -548,11 +548,11 @@ Requires the `replicas.read` permission, which grants access to every replica of
 **Flag sets:** output-basic
 
 **Flags:**
-- `--all` — Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
-- `--cursor <string>` — Cursor for the next page, taken from 'page.next_cursor' of the previous response.
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
-- `--limit <int64>` — Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
-- `--raw` — Print the full response envelope instead of data (conflicts with `--all`)
+- `--all`: Collect remaining pages into one array in memory (conflicts with --raw and --include; --jq runs after collection)
+- `--cursor <string>`: Cursor for the next page, taken from 'page.next_cursor' of the previous response.
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document) (conflicts with `--all`)
+- `--limit <int64>`: Maximum number of items to return, from 1 to 200; minimum: 1; maximum: 200
+- `--raw`: Print the full response envelope instead of data (conflicts with `--all`)
 
 **Examples:**
 

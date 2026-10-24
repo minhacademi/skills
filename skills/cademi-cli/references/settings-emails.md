@@ -1,16 +1,16 @@
 ---
 name: cademi-cli-settings-emails
-description: "Email settings — `cademi settings emails` (7 commands)"
+description: "Email settings (`cademi settings emails`, 7 commands)"
 metadata:
-  cademi-cli: "0.5.0"
+  cademi-cli: "0.5.1"
   cademi-api: "3.18.0"
 ---
 
 # Settings Emails Commands
 
-> cademi 0.5.0, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
+> cademi 0.5.1, API 3.18.0. The live catalog is always `cademi commands <prefix> --json`.
 
-> Domain `cademi settings` — Configure platform behavior, appearance and shared definitions.
+> Domain `cademi settings`: Configure platform behavior, appearance and shared definitions.
 
 Controls transactional email sender identity, signature and appearance.
 
@@ -25,23 +25,23 @@ Live catalog for this file: `cademi commands settings emails --json` (offline, n
 Each command lists the sets it accepts. The flags of a set are:
 
 **output**
-- `-i, --include` — Print HTTP status and headers before the body on stdout (output is not a JSON document)
-- `--jq <string>` — Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
-- `--json` — Print JSON (same as --output json)
-- `-o, --output <string>` — Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
-- `--raw` — Print the full response envelope instead of data
+- `-i, --include`: Print HTTP status and headers before the body on stdout (output is not a JSON document)
+- `--jq <string>`: Filter data (or --raw envelope); strings print unquoted, other values as JSON; overrides --output
+- `--json`: Print JSON (same as --output json)
+- `-o, --output <string>`: Output format: json, table or yaml (default: table for lists on a terminal, JSON otherwise)
+- `--raw`: Print the full response envelope instead of data
 
 **body**
-- `-d, --data <string>` — JSON body: a literal, @file or @- for stdin
-- `-f, --field <stringArray>` — Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
-- `-F, --typed-field <stringArray>` — Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
+- `-d, --data <string>`: JSON body: a literal, @file or @- for stdin
+- `-f, --field <stringArray>`: Add a string field: key=value (nested: a.b=v, arrays: tags[]=v)
+- `-F, --typed-field <stringArray>`: Add a typed field: key=true\|false\|null\|number\|JSON, or key=@file to read text; applied after all -f fields
 
 **idempotency**
-- `--idempotency-key <string>` — Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
+- `--idempotency-key <string>`: Reuse the key returned with a failed request to repeat it (default: automatic UUIDv7)
 
 **async**
-- `--wait` — When the API answers 202, wait for the operation to finish
-- `--wait-timeout <duration>` — Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
+- `--wait`: When the API answers 202, wait for the operation to finish
+- `--wait-timeout <duration>`: Maximum time for --wait, e.g. 30s or 2m (default: no limit; does not cancel the operation)
 
 ## Commands
 
@@ -73,7 +73,7 @@ To avoid overwriting a newer version, send the `ETag` returned by the retrieve o
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -102,7 +102,7 @@ cademi settings emails update -f branding.background_color=<branding.background_
 cademi settings emails update --data @body.json --json
 ```
 
-### `cademi settings emails templates` — Transactional email template settings
+### `cademi settings emails templates`: Transactional email template settings
 
 Controls whether a transactional email is sent, its access credentials and its editable message body.
 
@@ -119,7 +119,7 @@ Retrieves an email template by its key. The template catalog is fixed and contai
 The response includes an `ETag` representing the current revision of this template; changes to other templates or settings groups do not affect it. Send this value in the `If-Match` header when updating the template to avoid overwriting a newer version.
 
 **Arguments:**
-- `email_template_id` — Public ID of the email template. Example: `sale`
+- `email_template_id`: Public ID of the email template. Example: `sale`
 
 **Flag sets:** output
 
@@ -156,12 +156,12 @@ Updates an email template. Only the fields included in the request are changed.
 To avoid overwriting a newer version, send the `ETag` returned by the retrieve operation in the `If-Match` header. The header is optional; when it is omitted, the update is applied to the current revision.
 
 **Arguments:**
-- `email_template_id` — Public ID of the email template. Example: `sale`
+- `email_template_id`: Public ID of the email template. Example: `sale`
 
 **Flag sets:** output, body, idempotency
 
 **Flags:**
-- `--if-match <string>` — Send If-Match with this ETag (fails with 412 if the resource changed)
+- `--if-match <string>`: Send If-Match with this ETag (fails with 412 if the resource changed)
 
 **Body:**
 
@@ -183,7 +183,7 @@ cademi settings emails templates update sale -f body=<body> --if-match '"<etag>"
 cademi settings emails templates update sale --data @body.json --json
 ```
 
-### `cademi settings emails templates previews` — Preview an email template
+### `cademi settings emails templates previews`: Preview an email template
 
 #### `cademi settings emails templates previews create <email_template_id>`
 
@@ -194,7 +194,7 @@ Renders an email template with an optional draft `body` and returns the resultin
 Requires only the `settings.read` permission. The `new_access` template does not support previews.
 
 **Arguments:**
-- `email_template_id` — Public ID of the email template. Example: `sale`
+- `email_template_id`: Public ID of the email template. Example: `sale`
 
 **Flag sets:** output, body, idempotency
 
@@ -216,7 +216,7 @@ cademi settings emails templates previews create sale -f body=<body> --json
 cademi settings emails templates previews create sale --data @body.json --json
 ```
 
-### `cademi settings emails templates test-messages` — Send a test email
+### `cademi settings emails templates test-messages`: Send a test email
 
 #### `cademi settings emails templates test-messages create <email_template_id>`
 
@@ -227,7 +227,7 @@ Sends a test email using the template. The recipient in `to` must be the email a
 The email is sent asynchronously. The response contains the operation that tracks the delivery, and the `Location` header contains its URL.
 
 **Arguments:**
-- `email_template_id` — Public ID of the email template. Example: `sale`
+- `email_template_id`: Public ID of the email template. Example: `sale`
 
 **Flag sets:** output, body, idempotency, async
 
